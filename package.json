@@ -1,8 +1,7 @@
 {
-  "name": "egipto-2026",
+  "name": "egipto-app",
   "version": "1.0.0",
-  "private": true,
   "dependencies": {
-    "@vercel/kv": "^1.0.1"
+    "@upstash/redis": "^1.34.3"
   }
 }
