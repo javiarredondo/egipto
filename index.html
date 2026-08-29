@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Egipto · Octubre 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --papyrus:#EDE3C8; --papyrus-card:#F8F2DE; --ink:#2A2118; --ink-soft:#5B4E3B;
+    --nile:#1F5C63; --nile-dark:#123B40; --nile-light:#DCEAE9;
+    --gold:#B8892F; --gold-light:#F1E1B8; --clay:#A6542A; --line:#D9CBA3;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--papyrus);color:var(--ink);font-family:'Lora',serif;line-height:1.55;}
+  h1,h2,h3,.disp{font-family:'Cinzel',serif;letter-spacing:.02em;font-weight:600;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:920px;margin:0 auto;padding:28px 20px 80px;}
+
+  header{position:relative;padding-bottom:22px;border-bottom:2px solid var(--nile);margin-bottom:24px;}
+  header .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--nile);display:flex;justify-content:space-between;align-items:center;}
+  header h1{font-size:30px;margin:6px 0 4px;color:var(--nile-dark);}
+  header p.sub{margin:0;color:var(--ink-soft);font-size:15px;}
+  .people-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+  .chip{display:flex;align-items:center;gap:6px;padding:6px 12px 6px 6px;border-radius:999px;border:1.5px solid var(--line);background:var(--papyrus-card);cursor:pointer;font-size:14px;color:var(--ink-soft);transition:border-color .15s, background .15s, color .15s;}
+  .chip .dot{width:24px;height:24px;border-radius:50%;background:var(--nile-light);color:var(--nile-dark);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;}
+  .chip.active{border-color:var(--nile);background:var(--nile);color:#fff;}
+  .chip.active .dot{background:var(--gold);color:var(--nile-dark);}
+  .whoami-note{font-size:12.5px;color:var(--ink-soft);margin-top:8px;}
+  .sync-btn{background:none;border:1px solid var(--nile);color:var(--nile);border-radius:6px;padding:4px 10px;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;}
+  .sync-btn:hover{background:var(--nile-light);}
+  #syncStatus{font-size:11px;color:var(--ink-soft);}
+
+  nav.tabs{display:flex;gap:2px;margin-bottom:26px;border-bottom:1px solid var(--line);}
+  nav.tabs button{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.04em;background:none;border:none;padding:10px 18px;cursor:pointer;color:var(--ink-soft);border-bottom:3px solid transparent;margin-bottom:-1px;}
+  nav.tabs button.active{color:var(--nile-dark);border-bottom-color:var(--gold);}
+  section{display:none;} section.active{display:block;}
+
+  .flight-card{display:flex;justify-content:space-between;align-items:center;background:var(--nile-dark);color:var(--gold-light);border-radius:10px;padding:14px 18px;margin-bottom:10px;font-size:14px;}
+  .flight-card .route{font-family:'Cinzel',serif;font-size:16px;color:#fff;}
+  .flight-card .meta{text-align:right;color:var(--gold-light);opacity:.85;font-size:12.5px;}
+
+  .river-wrap{position:relative;margin-top:18px;}
+  .river-svg{display:block;width:100%;height:46px;}
+  .day-list{display:flex;flex-direction:column;gap:10px;}
+  .day-card{background:var(--papyrus-card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:flex;gap:14px;align-items:flex-start;}
+  .day-card .d{font-family:'JetBrains Mono',monospace;min-width:52px;text-align:center;color:var(--nile-dark);}
+  .day-card .d .num{font-size:20px;font-weight:500;display:block;}
+  .day-card .d .wd{font-size:11px;text-transform:uppercase;color:var(--ink-soft);}
+  .day-card .body{flex:1;}
+  .day-card .flag{font-size:12px;color:var(--clay);font-weight:600;margin-bottom:2px;}
+  .day-card textarea{width:100%;border:1px solid var(--line);border-radius:6px;background:#fff;font-family:'Lora',serif;font-size:14px;padding:8px 10px;resize:vertical;min-height:38px;color:var(--ink);}
+  .day-card textarea:focus{outline:1.5px solid var(--nile);}
+
+  .poll{background:var(--papyrus-card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin-bottom:18px;}
+  .poll h3{margin:0 0 4px;font-size:17px;color:var(--nile-dark);}
+  .poll .desc{font-size:13.5px;color:var(--ink-soft);margin:0 0 14px;}
+  .opt-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;}
+  .opt{border:1.5px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;transition:border-color .15s, background .15s;}
+  .opt:hover{border-color:var(--gold);}
+  .opt.picked{border-color:var(--nile);background:var(--nile-light);}
+  .opt .photo{width:100%;height:110px;background:var(--nile-light) center/cover no-repeat;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;}
+  .opt .photo.empty{background:var(--nile-light);}
+  .opt .photo svg{opacity:.55;}
+  .opt .photo .addphoto{position:absolute;bottom:4px;right:6px;font-size:10px;background:rgba(255,255,255,.85);color:var(--nile-dark);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;}
+  .opt .clickzone{padding:12px 14px;cursor:pointer;}
+  .opt .name{font-weight:600;font-size:14.5px;color:var(--ink);}
+  .opt .odesc{font-size:12.5px;color:var(--ink-soft);margin:6px 0 8px;}
+  .votes-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .vote-badge{width:22px;height:22px;border-radius:50%;background:var(--nile);color:#fff;font-family:'JetBrains Mono',monospace;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:500;}
+  .vote-count{font-size:12px;color:var(--ink-soft);margin-left:2px;}
+
+  table.budget{width:100%;border-collapse:collapse;font-size:14px;}
+  table.budget th{text-align:left;font-family:'Cinzel',serif;font-weight:600;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);border-bottom:2px solid var(--nile);padding:8px 6px;}
+  table.budget td{padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:middle;}
+  table.budget input[type=number]{width:90px;border:1px solid var(--line);border-radius:6px;padding:6px 8px;font-family:'JetBrains Mono',monospace;font-size:13.5px;background:#fff;color:var(--ink);}
+  table.budget input[type=number]:focus{outline:1.5px solid var(--nile);}
+  .badge-pp{font-size:10.5px;color:var(--ink-soft);}
+  .budget-summary{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap;}
+  .metric{background:var(--nile-dark);color:#fff;border-radius:10px;padding:14px 18px;min-width:150px;}
+  .metric .label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--gold-light);opacity:.85;}
+  .metric .value{font-family:'JetBrains Mono',monospace;font-size:22px;margin-top:4px;}
+  .sunk-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;}
+
+  .setup-banner{background:var(--clay);color:#fff;padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:20px;line-height:1.5;}
+  .setup-banner code{background:rgba(0,0,0,.2);padding:1px 5px;border-radius:4px;}
+  .footer-note{margin-top:40px;font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:14px;}
+  .loading{padding:40px;text-align:center;color:var(--ink-soft);font-size:14px;}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"><div class="loading">Cargando el mapa del Nilo…</div></div>
+
+<script>
+/* ====== GUARDADO COMPARTIDO ======
+   Este archivo llama a /api/state (mismo dominio), que guarda los datos en Vercel KV.
+   Para que funcione: deployear este proyecto en Vercel con Storage > KV conectado
+   (ver api/state.js). Si lo abrís suelto (file://) o sin el KV conectado, el fetch
+   va a fallar silenciosamente y nada se va a compartir entre ustedes. */
+const STORAGE_READY = true;
+
+const PEOPLE = ["Pipa","Fer","Maticha","Edu","Agus","Javi"];
+
+/* Fechas reales: llegan Cairo viernes 9/10 de noche. Ojo: en la planilla del grupo
+   los numeros de dia estaban corridos (dice "sabado 12" pero el sabado real es el 10). */
+const DAY_STRINGS = ["2026-10-09","2026-10-10","2026-10-11","2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16","2026-10-17","2026-10-18","2026-10-19"];
+
+const DEFAULT_CALENDAR = {
+  "2026-10-09": "Llegada a El Cairo (vuelo desde Stuttgart, sale 19:45). A dormir.",
+  "2026-10-10": "Cairo: pirámides de Guiza + museo (Gran Museo Egipcio / Museo Egipcio).",
+  "2026-10-11": "Cairo: centro + Museo Nacional de la Civilización Egipcia (NMEC, momias).",
+  "2026-10-12": "Cairo medio día: Saqqara, pirámides escalonadas, para entrar temprano. Vuelo a Asuán. Noche en Asuán (hotel).",
+  "2026-10-13": "Asuán: día para el templo de Asuán (Philae) mientras el barco todavía está en el puerto. El crucero en sí zarpa recién mañana al mediodía.",
+  "2026-10-14": "Tipo 4am nos buscan del hotel en Asuán para Abu Simbel (incluido en el crucero). Volvemos ~mediodía, subimos al barco, sale hacia Kom Ombo, visitamos el templo.",
+  "2026-10-15": "Edfu, templo de Edfu (crucero). Algunos ya llegan a Luxor y tienen algo a la noche.",
+  "2026-10-16": "Llegada a Luxor. Todo incluido con el barco: Valle de los Reyes y templos. Suele terminar ~16h, pedir transfer directo a Hurghada (4h en auto).",
+  "2026-10-17": "Hurghada: playa.",
+  "2026-10-18": "Hurghada: playa.",
+  "2026-10-19": "Hurghada + vuelo de vuelta (según el ticket sale 17:20)."
+};
+
+const ICONS = {
+  plane: '<path d="M2 12l8-2 5-7 2 1-3 6.5L21 9l1 2-7 3.5.5 6-2 1-2-5-5 2.5-.5-2 3-2.5z" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linejoin="round"/>',
+  pyramid: '<path d="M12 4l8 15H4z" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linejoin="round"/><path d="M12 4l3 15" fill="none" stroke="var(--gold)" stroke-width="1"/>',
+  boat: '<path d="M3 15h18l-2 4H5z" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linejoin="round"/><path d="M12 15V4M12 5l6 5H8z" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linejoin="round"/>',
+  temple: '<path d="M4 20h16M5 20V9M9 20V9M12 20V9M15 20V9M19 20V9M3 9l9-5 9 5" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linejoin="round"/>',
+  obelisk: '<path d="M10 20V6l2-3 2 3v14z" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 20h10" fill="none" stroke="var(--gold)" stroke-width="1.3"/>',
+  dam: '<path d="M3 18h18M4 18v-5l4-2v7M8 13l4-2v9M12 11l4-2v9M16 9l4-2v11" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linejoin="round"/>',
+  island: '<ellipse cx="12" cy="19" rx="9" ry="2" fill="none" stroke="var(--gold)" stroke-width="1.2"/><path d="M8 19V11M16 19V11M8 11h8l-1-4H9z" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linejoin="round"/>',
+  sun: '<circle cx="12" cy="12" r="4" fill="none" stroke="var(--gold)" stroke-width="1.3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round"/>',
+  village: '<path d="M4 20V11l4-3 4 3v9M6 20v-4h4v4M13 20v-6l4-2 4 2v6M15 20v-3h4v3" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linejoin="round"/>'
+};
+function iconSvg(name){ return '<svg width="30" height="30" viewBox="0 0 24 24">'+(ICONS[name]||ICONS.temple)+'</svg>'; }
+
+const POLLS = [
+  {id:"cairoExtra", type:"single", title:"¿Un día extra en El Cairo?",
+    desc:"Ya tenemos 3 días armados en Cairo (Guiza+museo, centro+NMEC, Saqqara). ¿Suman un cuarto día o está completo así?",
+    options:[
+      {id:"si", name:"Sí, un día más", icon:"pyramid", desc:"Sumar algo del listado de Fer: Dashur, Memphis, barrio copto, ciudadela, Al-Muizz."},
+      {id:"no", name:"No, con 3 días alcanza", icon:"plane", desc:"Mantener el plan actual y bajar antes a Asuán."}
+    ]},
+  {id:"cruiseLength", type:"single", title:"Duración del crucero",
+    desc:"Según lo que cuenta Fer: si subís el martes (perdiéndote el lunes) terminás con 2 noches a bordo; si consiguen que cuente el lunes, serían 3.",
+    options:[
+      {id:"2n", name:"2 noches a bordo", icon:"boat", desc:"Subís el martes al mediodía después de Abu Simbel. Es lo más simple."},
+      {id:"3n", name:"3 noches a bordo", icon:"boat", desc:"Si el barco te deja subir el lunes (aunque no zarpe hasta el martes)."}
+    ]},
+  {id:"cruiseDirection", type:"single", title:"Sentido del crucero",
+    desc:"Ya parece definido por el plan actual (Asuán → Luxor), lo dejamos igual para confirmar entre todos.",
+    options:[
+      {id:"aswanLuxor", name:"Aswan → Luxor", icon:"boat", desc:"Empezás por Abu Simbel/Aswan y terminás en Luxor, más cerca de Hurghada. (Plan actual)"},
+      {id:"luxorAswan", name:"Luxor → Aswan", icon:"boat", desc:"Empezás por Karnak/Valle de los Reyes y terminás en Aswan."}
+    ]},
+  {id:"aswanExtras", type:"multi", title:"Sitios extra en Asuán",
+    desc:"Abu Simbel ya está incluido en el crucero. ¿Qué más sumamos el lunes en Asuán, además de Philae?",
+    options:[
+      {id:"philae", name:"Templo de Philae", icon:"island", desc:"Templo dedicado a Isis, reconstruido en una isla del Nilo."},
+      {id:"highDam", name:"Presa Alta de Asuán", icon:"dam", desc:"La represa que formó el lago Nasser, parada corta e icónica."},
+      {id:"obelisk", name:"Obelisco Inacabado", icon:"obelisk", desc:"Obelisco gigante abandonado en la cantera."},
+      {id:"nubian", name:"Pueblo Nubio", icon:"village", desc:"Aldea nubia a orillas del Nilo, a veces con paseo en felucca."}
+    ]},
+  {id:"hurghadaExtra", type:"single", title:"3 días de playa en Hurghada, ¿alcanza?",
+    desc:"El plan actual tiene 3 días completos de playa en Hurghada antes del vuelo. ¿Suma algo más o está bien así de relax?",
+    options:[
+      {id:"relax", name:"Solo playa, como está", icon:"sun", desc:"Descansar después del ritmo de templos."},
+      {id:"snorkel", name:"Sumar snorkel/buceo un día", icon:"sun", desc:"Salida en barco a arrecifes, en vez de un día 100% de playa de hotel."}
+    ]}
+];
+
+const BUDGET_CATEGORIES = [
+  {id:"cruise", name:"Crucero por el Nilo", note:"varía según noches y categoría del barco", def:450},
+  {id:"hotelCairo", name:"Hoteles en El Cairo", note:"3 noches, gama media", def:150},
+  {id:"hotelAswan", name:"Hotel en Asuán (noche del lunes)", note:"antes de subir al barco", def:60},
+  {id:"hotelHurghada", name:"Hotel/resort en Hurghada", note:"3 noches de playa", def:220},
+  {id:"entradas", name:"Entradas a templos y sitios", note:"Karnak, Valle de los Reyes, Abu Simbel, Philae, etc.", def:150},
+  {id:"traslados", name:"Traslados y guía", note:"transfers, chofer/guía compartido, vuelo interno Cairo-Asuán", def:180},
+  {id:"comidas", name:"Comidas fuera del crucero/hotel", note:"días en Cairo y Hurghada", def:120},
+  {id:"extras", name:"Extras e imprevistos", note:"propinas, souvenirs, agua, etc.", def:80}
+];
+
+const CHECKLIST_CATEGORIES = ["Vuelo interno","Crucero","Alojamiento","Entrada","Traslado","Seguro/Visa","Otro"];
+const DEFAULT_CHECKLIST = [
+  {id:"c1", name:"Crucero por el Nilo", category:"Crucero", day:"", done:false, price:0, payer:"", link:""},
+  {id:"c2", name:"Vuelo interno Cairo → Asuán", category:"Vuelo interno", day:"2026-10-12", done:false, price:0, payer:"", link:""},
+  {id:"c3", name:"Entrada Abu Simbel", category:"Entrada", day:"2026-10-14", done:false, price:0, payer:"", link:""},
+  {id:"c4", name:"Hotel en El Cairo", category:"Alojamiento", day:"", done:false, price:0, payer:"", link:""},
+  {id:"c5", name:"Hotel en Asuán (noche del lunes)", category:"Alojamiento", day:"2026-10-12", done:false, price:0, payer:"", link:""},
+  {id:"c6", name:"Hotel/resort en Hurghada", category:"Alojamiento", day:"2026-10-16", done:false, price:0, payer:"", link:""},
+  {id:"c7", name:"Visa / e-visa Egipto", category:"Otro", day:"", done:false, price:0, payer:"", link:""},
+  {id:"c8", name:"Seguro de viaje", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""}
+];
+
+let state = { me:null, votes:{}, calendar:{}, budget:{}, photos:{}, checklist:[] };
+let syncStatus = STORAGE_READY ? "" : "⚠ falta configurar guardado compartido";
+
+async function loadShared(){
+  try{
+    const res = await fetch('/api/state');
+    const rec = await res.json();
+    state.votes = rec.votes || {};
+    state.calendar = rec.calendar || {};
+    state.budget = rec.budget || {};
+    state.photos = rec.photos || {};
+    state.checklist = (rec.checklist && rec.checklist.length) ? rec.checklist : DEFAULT_CHECKLIST.map(x=>Object.assign({},x));
+    syncStatus = "sincronizado";
+  }catch(e){ syncStatus = "no se pudo sincronizar (¿está deployado en Vercel con KV conectado?)"; }
+}
+async function saveShared(){
+  try{
+    await fetch('/api/state', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({votes:state.votes, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist})
+    });
+    syncStatus = "guardado";
+  }catch(e){ syncStatus = "no se pudo guardar"; }
+  updateSyncLabel();
+}
+function updateSyncLabel(){ const el = document.getElementById('syncStatus'); if(el) el.textContent = syncStatus; }
+
+function loadMe(){ try{ state.me = localStorage.getItem('nile-me') || null; }catch(e){ state.me = null; } }
+function saveMe(){ try{ localStorage.setItem('nile-me', state.me || ''); }catch(e){} }
+
+function initials(name){ return name.slice(0,2).toUpperCase(); }
+function fmtDay(dstr){
+  const d = new Date(dstr+"T12:00:00");
+  return { num: d.getDate(), wd: d.toLocaleDateString('es-AR',{weekday:'short'}).replace('.',''), mo: d.toLocaleDateString('es-AR',{month:'short'}).replace('.','') };
+}
+function riverSvg(){
+  return '<svg class="river-svg" viewBox="0 0 900 46" preserveAspectRatio="none"><path d="M0 23 C 150 5, 300 41, 450 23 S 750 5, 900 23" fill="none" stroke="var(--nile)" stroke-width="3" opacity="0.35"/></svg>';
+}
+
+async function init(){
+  loadMe();
+  BUDGET_CATEGORIES.forEach(c=>{ state.budget[c.id] = c.def; });
+  await loadShared();
+  BUDGET_CATEGORIES.forEach(c=>{ if(state.budget[c.id]===undefined) state.budget[c.id] = c.def; });
+  if(!state.checklist || !state.checklist.length) state.checklist = DEFAULT_CHECKLIST.map(x=>Object.assign({},x));
+  render();
+}
+
+function render(){
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <header>
+      <div class="eyebrow"><span>Grupo · 6 viajeros</span><span style="display:flex;gap:8px;align-items:center;"><span id="syncStatus">${syncStatus}</span><button class="sync-btn" id="syncBtn">Sincronizar</button></span></div>
+      <h1>Egipto, octubre 2026</h1>
+      <p class="sub">Stuttgart → El Cairo → Asuán → crucero → Luxor → Hurghada → Stuttgart</p>
+      <div class="people-row" id="peopleRow"></div>
+      <div class="whoami-note">${state.me ? 'Estás votando como <b>'+state.me+'</b>.' : 'Elegí quién sos para poder votar y anotar cosas.'}</div>
+    </header>
+    <nav class="tabs" id="tabs">
+      <button data-tab="itinerario" class="active">Itinerario</button>
+      <button data-tab="votaciones">Votaciones</button>
+      <button data-tab="checklist">Para reservar</button>
+      <button data-tab="presupuesto">Presupuesto</button>
+    </nav>
+    <section id="tab-itinerario" class="active"></section>
+    <section id="tab-votaciones"></section>
+    <section id="tab-checklist"></section>
+    <section id="tab-presupuesto"></section>
+    <div class="footer-note">Todo lo que se vota, anota, edita o el link de foto que pegan acá lo ven los 6 (si el guardado compartido está configurado). Los montos del presupuesto son estimaciones de referencia.</div>
+  `;
+
+  document.getElementById('syncBtn').addEventListener('click', async ()=>{ syncStatus='sincronizando…'; updateSyncLabel(); await loadShared(); render(); });
+
+  const peopleRow = document.getElementById('peopleRow');
+  peopleRow.innerHTML = PEOPLE.map(p=>`<div class="chip ${state.me===p?'active':''}" data-person="${p}"><span class="dot">${initials(p)}</span>${p}</div>`).join('');
+  peopleRow.querySelectorAll('.chip').forEach(el=>{
+    el.addEventListener('click', ()=>{ state.me = el.dataset.person; saveMe(); render(); });
+  });
+
+  document.getElementById('tabs').querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    });
+  });
+
+  renderItinerario(); renderVotaciones(); renderChecklist(); renderPresupuesto();
+}
+
+function renderItinerario(){
+  const el = document.getElementById('tab-itinerario');
+  const days = DAY_STRINGS.map((d,i)=>{
+    const {num,wd,mo} = fmtDay(d);
+    let flag = '';
+    if(i===0) flag = 'Llegada · vuelo STR → CAI (sale 19:45 del 9/10)';
+    if(i===DAY_STRINGS.length-1) flag = 'Vuelo de vuelta · HRG → STR, sale 17:20';
+    const note = (state.calendar[d] !== undefined) ? state.calendar[d] : (DEFAULT_CALENDAR[d] || '');
+    return `<div class="day-card">
+        <div class="d"><span class="num">${num}</span><span class="wd">${wd} ${mo}</span></div>
+        <div class="body">
+          ${flag ? `<div class="flag">${flag}</div>` : ''}
+          <textarea data-date="${d}" placeholder="Plan del día...">${note}</textarea>
+        </div>
+      </div>`;
+  }).join('');
+
+  el.innerHTML = `
+    <div class="flight-card"><div><div class="route">STR → CAI</div><div style="font-size:12.5px;opacity:.85">Vie 09.10.2026 · Economy Light · 1 escala</div></div><div class="meta">Sale 19:45</div></div>
+    <div class="flight-card"><div><div class="route">HRG → STR</div><div style="font-size:12.5px;opacity:.85">Lun 19.10.2026 · Economy Light · 1 escala</div></div><div class="meta">Sale 17:20</div></div>
+    <div class="river-wrap">${riverSvg()}</div>
+    <div class="day-list">${days}</div>`;
+
+  el.querySelectorAll('textarea').forEach(ta=>{
+    ta.addEventListener('change', ()=>{ state.calendar[ta.dataset.date] = ta.value; saveShared(); });
+  });
+}
+
+function renderVotaciones(){
+  const el = document.getElementById('tab-votaciones');
+  el.innerHTML = POLLS.map(poll=>{
+    const pollVotes = state.votes[poll.id] || {};
+    const opts = poll.options.map(opt=>{
+      let picked = false; let voters = [];
+      Object.keys(pollVotes).forEach(person=>{
+        const v = pollVotes[person];
+        if(poll.type==='multi'){ if(Array.isArray(v) && v.includes(opt.id)) voters.push(person); }
+        else { if(v===opt.id) voters.push(person); }
+      });
+      if(poll.type==='multi'){ const mine = pollVotes[state.me]; picked = Array.isArray(mine) && mine.includes(opt.id); }
+      else { picked = pollVotes[state.me]===opt.id; }
+      const photoUrl = state.photos[opt.id];
+      const photoInner = photoUrl ? '' : iconSvg(opt.icon);
+      const photoStyle = photoUrl ? `style="background-image:url('${photoUrl.replace(/'/g,"")}')"` : '';
+      return `<div class="opt ${picked?'picked':''}">
+          <div class="photo ${photoUrl?'':'empty'}" ${photoStyle} data-photofor="${opt.id}">${photoInner}<span class="addphoto" data-photofor="${opt.id}">${photoUrl?'cambiar foto':'+ foto'}</span></div>
+          <div class="clickzone" data-poll="${poll.id}" data-opt="${opt.id}">
+            <div class="name">${opt.name}</div>
+            <div class="odesc">${opt.desc}</div>
+            <div class="votes-row">
+              ${voters.map(v=>`<span class="vote-badge" title="${v}">${initials(v)}</span>`).join('')}
+              <span class="vote-count">${voters.length?voters.length+' voto'+(voters.length>1?'s':''):'sin votos'}</span>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+    return `<div class="poll"><h3>${poll.title}</h3><p class="desc">${poll.desc}</p><div class="opt-grid">${opts}</div></div>`;
+  }).join('');
+
+  el.querySelectorAll('.clickzone').forEach(zone=>{
+    zone.addEventListener('click', ()=>{
+      if(!state.me){ alert('Primero elegí quién sos, arriba de todo.'); return; }
+      const pollId = zone.dataset.poll, optId = zone.dataset.opt;
+      const poll = POLLS.find(p=>p.id===pollId);
+      if(!state.votes[pollId]) state.votes[pollId] = {};
+      if(poll.type==='multi'){
+        const cur = state.votes[pollId][state.me] || [];
+        const idx = cur.indexOf(optId);
+        if(idx>=0) cur.splice(idx,1); else cur.push(optId);
+        state.votes[pollId][state.me] = cur;
+      } else {
+        state.votes[pollId][state.me] = state.votes[pollId][state.me]===optId ? null : optId;
+      }
+      saveShared(); renderVotaciones();
+    });
+  });
+  el.querySelectorAll('[data-photofor]').forEach(el2=>{
+    el2.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const optId = el2.dataset.photofor;
+      const current = state.photos[optId] || '';
+      const url = prompt('Pegá el link de una foto (jpg/png):', current);
+      if(url===null) return;
+      if(url.trim()==='') delete state.photos[optId]; else state.photos[optId] = url.trim();
+      saveShared(); renderVotaciones();
+    });
+  });
+}
+
+function dayOptionsHtml(selected){
+  let out = '<option value=""'+(selected===""?" selected":"")+'>General</option>';
+  DAY_STRINGS.forEach(d=>{
+    const {num,mo} = fmtDay(d);
+    out += '<option value="'+d+'"'+(selected===d?" selected":"")+'>'+num+' '+mo+'</option>';
+  });
+  return out;
+}
+function payerOptionsHtml(selected){
+  let out = '<option value=""'+(selected===""?" selected":"")+'>—</option>';
+  PEOPLE.forEach(p=>{ out += '<option value="'+p+'"'+(selected===p?" selected":"")+'>'+p+'</option>'; });
+  return out;
+}
+function categoryOptionsHtml(selected){
+  let out = '';
+  CHECKLIST_CATEGORIES.forEach(c=>{ out += '<option value="'+c+'"'+(selected===c?" selected":"")+'>'+c+'</option>'; });
+  return out;
+}
+function renderChecklist(){
+  const el = document.getElementById('tab-checklist');
+  const rows = state.checklist.map(item=>{
+    return '<tr data-id="'+item.id+'">'
+      + '<td><input type="checkbox" data-field="done" '+(item.done?'checked':'')+'></td>'
+      + '<td><input type="text" data-field="name" value="'+(item.name||'').replace(/"/g,'&quot;')+'" placeholder="Qué hay que sacar" style="width:170px"></td>'
+      + '<td><select data-field="category">'+categoryOptionsHtml(item.category)+'</select></td>'
+      + '<td><select data-field="day">'+dayOptionsHtml(item.day||'')+'</select></td>'
+      + '<td><input type="number" min="0" step="10" data-field="price" value="'+(item.price||0)+'" style="width:80px"> €</td>'
+      + '<td><select data-field="payer">'+payerOptionsHtml(item.payer||'')+'</select></td>'
+      + '<td><input type="text" data-field="link" value="'+(item.link||'').replace(/"/g,'&quot;')+'" placeholder="hotel / link" style="width:150px"></td>'
+      + '<td><button class="sync-btn" data-del="'+item.id+'" title="Borrar">✕</button></td>'
+      + '</tr>';
+  }).join('');
+
+  const doneCount = state.checklist.filter(i=>i.done).length;
+  const totalPaid = state.checklist.filter(i=>i.done).reduce((s,i)=>s+Number(i.price||0),0);
+  const totalPending = state.checklist.filter(i=>!i.done).reduce((s,i)=>s+Number(i.price||0),0);
+
+  el.innerHTML = '<table class="budget"><thead><tr><th></th><th>Ítem</th><th>Categoría</th><th>Día</th><th>Precio</th><th>Pagó</th><th>Hotel / link</th><th></th></tr></thead>'
+    + '<tbody id="checklistBody">' + rows + '</tbody></table>'
+    + '<button class="sync-btn" id="addChecklistRow" style="margin-top:12px;">+ agregar ítem</button>'
+    + '<div class="budget-summary">'
+    + '<div class="metric"><div class="label">Reservado</div><div class="value">'+doneCount+' / '+state.checklist.length+'</div></div>'
+    + '<div class="metric"><div class="label">Ya pagado</div><div class="value">€'+totalPaid.toLocaleString('es-AR')+'</div></div>'
+    + '<div class="metric"><div class="label">Pendiente (estimado)</div><div class="value">€'+totalPending.toLocaleString('es-AR')+'</div></div>'
+    + '</div>';
+
+  function findItem(id){ return state.checklist.find(i=>i.id===id); }
+
+  el.querySelectorAll('#checklistBody tr').forEach(tr=>{
+    const id = tr.dataset.id;
+    tr.querySelectorAll('[data-field]').forEach(fieldEl=>{
+      const evt = (fieldEl.tagName==='SELECT' || fieldEl.type==='checkbox') ? 'change' : 'change';
+      fieldEl.addEventListener(evt, ()=>{
+        const item = findItem(id); if(!item) return;
+        const f = fieldEl.dataset.field;
+        if(f==='done') item.done = fieldEl.checked;
+        else if(f==='price') item.price = Math.max(0, Number(fieldEl.value)||0);
+        else item[f] = fieldEl.value;
+        saveShared(); renderChecklist();
+      });
+    });
+  });
+  el.querySelectorAll('[data-del]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      state.checklist = state.checklist.filter(i=>i.id!==btn.dataset.del);
+      saveShared(); renderChecklist();
+    });
+  });
+  document.getElementById('addChecklistRow').addEventListener('click', ()=>{
+    state.checklist.push({id:'c'+Date.now(), name:'', category:CHECKLIST_CATEGORIES[0], day:'', done:false, price:0, payer:'', link:''});
+    saveShared(); renderChecklist();
+  });
+}
+
+function renderPresupuesto(){
+  const el = document.getElementById('tab-presupuesto');
+  const rows = BUDGET_CATEGORIES.map(c=>{
+    const val = state.budget[c.id] ?? c.def;
+    return `<tr><td>${c.name}<div class="badge-pp">${c.note}</div></td><td><span class="badge-pp">por persona</span></td><td><input type="number" min="0" step="10" data-cat="${c.id}" value="${val}"> €</td></tr>`;
+  }).join('');
+  const totalPP = BUDGET_CATEGORIES.reduce((s,c)=> s + Number(state.budget[c.id] ?? c.def), 0);
+  const totalGroup = totalPP * PEOPLE.length;
+  el.innerHTML = `
+    <table class="budget"><thead><tr><th>Rubro</th><th></th><th>Estimado</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="sunk-note">Los vuelos STR↔CAI/HRG ya están reservados, no están incluidos en este cálculo.</div>
+    <div class="budget-summary">
+      <div class="metric"><div class="label">Por persona</div><div class="value">€${totalPP.toLocaleString('es-AR')}</div></div>
+      <div class="metric"><div class="label">Grupo (6 personas)</div><div class="value">€${totalGroup.toLocaleString('es-AR')}</div></div>
+    </div>`;
+  el.querySelectorAll('input[type=number]').forEach(inp=>{
+    inp.addEventListener('change', ()=>{
+      state.budget[inp.dataset.cat] = Math.max(0, Number(inp.value)||0);
+      saveShared(); renderPresupuesto();
+    });
+  });
+}
+
+init();
+</script>
+</body>
+</html>
