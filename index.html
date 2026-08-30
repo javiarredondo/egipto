@@ -134,29 +134,29 @@ function iconSvg(name){ return '<svg width="30" height="30" viewBox="0 0 24 24">
 
 const PLACES = [
   {segment:"El Cairo", items:[
-    {id:"guiza", name:"Pirámides de Guiza", desc:"Día 1 de Cairo. La única de las 7 maravillas del mundo antiguo que sigue en pie.", wiki:"Pirámides de Guiza", status:"decidido"},
-    {id:"khufus", name:"Khufu's Restaurant", desc:"Desayuno/almuerzo con vista a las pirámides desde afuera. Hay que reservar y entrar al predio (Uber no llega).", imgUrl:"https://www.listonegiordano.com/one/wp-content/uploads/2025/01/Khufus-Restaurant-ristorante-vista-piramidi-egitto-giza1-1536x1024.jpg", status:"decidido"},
-    {id:"gem", name:"Gran Museo Egipcio (GEM)", desc:"Día 2 de Cairo. El museo más grande del mundo dedicado a una sola civilización, con la colección completa de Tutankamón.", imgUrl:"https://elojodelarte.com/media/k2/items/cache/fdcdab7b883db46c6461d37dc1d99b74_S.webp?t=20250121_035239", status:"decidido"},
-    {id:"saqqara", name:"Saqqara", desc:"Medio día del lunes. La primera pirámide de Egipto, la escalonada de Zoser (~2650 a.C.).", wiki:"Saqqara", status:"decidido"}
+    {id:"guiza", name:"Pirámides de Guiza", desc:"Día 1 de Cairo. La única de las 7 maravillas del mundo antiguo que sigue en pie.", wiki:"Pirámides de Guiza", imgUrl:null, status:"decidido"},
+    {id:"khufus", name:"Khufu's Restaurant", desc:"Desayuno/almuerzo con vista a las pirámides desde afuera. Hay que reservar y entrar al predio (Uber no llega).", wiki:null, imgUrl:"https://www.listonegiordano.com/one/wp-content/uploads/2025/01/Khufus-Restaurant-ristorante-vista-piramidi-egitto-giza1-1536x1024.jpg", status:"decidido"},
+    {id:"gem", name:"Gran Museo Egipcio (GEM)", desc:"Día 2 de Cairo. El museo más grande del mundo dedicado a una sola civilización, con la colección completa de Tutankamón.", wiki:null, imgUrl:"https://elojodelarte.com/media/k2/items/cache/fdcdab7b883db46c6461d37dc1d99b74_S.webp?t=20250121_035239", status:"decidido"},
+    {id:"saqqara", name:"Saqqara", desc:"Medio día del lunes. La primera pirámide de Egipto, la escalonada de Zoser (~2650 a.C.).", wiki:"Saqqara", imgUrl:null, status:"decidido"}
   ]},
   {segment:"Crucero por el Nilo (4 días, Aswan → Luxor)", items:[
-    {id:"abusimbel", name:"Abu Simbel", desc:"Día 2 del crucero, salida ~4am. Los templos tallados en la montaña por Ramsés II.", wiki:"Abu Simbel", status:"decidido"},
-    {id:"komombo", name:"Templo de Kom Ombo", desc:"Día 2 del crucero. Único templo doble de Egipto, mitad Sobek (cocodrilo) mitad Horus.", wiki:"Templo de Kom Ombo", status:"decidido"},
-    {id:"edfu", name:"Templo de Edfu", desc:"Día 3 del crucero. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", status:"decidido"},
-    {id:"luxortemplo", name:"Templo de Luxor", desc:"Día 3 del crucero, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", status:"decidido"},
-    {id:"globo", name:"Paseo en globo aerostático", desc:"Día 4 del crucero, al amanecer sobre el Valle de los Reyes. Incluido en el tour.", imgUrl:"https://media.tacdn.com/media/attractions-splice-spp-674x446/09/a8/4a/dc.jpg", status:"decidido"},
-    {id:"valle", name:"Valle de los Reyes", desc:"Día 4 del crucero. Necrópolis de los faraones del Imperio Nuevo, incluido Tutankamón.", wiki:"Valle de los Reyes", status:"decidido"},
-    {id:"karnak", name:"Templo de Karnak", desc:"Día 4 del crucero. El complejo religioso más grande jamás construido.", wiki:"Templo de Karnak", status:"decidido"}
+    {id:"abusimbel", name:"Abu Simbel", desc:"Día 2 del crucero, salida ~4am. Los templos tallados en la montaña por Ramsés II.", wiki:"Abu Simbel", imgUrl:null, status:"decidido"},
+    {id:"komombo", name:"Templo de Kom Ombo", desc:"Día 2 del crucero. Único templo doble de Egipto, mitad Sobek (cocodrilo) mitad Horus.", wiki:"Templo de Kom Ombo", imgUrl:null, status:"decidido"},
+    {id:"edfu", name:"Templo de Edfu", desc:"Día 3 del crucero. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", imgUrl:null, status:"decidido"},
+    {id:"luxortemplo", name:"Templo de Luxor", desc:"Día 3 del crucero, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", imgUrl:null, status:"decidido"},
+    {id:"globo", name:"Paseo en globo aerostático", desc:"Día 4 del crucero, al amanecer sobre el Valle de los Reyes. Incluido en el tour.", wiki:null, imgUrl:"https://media.tacdn.com/media/attractions-splice-spp-674x446/09/a8/4a/dc.jpg", status:"decidido"},
+    {id:"valle", name:"Valle de los Reyes", desc:"Día 4 del crucero. Necrópolis de los faraones del Imperio Nuevo, incluido Tutankamón.", wiki:"Valle de los Reyes", imgUrl:null, status:"decidido"},
+    {id:"karnak", name:"Templo de Karnak", desc:"Día 4 del crucero. El complejo religioso más grande jamás construido.", wiki:"Templo de Karnak", imgUrl:null, status:"decidido"}
   ]},
   {segment:"¿Sumamos aparte? (nos las perdemos por embarcar el martes)", items:[
-    {id:"philae", name:"Templo de Philae", desc:"Día 1 del crucero que nos perdemos. Templo de Isis reconstruido en una isla del Nilo.", wiki:"Templo de Filé", status:"abierto"},
-    {id:"highDam", name:"Presa Alta de Asuán", desc:"Día 1 del crucero que nos perdemos. Formó el lago Nasser, parada corta e icónica.", wiki:"Presa de Asuán", status:"abierto"},
-    {id:"obelisk", name:"Obelisco Inacabado", desc:"No está en el tour. Obelisco gigante abandonado en la cantera, se ve cómo lo tallaban.", imgUrl:"https://www.luxorandaswan.com/images/16587742560The-Unfinshed-Obelisk.jpg", status:"abierto"},
-    {id:"nubian", name:"Pueblo Nubio", desc:"No está en el tour. Casas de colores a orillas del Nilo, a veces con paseo en felucca.", imgUrl:"https://www.egiptoexclusivo.com/wp-content/uploads/2023/06/destino-nubia.jpg", icon:"village", status:"abierto"}
+    {id:"philae", name:"Templo de Philae", desc:"Día 1 del crucero que nos perdemos. Templo de Isis reconstruido en una isla del Nilo.", wiki:"Templo de Filé", imgUrl:null, status:"abierto"},
+    {id:"highDam", name:"Presa Alta de Asuán", desc:"Día 1 del crucero que nos perdemos. Formó el lago Nasser, parada corta e icónica.", wiki:"Presa de Asuán", imgUrl:null, status:"abierto"},
+    {id:"obelisk", name:"Obelisco Inacabado", desc:"No está en el tour. Obelisco gigante abandonado en la cantera, se ve cómo lo tallaban.", wiki:null, imgUrl:"https://www.luxorandaswan.com/images/16587742560The-Unfinshed-Obelisk.jpg", status:"abierto"},
+    {id:"nubian", name:"Pueblo Nubio", desc:"No está en el tour. Casas de colores a orillas del Nilo, a veces con paseo en felucca.", wiki:null, imgUrl:"https://www.egiptoexclusivo.com/wp-content/uploads/2023/06/destino-nubia.jpg", icon:"village", status:"abierto"}
   ]},
   {segment:"Hurghada (4 días de playa)", items:[
-    {id:"hurghadaplaya", name:"Playa / resort", desc:"Del jueves a la noche hasta el lunes del vuelo. Como está el plan, es descanso puro.", wiki:"Hurghada", status:"decidido"},
-    {id:"snorkel", name:"Día de snorkel / buceo", desc:"En vez de un día 100% de playa de hotel, salida en barco a los arrecifes del Mar Rojo.", imgUrl:"https://egyptra.com/wp-content/uploads/2025/06/image-2025-06-29T174349.874-1024x681.jpg", status:"abierto"}
+    {id:"hurghadaplaya", name:"Playa / resort", desc:"Del jueves a la noche hasta el lunes del vuelo. Como está el plan, es descanso puro.", wiki:"Hurghada", imgUrl:null, status:"decidido"},
+    {id:"snorkel", name:"Día de snorkel / buceo", desc:"En vez de un día 100% de playa de hotel, salida en barco a los arrecifes del Mar Rojo.", wiki:null, imgUrl:"https://egyptra.com/wp-content/uploads/2025/06/image-2025-06-29T174349.874-1024x681.jpg", status:"abierto"}
   ]}
 ];
 
@@ -356,7 +356,7 @@ function renderVotaciones(){
     const cards = seg.items.map(it=>{
       const thumb = it.wiki ? wikiCache[it.wiki] : null;
       const customPhoto = state.photos[it.id];
-      const photoUrl = customPhoto || thumb;
+      const photoUrl = customPhoto || it.imgUrl || thumb;
       const photoInner = photoUrl ? '' : iconSvg(it.icon || 'temple');
       const photoStyle = photoUrl ? 'style="background-image:url(\''+photoUrl.replace(/'/g,'')+'\')"' : '';
       const isOpen = it.status === 'abierto';
