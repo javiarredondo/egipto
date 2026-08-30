@@ -106,14 +106,14 @@ const PEOPLE = ["Pipa","Fer","Maticha","Edu","Agus","Javi"];
 const DAY_STRINGS = ["2026-10-09","2026-10-10","2026-10-11","2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16","2026-10-17","2026-10-18","2026-10-19"];
 
 const DEFAULT_CALENDAR = {
-  "2026-10-09": "Llegada a El Cairo (vuelo desde Stuttgart, sale 19:45). A dormir.",
-  "2026-10-10": "Cairo: pirámides de Guiza + museo (Gran Museo Egipcio / Museo Egipcio).",
-  "2026-10-11": "Cairo: centro + Museo Nacional de la Civilización Egipcia (NMEC, momias).",
-  "2026-10-12": "Cairo medio día: Saqqara, pirámides escalonadas, para entrar temprano. Vuelo a Asuán. Noche en Asuán (hotel).",
-  "2026-10-13": "Asuán: día para el templo de Asuán (Philae) mientras el barco todavía está en el puerto. El crucero en sí zarpa recién mañana al mediodía.",
-  "2026-10-14": "Tipo 4am nos buscan del hotel en Asuán para Abu Simbel (incluido en el crucero). Volvemos ~mediodía, subimos al barco, sale hacia Kom Ombo, visitamos el templo.",
-  "2026-10-15": "Edfu, templo de Edfu (crucero). Algunos ya llegan a Luxor y tienen algo a la noche.",
-  "2026-10-16": "Llegada a Luxor. Todo incluido con el barco: Valle de los Reyes y templos. Suele terminar ~16h, pedir transfer directo a Hurghada (4h en auto).",
+  "2026-10-09": "Llegada a El Cairo (vuelo desde Stuttgart, sale 19:45). Base: Zamalek. A dormir.",
+  "2026-10-10": "Día 1 Cairo - Pirámides. 07:30 salida de Zamalek. 08-09 entrada a la meseta de Guiza. Desayuno/almuerzo en Khufu's (reservar antes, pedir mesa afuera - es el lugar con vista a las pirámides). Tarde: Esfinge, Khafre, Micerinos. ~16h vuelta a Zamalek. Cena: Crimson Bar & Grill (16 Kamal Al Tawil St, terraza sobre el Nilo).",
+  "2026-10-11": "Día 2 Cairo - Gran Museo Egipcio (GEM). 09:00 directo a las salas de Tutankamón (se llena después). Calcular ~6h, vale la pena un guía. Almuerzo tarde: Andrea El Mariouteya (New Giza, reservar el fateer). Cena: Pier 88 (19 Saray El Gezira St, punta sur de Zamalek).",
+  "2026-10-12": "Día 3 - Medio día en Cairo: Saqqara (pirámide escalonada de Zoser). Vuelo interno Cairo → Asuán, sale 17:00. Noche en Asuán (hotel). Ojo: al embarcar recién el martes nos perdemos el Día 1 del crucero (Templo de Philae + Presa Alta, incluidos en el tour) - ver si lo sumamos aparte.",
+  "2026-10-13": "Día 4 - Crucero día 2: ~4am salida a Abu Simbel (incluido, ~7h ida y vuelta). Al volver, navegación a Kom Ombo y visita al templo (incluida). Noche a bordo.",
+  "2026-10-14": "Día 5 - Crucero día 3: Templo de Edfu (incluido) y llegada a Luxor, visita al Templo de Luxor de noche (incluida). Noche a bordo.",
+  "2026-10-15": "Día 6 - Crucero día 4 (último): paseo en globo aerostático al amanecer (incluido), Colosos de Memnón, Valle de los Reyes, Templo de Hatshepsut, Karnak (entradas no incluidas, ~80-100 USD aparte). Fin del crucero - transfer a Hurghada (~4h en auto).",
+  "2026-10-16": "Hurghada: playa.",
   "2026-10-17": "Hurghada: playa.",
   "2026-10-18": "Hurghada: playa.",
   "2026-10-19": "Hurghada + vuelo de vuelta (según el ticket sale 17:20)."
@@ -133,61 +133,62 @@ const ICONS = {
 function iconSvg(name){ return '<svg width="30" height="30" viewBox="0 0 24 24">'+(ICONS[name]||ICONS.temple)+'</svg>'; }
 
 const POLLS = [
-  {id:"cairoExtra", type:"single", title:"¿Un día extra en El Cairo?",
-    desc:"Ya tenemos 3 días armados en Cairo (Guiza+museo, centro+NMEC, Saqqara). ¿Suman un cuarto día o está completo así?",
+  {id:"cairoExtra", type:"single", title:"Medio día extra en El Cairo (DECIDIDO)",
+    desc:"Ya está confirmado por el grupo: se suma medio día en Cairo el lunes para Saqqara, y por eso se embarca el crucero recién el martes (perdiendo el día 1 del tour: Philae + Presa Alta).",
     options:[
-      {id:"si", name:"Sí, un día más", icon:"pyramid", desc:"Sumar algo del listado de Fer: Dashur, Memphis, barrio copto, ciudadela, Al-Muizz."},
-      {id:"no", name:"No, con 3 días alcanza", icon:"plane", desc:"Mantener el plan actual y bajar antes a Asuán."}
+      {id:"si", name:"Sí, confirmado", icon:"pyramid", desc:"Lunes: medio día Saqqara + vuelo a Asuán 17:00."},
+      {id:"no", name:"No", icon:"plane", desc:"Opción descartada."}
     ]},
-  {id:"cruiseLength", type:"single", title:"Duración del crucero",
-    desc:"Según lo que cuenta Fer: si subís el martes (perdiéndote el lunes) terminás con 2 noches a bordo; si consiguen que cuente el lunes, serían 3.",
+  {id:"cruiseChoice", type:"single", title:"Crucero (DECIDIDO)",
+    desc:"El grupo eligió: 4 días / 3 noches Aswan → Luxor con Abu Simbel y globo aerostático incluidos (Go Tours Egypt, 569 reseñas, 4.7). Desde 279 USD por persona + ~80-100 USD de entradas no incluidas + propina sugerida 10 USD/persona/noche para la tripulación.",
     options:[
-      {id:"2n", name:"2 noches a bordo", icon:"boat", desc:"Subís el martes al mediodía después de Abu Simbel. Es lo más simple."},
-      {id:"3n", name:"3 noches a bordo", icon:"boat", desc:"Si el barco te deja subir el lunes (aunque no zarpe hasta el martes)."}
+      {id:"elegido", name:"Aswan → Luxor, 4 días con Abu Simbel + globo", icon:"boat", desc:"Día 1 del tour (Philae+Presa) se pierde por embarcar el martes. Día 2: Abu Simbel + Kom Ombo. Día 3: Edfu + Luxor. Día 4: globo + Valle de los Reyes + Karnak."}
     ]},
-  {id:"cruiseDirection", type:"single", title:"Sentido del crucero",
-    desc:"Ya parece definido por el plan actual (Asuán → Luxor), lo dejamos igual para confirmar entre todos.",
+  {id:"aswanExtras", type:"multi", title:"¿Sumamos Philae/Presa aparte?",
+    desc:"Al embarcar el martes nos perdemos el día 1 del crucero (Templo de Philae y Presa Alta de Asuán, incluidos en el tour). ¿Vale la pena sumarlos por separado, o los dejamos afuera?",
     options:[
-      {id:"aswanLuxor", name:"Aswan → Luxor", icon:"boat", desc:"Empezás por Abu Simbel/Aswan y terminás en Luxor, más cerca de Hurghada. (Plan actual)"},
-      {id:"luxorAswan", name:"Luxor → Aswan", icon:"boat", desc:"Empezás por Karnak/Valle de los Reyes y terminás en Aswan."}
+      {id:"philae", name:"Templo de Philae", icon:"island", desc:"Templo dedicado a Isis, reconstruido en una isla del Nilo. Se puede visitar aparte, corto (2h)."},
+      {id:"highDam", name:"Presa Alta de Asuán", icon:"dam", desc:"La represa que formó el lago Nasser. Parada corta (30min), fácil de sumar el lunes a la noche o de camino al aeropuerto."},
+      {id:"obelisk", name:"Obelisco Inacabado", icon:"obelisk", desc:"No está en el tour del crucero. Obelisco gigante abandonado en la cantera."},
+      {id:"nubian", name:"Pueblo Nubio", icon:"village", desc:"No está en el tour del crucero. Aldea nubia a orillas del Nilo, a veces con paseo en felucca."}
     ]},
-  {id:"aswanExtras", type:"multi", title:"Sitios extra en Asuán",
-    desc:"Abu Simbel ya está incluido en el crucero. ¿Qué más sumamos el lunes en Asuán, además de Philae?",
+  {id:"hurghadaExtra", type:"single", title:"4 días de playa en Hurghada, ¿alcanza?",
+    desc:"Con el crucero terminando el jueves, quedan 4 días completos de playa en Hurghada antes del vuelo (16 al 19/10). ¿Suma algo más o está bien así de relax?",
     options:[
-      {id:"philae", name:"Templo de Philae", icon:"island", desc:"Templo dedicado a Isis, reconstruido en una isla del Nilo."},
-      {id:"highDam", name:"Presa Alta de Asuán", icon:"dam", desc:"La represa que formó el lago Nasser, parada corta e icónica."},
-      {id:"obelisk", name:"Obelisco Inacabado", icon:"obelisk", desc:"Obelisco gigante abandonado en la cantera."},
-      {id:"nubian", name:"Pueblo Nubio", icon:"village", desc:"Aldea nubia a orillas del Nilo, a veces con paseo en felucca."}
-    ]},
-  {id:"hurghadaExtra", type:"single", title:"3 días de playa en Hurghada, ¿alcanza?",
-    desc:"El plan actual tiene 3 días completos de playa en Hurghada antes del vuelo. ¿Suma algo más o está bien así de relax?",
-    options:[
-      {id:"relax", name:"Solo playa, como está", icon:"sun", desc:"Descansar después del ritmo de templos."},
+      {id:"relax", name:"Solo playa, como está", icon:"sun", desc:"Descansar después del ritmo de templos y madrugones."},
       {id:"snorkel", name:"Sumar snorkel/buceo un día", icon:"sun", desc:"Salida en barco a arrecifes, en vez de un día 100% de playa de hotel."}
     ]}
 ];
 
 const BUDGET_CATEGORIES = [
-  {id:"cruise", name:"Crucero por el Nilo", note:"varía según noches y categoría del barco", def:450},
-  {id:"hotelCairo", name:"Hoteles en El Cairo", note:"3 noches, gama media", def:150},
-  {id:"hotelAswan", name:"Hotel en Asuán (noche del lunes)", note:"antes de subir al barco", def:60},
-  {id:"hotelHurghada", name:"Hotel/resort en Hurghada", note:"3 noches de playa", def:220},
-  {id:"entradas", name:"Entradas a templos y sitios", note:"Karnak, Valle de los Reyes, Abu Simbel, Philae, etc.", def:150},
-  {id:"traslados", name:"Traslados y guía", note:"transfers, chofer/guía compartido, vuelo interno Cairo-Asuán", def:180},
-  {id:"comidas", name:"Comidas fuera del crucero/hotel", note:"días en Cairo y Hurghada", def:120},
-  {id:"extras", name:"Extras e imprevistos", note:"propinas, souvenirs, agua, etc.", def:80}
+  {id:"cruise", name:"Crucero por el Nilo (4 días/3 noches)", note:"desde 279 USD pp + ~80-100 USD entradas no incluidas + propina crew ~10 USD/persona/noche", def:420},
+  {id:"vueloInterno", name:"Vuelo interno Cairo → Asuán", note:"sale 17:00 del lunes", def:90},
+  {id:"hotelCairo", name:"Hoteles en El Cairo (Zamalek)", note:"3 noches, gama media (Airbnb / President Hotel / Marriott)", def:150},
+  {id:"hotelAswan", name:"Hotel en Asuán (noche del lunes)", note:"antes de subir al barco el martes", def:60},
+  {id:"hotelHurghada", name:"Hotel/resort en Hurghada", note:"4 noches de playa", def:280},
+  {id:"entradas", name:"Entradas a templos y sitios", note:"Giza, Saqqara, GEM, Karnak/Valle de los Reyes del último día del crucero, etc.", def:180},
+  {id:"traslados", name:"Traslados y guía", note:"transfers, chofer/guía compartido en Cairo", def:120},
+  {id:"comidas", name:"Comidas fuera del crucero/hotel", note:"Khufu's, Andrea, Crimson, Pier 88, días en Hurghada", def:160},
+  {id:"extras", name:"Extras e imprevistos", note:"propinas, souvenirs, agua, camello/caballo en Guiza, etc.", def:90}
 ];
 
-const CHECKLIST_CATEGORIES = ["Vuelo interno","Crucero","Alojamiento","Entrada","Traslado","Seguro/Visa","Otro"];
+const CHECKLIST_CATEGORIES = ["Vuelo interno","Crucero","Alojamiento","Entrada","Traslado","Restaurante","Seguro/Visa","Otro"];
 const DEFAULT_CHECKLIST = [
-  {id:"c1", name:"Crucero por el Nilo", category:"Crucero", day:"", done:false, price:0, payer:"", link:""},
-  {id:"c2", name:"Vuelo interno Cairo → Asuán", category:"Vuelo interno", day:"2026-10-12", done:false, price:0, payer:"", link:""},
-  {id:"c3", name:"Entrada Abu Simbel", category:"Entrada", day:"2026-10-14", done:false, price:0, payer:"", link:""},
-  {id:"c4", name:"Hotel en El Cairo", category:"Alojamiento", day:"", done:false, price:0, payer:"", link:""},
-  {id:"c5", name:"Hotel en Asuán (noche del lunes)", category:"Alojamiento", day:"2026-10-12", done:false, price:0, payer:"", link:""},
-  {id:"c6", name:"Hotel/resort en Hurghada", category:"Alojamiento", day:"2026-10-16", done:false, price:0, payer:"", link:""},
-  {id:"c7", name:"Visa / e-visa Egipto", category:"Otro", day:"", done:false, price:0, payer:"", link:""},
-  {id:"c8", name:"Seguro de viaje", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""}
+  {id:"c1", name:"Crucero Aswan-Luxor 4d/3n (Go Tours, Abu Simbel+globo)", category:"Crucero", day:"2026-10-13", done:false, price:0, payer:"", link:"viator.com d796-331802P3 - desde 279 USD pp"},
+  {id:"c2", name:"Vuelo interno Cairo → Asuán (17:00)", category:"Vuelo interno", day:"2026-10-12", done:false, price:0, payer:"", link:"Falta dato de Agustín para completar"},
+  {id:"c3", name:"Entradas Karnak/Valle de los Reyes/Hatshepsut (día 4 crucero)", category:"Entrada", day:"2026-10-15", done:false, price:0, payer:"", link:"no incluidas en el tour, ~80-100 USD"},
+  {id:"c4", name:"Entradas Giza (pirámides + Esfinge)", category:"Entrada", day:"2026-10-10", done:false, price:0, payer:"", link:"comprar online con anticipación"},
+  {id:"c5", name:"Khufu's Restaurant - reserva mesa afuera", category:"Restaurante", day:"2026-10-10", done:false, price:0, payer:"", link:"+20 10 80058888"},
+  {id:"c6", name:"Crimson Bar & Grill - reserva cena", category:"Restaurante", day:"2026-10-10", done:false, price:0, payer:"", link:"+20 12 75055555 - 16 Kamal Al Tawil St"},
+  {id:"c7", name:"GEM - entrada + guía", category:"Entrada", day:"2026-10-11", done:false, price:0, payer:"", link:"reservar online, considerar guía"},
+  {id:"c8", name:"Andrea El Mariouteya - reserva fateer", category:"Restaurante", day:"2026-10-11", done:false, price:0, payer:"", link:"+20 10 03531000"},
+  {id:"c9", name:"Pier 88 - reserva cena", category:"Restaurante", day:"2026-10-11", done:false, price:0, payer:"", link:"+20 10 80888840 - 19 Saray El Gezira St"},
+  {id:"c10", name:"Hotel/Airbnb en Zamalek (El Cairo)", category:"Alojamiento", day:"", done:false, price:0, payer:"", link:""},
+  {id:"c11", name:"Hotel en Asuán (noche del lunes)", category:"Alojamiento", day:"2026-10-12", done:false, price:0, payer:"", link:""},
+  {id:"c12", name:"Hotel/resort en Hurghada", category:"Alojamiento", day:"2026-10-16", done:false, price:0, payer:"", link:""},
+  {id:"c13", name:"SIM local (Vodafone/Orange, aeropuerto)", category:"Otro", day:"2026-10-09", done:false, price:0, payer:"", link:""},
+  {id:"c14", name:"Visa / e-visa Egipto", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""},
+  {id:"c15", name:"Seguro de viaje", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""}
 ];
 
 let state = { me:null, votes:{}, calendar:{}, budget:{}, photos:{}, checklist:[] };
@@ -251,11 +252,13 @@ function render(){
     </header>
     <nav class="tabs" id="tabs">
       <button data-tab="itinerario" class="active">Itinerario</button>
+      <button data-tab="mapa">Mapa</button>
       <button data-tab="votaciones">Votaciones</button>
       <button data-tab="checklist">Para reservar</button>
       <button data-tab="presupuesto">Presupuesto</button>
     </nav>
     <section id="tab-itinerario" class="active"></section>
+    <section id="tab-mapa"></section>
     <section id="tab-votaciones"></section>
     <section id="tab-checklist"></section>
     <section id="tab-presupuesto"></section>
@@ -279,7 +282,7 @@ function render(){
     });
   });
 
-  renderItinerario(); renderVotaciones(); renderChecklist(); renderPresupuesto();
+  renderItinerario(); renderMapa(); renderVotaciones(); renderChecklist(); renderPresupuesto();
 }
 
 function renderItinerario(){
@@ -308,6 +311,12 @@ function renderItinerario(){
   el.querySelectorAll('textarea').forEach(ta=>{
     ta.addEventListener('change', ()=>{ state.calendar[ta.dataset.date] = ta.value; saveShared(); });
   });
+}
+
+function renderMapa(){
+  const el = document.getElementById('tab-mapa');
+  el.innerHTML = '<iframe src="https://www.google.com/maps/d/embed?mid=1XryATKAlA2VuziEw-gYsULqJAhhhrRE&ehbc=2E312F" width="100%" height="480" style="border:1px solid var(--line);border-radius:10px;"></iframe>'
+    + '<p class="badge-pp" style="margin-top:8px;">Mapa de MyMaps del grupo - templos, museos, comida y más, por categoría.</p>';
 }
 
 function renderVotaciones(){
@@ -472,3 +481,4 @@ init();
 </script>
 </body>
 </html>
+
