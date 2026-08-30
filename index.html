@@ -132,32 +132,32 @@ const ICONS = {
 };
 function iconSvg(name){ return '<svg width="30" height="30" viewBox="0 0 24 24">'+(ICONS[name]||ICONS.temple)+'</svg>'; }
 
-const POLLS = [
-  {id:"cairoExtra", type:"single", title:"Medio día extra en El Cairo (DECIDIDO)",
-    desc:"Ya está confirmado por el grupo: se suma medio día en Cairo el lunes para Saqqara, y por eso se embarca el crucero recién el martes (perdiendo el día 1 del tour: Philae + Presa Alta).",
-    options:[
-      {id:"si", name:"Sí, confirmado", icon:"pyramid", desc:"Lunes: medio día Saqqara + vuelo a Asuán 17:00."},
-      {id:"no", name:"No", icon:"plane", desc:"Opción descartada."}
-    ]},
-  {id:"cruiseChoice", type:"single", title:"Crucero (DECIDIDO)",
-    desc:"El grupo eligió: 4 días / 3 noches Aswan → Luxor con Abu Simbel y globo aerostático incluidos (Go Tours Egypt, 569 reseñas, 4.7). Desde 279 USD por persona + ~80-100 USD de entradas no incluidas + propina sugerida 10 USD/persona/noche para la tripulación.",
-    options:[
-      {id:"elegido", name:"Aswan → Luxor, 4 días con Abu Simbel + globo", icon:"boat", desc:"Día 1 del tour (Philae+Presa) se pierde por embarcar el martes. Día 2: Abu Simbel + Kom Ombo. Día 3: Edfu + Luxor. Día 4: globo + Valle de los Reyes + Karnak."}
-    ]},
-  {id:"aswanExtras", type:"multi", title:"¿Sumamos Philae/Presa aparte?",
-    desc:"Al embarcar el martes nos perdemos el día 1 del crucero (Templo de Philae y Presa Alta de Asuán, incluidos en el tour). ¿Vale la pena sumarlos por separado, o los dejamos afuera?",
-    options:[
-      {id:"philae", name:"Templo de Philae", icon:"island", desc:"Templo dedicado a Isis, reconstruido en una isla del Nilo. Se puede visitar aparte, corto (2h)."},
-      {id:"highDam", name:"Presa Alta de Asuán", icon:"dam", desc:"La represa que formó el lago Nasser. Parada corta (30min), fácil de sumar el lunes a la noche o de camino al aeropuerto."},
-      {id:"obelisk", name:"Obelisco Inacabado", icon:"obelisk", desc:"No está en el tour del crucero. Obelisco gigante abandonado en la cantera."},
-      {id:"nubian", name:"Pueblo Nubio", icon:"village", desc:"No está en el tour del crucero. Aldea nubia a orillas del Nilo, a veces con paseo en felucca."}
-    ]},
-  {id:"hurghadaExtra", type:"single", title:"4 días de playa en Hurghada, ¿alcanza?",
-    desc:"Con el crucero terminando el jueves, quedan 4 días completos de playa en Hurghada antes del vuelo (16 al 19/10). ¿Suma algo más o está bien así de relax?",
-    options:[
-      {id:"relax", name:"Solo playa, como está", icon:"sun", desc:"Descansar después del ritmo de templos y madrugones."},
-      {id:"snorkel", name:"Sumar snorkel/buceo un día", icon:"sun", desc:"Salida en barco a arrecifes, en vez de un día 100% de playa de hotel."}
-    ]}
+const PLACES = [
+  {segment:"El Cairo", items:[
+    {id:"guiza", name:"Pirámides de Guiza", desc:"Día 1 de Cairo. La única de las 7 maravillas del mundo antiguo que sigue en pie.", wiki:"Pirámides de Guiza", status:"decidido"},
+    {id:"khufus", name:"Khufu's Restaurant", desc:"Desayuno/almuerzo con vista a las pirámides desde afuera. Hay que reservar y entrar al predio (Uber no llega).", wiki:null, icon:"pyramid", status:"decidido"},
+    {id:"gem", name:"Gran Museo Egipcio (GEM)", desc:"Día 2 de Cairo. El museo más grande del mundo dedicado a una sola civilización, con la colección completa de Tutankamón.", wiki:"Gran Museo Egipcio", status:"decidido"},
+    {id:"saqqara", name:"Saqqara", desc:"Medio día del lunes. La primera pirámide de Egipto, la escalonada de Zoser (~2650 a.C.).", wiki:"Saqqara", status:"decidido"}
+  ]},
+  {segment:"Crucero por el Nilo (4 días, Aswan → Luxor)", items:[
+    {id:"abusimbel", name:"Abu Simbel", desc:"Día 2 del crucero, salida ~4am. Los templos tallados en la montaña por Ramsés II.", wiki:"Abu Simbel", status:"decidido"},
+    {id:"komombo", name:"Templo de Kom Ombo", desc:"Día 2 del crucero. Único templo doble de Egipto, mitad Sobek (cocodrilo) mitad Horus.", wiki:"Templo de Kom Ombo", status:"decidido"},
+    {id:"edfu", name:"Templo de Edfu", desc:"Día 3 del crucero. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", status:"decidido"},
+    {id:"luxortemplo", name:"Templo de Luxor", desc:"Día 3 del crucero, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", status:"decidido"},
+    {id:"globo", name:"Paseo en globo aerostático", desc:"Día 4 del crucero, al amanecer sobre el Valle de los Reyes. Incluido en el tour.", wiki:null, icon:"sun", status:"decidido"},
+    {id:"valle", name:"Valle de los Reyes", desc:"Día 4 del crucero. Necrópolis de los faraones del Imperio Nuevo, incluido Tutankamón.", wiki:"Valle de los Reyes", status:"decidido"},
+    {id:"karnak", name:"Templo de Karnak", desc:"Día 4 del crucero. El complejo religioso más grande jamás construido.", wiki:"Templo de Karnak", status:"decidido"}
+  ]},
+  {segment:"¿Sumamos aparte? (nos las perdemos por embarcar el martes)", items:[
+    {id:"philae", name:"Templo de Philae", desc:"Día 1 del crucero que nos perdemos. Templo de Isis reconstruido en una isla del Nilo.", wiki:"Templo de Filé", status:"abierto"},
+    {id:"highDam", name:"Presa Alta de Asuán", desc:"Día 1 del crucero que nos perdemos. Formó el lago Nasser, parada corta e icónica.", wiki:"Presa de Asuán", status:"abierto"},
+    {id:"obelisk", name:"Obelisco Inacabado", desc:"No está en el tour. Obelisco gigante abandonado en la cantera, se ve cómo lo tallaban.", wiki:"Obelisco inacabado", status:"abierto"},
+    {id:"nubian", name:"Pueblo Nubio", desc:"No está en el tour. Casas de colores a orillas del Nilo, a veces con paseo en felucca.", wiki:null, icon:"village", status:"abierto"}
+  ]},
+  {segment:"Hurghada (4 días de playa)", items:[
+    {id:"hurghadaplaya", name:"Playa / resort", desc:"Del jueves a la noche hasta el lunes del vuelo. Como está el plan, es descanso puro.", wiki:"Hurghada", status:"decidido"},
+    {id:"snorkel", name:"Día de snorkel / buceo", desc:"En vez de un día 100% de playa de hotel, salida en barco a los arrecifes del Mar Rojo.", wiki:null, icon:"sun", status:"abierto"}
+  ]}
 ];
 
 const BUDGET_CATEGORIES = [
@@ -191,14 +191,15 @@ const DEFAULT_CHECKLIST = [
   {id:"c15", name:"Seguro de viaje", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""}
 ];
 
-let state = { me:null, votes:{}, calendar:{}, budget:{}, photos:{}, checklist:[] };
+let state = { me:null, interest:{}, calendar:{}, budget:{}, photos:{}, checklist:[] };
+let wikiCache = {};
 let syncStatus = STORAGE_READY ? "" : "⚠ falta configurar guardado compartido";
 
 async function loadShared(){
   try{
     const res = await fetch('/api/state');
     const rec = await res.json();
-    state.votes = rec.votes || {};
+    state.interest = rec.interest || rec.votes || {};
     state.calendar = rec.calendar || {};
     state.budget = rec.budget || {};
     state.photos = rec.photos || {};
@@ -208,16 +209,28 @@ async function loadShared(){
 }
 async function saveShared(){
   try{
-    await fetch('/api/state', {
+    const res = await fetch('/api/state', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({votes:state.votes, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist})
+      body: JSON.stringify({interest:state.interest, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist})
     });
-    syncStatus = "guardado";
-  }catch(e){ syncStatus = "no se pudo guardar"; }
+    if(!res.ok) throw new Error('status '+res.status);
+    syncStatus = "guardado ✓";
+    lastSaveFailed = false;
+  }catch(e){
+    syncStatus = "⚠ no se guardó - revisá que estés en la URL de Vercel (no el archivo local) y que el KV esté conectado";
+    lastSaveFailed = true;
+  }
   updateSyncLabel();
 }
-function updateSyncLabel(){ const el = document.getElementById('syncStatus'); if(el) el.textContent = syncStatus; }
+let lastSaveFailed = false;
+function updateSyncLabel(){
+  const el = document.getElementById('syncStatus');
+  if(!el) return;
+  el.textContent = syncStatus;
+  el.style.color = lastSaveFailed ? '#c0392b' : '';
+  el.style.fontWeight = lastSaveFailed ? '600' : '';
+}
 
 function loadMe(){ try{ state.me = localStorage.getItem('nile-me') || null; }catch(e){ state.me = null; } }
 function saveMe(){ try{ localStorage.setItem('nile-me', state.me || ''); }catch(e){} }
@@ -231,6 +244,22 @@ function riverSvg(){
   return '<svg class="river-svg" viewBox="0 0 900 46" preserveAspectRatio="none"><path d="M0 23 C 150 5, 300 41, 450 23 S 750 5, 900 23" fill="none" stroke="var(--nile)" stroke-width="3" opacity="0.35"/></svg>';
 }
 
+async function fetchWikiThumb(title){
+  if(!title) return null;
+  if(title in wikiCache) return wikiCache[title];
+  try{
+    const res = await fetch('https://es.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title));
+    const j = await res.json();
+    wikiCache[title] = (j.thumbnail && j.thumbnail.source) ? j.thumbnail.source : null;
+  }catch(e){ wikiCache[title] = null; }
+  return wikiCache[title];
+}
+async function prefetchAllThumbs(){
+  const titles = [];
+  PLACES.forEach(seg=> seg.items.forEach(it=>{ if(it.wiki) titles.push(it.wiki); }));
+  await Promise.all(titles.map(fetchWikiThumb));
+}
+
 async function init(){
   loadMe();
   BUDGET_CATEGORIES.forEach(c=>{ state.budget[c.id] = c.def; });
@@ -238,6 +267,8 @@ async function init(){
   BUDGET_CATEGORIES.forEach(c=>{ if(state.budget[c.id]===undefined) state.budget[c.id] = c.def; });
   if(!state.checklist || !state.checklist.length) state.checklist = DEFAULT_CHECKLIST.map(x=>Object.assign({},x));
   render();
+  await prefetchAllThumbs();
+  renderVotaciones();
 }
 
 function render(){
@@ -253,7 +284,7 @@ function render(){
     <nav class="tabs" id="tabs">
       <button data-tab="itinerario" class="active">Itinerario</button>
       <button data-tab="mapa">Mapa</button>
-      <button data-tab="votaciones">Votaciones</button>
+      <button data-tab="votaciones">Lugares</button>
       <button data-tab="checklist">Para reservar</button>
       <button data-tab="presupuesto">Presupuesto</button>
     </nav>
@@ -321,60 +352,53 @@ function renderMapa(){
 
 function renderVotaciones(){
   const el = document.getElementById('tab-votaciones');
-  el.innerHTML = POLLS.map(poll=>{
-    const pollVotes = state.votes[poll.id] || {};
-    const opts = poll.options.map(opt=>{
-      let picked = false; let voters = [];
-      Object.keys(pollVotes).forEach(person=>{
-        const v = pollVotes[person];
-        if(poll.type==='multi'){ if(Array.isArray(v) && v.includes(opt.id)) voters.push(person); }
-        else { if(v===opt.id) voters.push(person); }
-      });
-      if(poll.type==='multi'){ const mine = pollVotes[state.me]; picked = Array.isArray(mine) && mine.includes(opt.id); }
-      else { picked = pollVotes[state.me]===opt.id; }
-      const photoUrl = state.photos[opt.id];
-      const photoInner = photoUrl ? '' : iconSvg(opt.icon);
-      const photoStyle = photoUrl ? `style="background-image:url('${photoUrl.replace(/'/g,"")}')"` : '';
-      return `<div class="opt ${picked?'picked':''}">
-          <div class="photo ${photoUrl?'':'empty'}" ${photoStyle} data-photofor="${opt.id}">${photoInner}<span class="addphoto" data-photofor="${opt.id}">${photoUrl?'cambiar foto':'+ foto'}</span></div>
-          <div class="clickzone" data-poll="${poll.id}" data-opt="${opt.id}">
-            <div class="name">${opt.name}</div>
-            <div class="odesc">${opt.desc}</div>
-            <div class="votes-row">
-              ${voters.map(v=>`<span class="vote-badge" title="${v}">${initials(v)}</span>`).join('')}
-              <span class="vote-count">${voters.length?voters.length+' voto'+(voters.length>1?'s':''):'sin votos'}</span>
-            </div>
-          </div>
-        </div>`;
+  el.innerHTML = PLACES.map(seg=>{
+    const cards = seg.items.map(it=>{
+      const thumb = it.wiki ? wikiCache[it.wiki] : null;
+      const customPhoto = state.photos[it.id];
+      const photoUrl = customPhoto || thumb;
+      const photoInner = photoUrl ? '' : iconSvg(it.icon || 'temple');
+      const photoStyle = photoUrl ? 'style="background-image:url(\''+photoUrl.replace(/'/g,'')+'\')"' : '';
+      const isOpen = it.status === 'abierto';
+      let interestedHtml = '';
+      if(isOpen){
+        const interested = Object.keys(state.interest[it.id] || {}).filter(p=>state.interest[it.id][p]);
+        const mine = state.me && state.interest[it.id] && state.interest[it.id][state.me];
+        interestedHtml = '<div class="votes-row" style="margin-top:8px;">'
+          + '<button class="sync-btn interest-btn" data-interest="'+it.id+'" style="'+(mine?'background:var(--nile);color:#fff;':'')+'">'+(mine?'✓ Me interesa':'Me interesa')+'</button>'
+          + interested.map(p=>'<span class="vote-badge" title="'+p+'">'+initials(p)+'</span>').join('')
+          + '</div>';
+      } else {
+        interestedHtml = '<div class="votes-row" style="margin-top:8px;"><span class="vote-count" style="color:var(--nile-dark);font-weight:600;">✓ en el plan</span></div>';
+      }
+      return '<div class="opt' + (isOpen?'':' picked') + '">'
+        + '<div class="photo ' + (photoUrl?'':'empty') + '" ' + photoStyle + ' data-photofor="' + it.id + '">' + photoInner + '<span class="addphoto" data-photofor="' + it.id + '">' + (customPhoto?'cambiar foto':'+ foto') + '</span></div>'
+        + '<div class="clickzone" style="cursor:default;">'
+        + '<div class="name">' + it.name + '</div>'
+        + '<div class="odesc">' + it.desc + '</div>'
+        + interestedHtml
+        + '</div></div>';
     }).join('');
-    return `<div class="poll"><h3>${poll.title}</h3><p class="desc">${poll.desc}</p><div class="opt-grid">${opts}</div></div>`;
+    return '<div class="poll"><h3>' + seg.segment + '</h3><div class="opt-grid">' + cards + '</div></div>';
   }).join('');
 
-  el.querySelectorAll('.clickzone').forEach(zone=>{
-    zone.addEventListener('click', ()=>{
+  el.querySelectorAll('[data-interest]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
       if(!state.me){ alert('Primero elegí quién sos, arriba de todo.'); return; }
-      const pollId = zone.dataset.poll, optId = zone.dataset.opt;
-      const poll = POLLS.find(p=>p.id===pollId);
-      if(!state.votes[pollId]) state.votes[pollId] = {};
-      if(poll.type==='multi'){
-        const cur = state.votes[pollId][state.me] || [];
-        const idx = cur.indexOf(optId);
-        if(idx>=0) cur.splice(idx,1); else cur.push(optId);
-        state.votes[pollId][state.me] = cur;
-      } else {
-        state.votes[pollId][state.me] = state.votes[pollId][state.me]===optId ? null : optId;
-      }
+      const id = btn.dataset.interest;
+      if(!state.interest[id]) state.interest[id] = {};
+      state.interest[id][state.me] = !state.interest[id][state.me];
       saveShared(); renderVotaciones();
     });
   });
   el.querySelectorAll('[data-photofor]').forEach(el2=>{
     el2.addEventListener('click', (e)=>{
       e.stopPropagation();
-      const optId = el2.dataset.photofor;
-      const current = state.photos[optId] || '';
-      const url = prompt('Pegá el link de una foto (jpg/png):', current);
+      const id = el2.dataset.photofor;
+      const current = state.photos[id] || '';
+      const url = prompt('Pegá el link de una foto (jpg/png) - dejalo vacío para volver a la foto automática:', current);
       if(url===null) return;
-      if(url.trim()==='') delete state.photos[optId]; else state.photos[optId] = url.trim();
+      if(url.trim()==='') delete state.photos[id]; else state.photos[id] = url.trim();
       saveShared(); renderVotaciones();
     });
   });
