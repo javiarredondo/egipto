@@ -51,6 +51,32 @@
   .addphoto:active{transform:scale(0.9);}
   section{display:none;} section.active{display:block;}
 
+  .overview-panel{background:var(--papyrus-card);border:1px solid var(--line);border-radius:16px;padding:16px 16px 12px;box-shadow:0 8px 18px rgba(18,59,64,.06);margin-bottom:18px;}
+  .overview-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;}
+  .overview-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--nile);opacity:.8;}
+  .overview-tag{background:var(--nile-light);border:1px solid var(--line);color:var(--nile-dark);padding:5px 8px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:10px;}
+  .overview-hero{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+  .overview-hero h3{margin:6px 0 4px;font-size:22px;line-height:1.1;color:var(--nile-dark);}
+  .overview-hero p{margin:0;color:var(--ink-soft);font-size:13px;}
+  .overview-hero .icon{font-size:28px;}
+  .overview-metrics{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:10px;margin-top:16px;}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 10px 9px;min-height:74px;}
+  .stat .label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;}
+  .stat strong{display:block;font-size:18px;font-weight:700;color:var(--nile-dark);line-height:1.2;}
+  .stat small{display:block;font-size:11px;color:var(--ink-soft);margin-top:3px;}
+
+  .mini-card{background:var(--papyrus-card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .mini-card + .mini-card{margin-top:12px;}
+  .mini-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;}
+  .mini-top h4{margin:0;font-size:14px;color:var(--nile-dark);font-family:'Cinzel',serif;}
+  .mini-pill{padding:4px 7px;border-radius:999px;background:var(--nile-light);color:var(--nile-dark);font-family:'JetBrains Mono',monospace;font-size:10px;}
+  .next-list{display:flex;flex-direction:column;gap:10px;}
+  .next-item{display:flex;gap:10px;padding:10px 0;border-top:1px dashed var(--line);}
+  .next-item:first-child{border-top:none;padding-top:0;}
+  .date-badge{min-width:52px;background:var(--nile-dark);color:#fff;border-radius:8px;padding:7px 6px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.2;}
+  .next-item strong{display:block;font-size:13px;color:var(--ink);}
+  .next-item p{margin:3px 0 0;font-size:12px;color:var(--ink-soft);}
+
   .flight-card{display:flex;justify-content:space-between;align-items:center;background:var(--nile-dark);color:var(--gold-light);border-radius:10px;padding:14px 18px;margin-bottom:10px;font-size:14px;}
   .flight-card .route{font-family:'Cinzel',serif;font-size:16px;color:#fff;}
   .flight-card .meta{text-align:right;color:var(--gold-light);opacity:.85;font-size:12.5px;}
@@ -139,6 +165,43 @@
   .setup-banner code{background:rgba(0,0,0,.2);padding:1px 5px;border-radius:4px;}
   .footer-note{margin-top:40px;font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:14px;}
   .loading{padding:40px;text-align:center;color:var(--ink-soft);font-size:14px;}
+
+  @media (max-width: 620px){
+    body{background-size:48px 48px;}
+    .wrap{padding:14px 12px 64px;}
+    header{padding-bottom:16px;margin-bottom:16px;}
+    header .eyebrow{font-size:10px;letter-spacing:.08em;}
+    header h1{font-size:26px;}
+    header p.sub{font-size:13px;}
+    .whoami-note{font-size:12px;}
+    nav.tabs{gap:4px;overflow-x:auto;white-space:nowrap;padding-bottom:4px;}
+    nav.tabs button{font-size:12px;padding:10px 12px;flex:0 0 auto;}
+    .people-row{gap:6px;}
+    .chip{padding:5px 10px 5px 5px;font-size:12px;}
+    .chip .dot{width:22px;height:22px;font-size:10px;}
+    .overview-panel{padding:12px 12px 10px;}
+    .overview-hero h3{font-size:20px;}
+    .overview-metrics{grid-template-columns:repeat(3, minmax(0,1fr));gap:8px;}
+    .stat{padding:8px 8px 7px;}
+    .stat strong{font-size:15px;}
+    .day-card{padding:10px 12px;}
+    .day-card .d{min-width:46px;}
+    .day-card .d .num{font-size:18px;}
+    .day-card .d .wd{font-size:10px;}
+    .flight-card{padding:10px 12px;}
+    .flight-card .route{font-size:15px;}
+    .flight-card .meta{font-size:11px;}
+    .view-toggle{width:100%;justify-content:space-between;}
+    .view-toggle button{flex:1;}
+    .cal-grid{gap:4px;}
+    .cal-cell{font-size:11px;}
+    .cal-label{display:none;}
+    .footer-note{font-size:11.5px;}
+  }
+
+  @media (min-width: 621px){
+    .overview-panel{display:none;}
+  }
 </style>
 </head>
 <body>
@@ -737,4 +800,5 @@ setInterval(()=>{ const box = document.getElementById('countdownBox'); if(box) b
 </script>
 </body>
 </html>
+
 
