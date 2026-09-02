@@ -140,21 +140,54 @@
   .footer-note{margin-top:40px;font-size:12px;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:14px;}
   .loading{padding:40px;text-align:center;color:var(--ink-soft);font-size:14px;}
 
+  .hero-card{background:var(--nile-dark);color:#fff;border-radius:16px;padding:20px 20px 16px;margin-bottom:16px;}
+  .hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);opacity:.8;}
+  .hero-title{font-family:'Cinzel',serif;font-size:26px;margin:6px 0 4px;}
+  .hero-sub{font-size:13px;color:var(--gold-light);opacity:.9;margin:0;}
+  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;}
+  .hero-stat{background:rgba(255,255,255,.08);border-radius:10px;padding:9px 8px;text-align:center;}
+  .hero-stat .hs-label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold-light);opacity:.8;margin-bottom:4px;}
+  .hero-stat .hs-value{display:block;font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:600;}
+
+  .next-card{background:var(--papyrus-card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:16px;}
+  .next-card h4{margin:0 0 10px;font-family:'Cinzel',serif;font-size:14px;color:var(--nile-dark);}
+  .next-row{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-top:1px dashed var(--line);}
+  .next-row:first-of-type{border-top:none;padding-top:0;}
+  .next-date{min-width:46px;background:var(--nile);color:#fff;border-radius:8px;padding:6px 4px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.25;}
+  .next-row strong{display:block;font-size:13.5px;color:var(--ink);}
+  .next-row span{font-size:11.5px;color:var(--ink-soft);}
+  .empty-note{font-size:13px;color:var(--ink-soft);}
+
+  .doc-form{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;background:var(--papyrus-card);border:1px solid var(--line);border-radius:10px;padding:12px;}
+  .doc-form input{flex:1;min-width:140px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-family:'Lora',serif;font-size:13.5px;background:#fff;color:var(--ink);}
+  .doc-list{display:flex;flex-direction:column;gap:10px;}
+  .doc-card{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;}
+  .doc-card .doc-info strong{display:block;font-size:14px;color:var(--ink);}
+  .doc-card .doc-info span{font-size:12px;color:var(--ink-soft);}
+  .doc-card .doc-actions{display:flex;gap:6px;flex-shrink:0;}
+  .doc-open{background:var(--nile);color:#fff;border:none;border-radius:6px;padding:7px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;text-decoration:none;}
+
   @media (max-width: 640px){
-    .wrap{padding:18px 14px 70px;}
+    .wrap{padding:18px 14px 90px;}
     header .eyebrow{flex-wrap:wrap;gap:6px;font-size:10px;}
     header h1{font-size:24px;}
     header p.sub{font-size:13px;}
     .countdown{font-size:12px;padding:8px 12px;}
 
-    nav.tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+    nav.tabs{
+      position:fixed;top:auto;bottom:0;left:0;right:0;margin-bottom:0;
+      border-bottom:none;border-top:1px solid var(--line);
+      box-shadow:0 -6px 14px rgba(18,59,64,.10);
+      padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+      flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+    }
     nav.tabs::-webkit-scrollbar{display:none;}
-    nav.tabs button{flex:0 0 auto;padding:9px 12px;font-size:12px;}
+    nav.tabs button{flex:0 0 auto;padding:8px 12px;font-size:11.5px;border-bottom:none;border-radius:8px;}
+    nav.tabs button.active{background:var(--nile);color:#fff;}
 
     .cal-label{display:none;}
     .cal-cell{font-size:11px;}
 
-    /* Checklist & budget tables become stacked cards on narrow screens */
     table.budget thead{display:none;}
     table.budget, table.budget tbody, table.budget tr, table.budget td{display:block;width:100%;}
     table.budget tr{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:10px;background:var(--papyrus-card);}
@@ -288,7 +321,7 @@ const SEGMENTS = [
 ];
 function segmentForDate(d){ return SEGMENTS.find(s=> d>=s.start && d<=s.end) || null; }
 
-let state = { me:null, interest:{}, calendar:{}, budget:{}, photos:{}, checklist:[] };
+let state = { me:null, interest:{}, calendar:{}, budget:{}, photos:{}, checklist:[], docs:[] };
 let itinView = "lista";
 let wikiCache = {};
 let weatherCache = {};
@@ -311,6 +344,7 @@ async function loadShared(){
     state.budget = rec.budget || {};
     state.photos = rec.photos || {};
     state.checklist = (rec.checklist && rec.checklist.length) ? rec.checklist : DEFAULT_CHECKLIST.map(x=>Object.assign({},x));
+    state.docs = rec.docs || [];
     syncStatus = "sincronizado";
   }catch(e){ syncStatus = "no se pudo sincronizar (¿está deployado en Vercel con KV conectado?)"; }
 }
@@ -319,7 +353,7 @@ async function saveShared(){
     const res = await fetch('/api/state', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({interest:state.interest, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist})
+      body: JSON.stringify({interest:state.interest, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist, docs:state.docs})
     });
     if(!res.ok) throw new Error('status '+res.status);
     syncStatus = "guardado ✓";
@@ -373,6 +407,7 @@ function prepProgressHtml(){
 function updatePrepProgress(){
   const box = document.getElementById('prepProgressBox');
   if(box) box.innerHTML = prepProgressHtml();
+  renderHoy();
 }
 
 function weatherIcon(code){
@@ -437,18 +472,22 @@ function render(){
       <div class="whoami-note">${state.me ? 'Estás votando como <b>'+state.me+'</b>.' : 'Elegí quién sos para poder votar y anotar cosas.'}</div>
     </header>
     <nav class="tabs" id="tabs">
-      <button data-tab="itinerario" class="active">Itinerario</button>
+      <button data-tab="hoy" class="active">Hoy</button>
+      <button data-tab="itinerario">Itinerario</button>
       <button data-tab="clima">Clima</button>
       <button data-tab="mapa">Mapa</button>
       <button data-tab="votaciones">Lugares</button>
       <button data-tab="checklist">Para reservar</button>
+      <button data-tab="documentos">Documentos</button>
       <button data-tab="presupuesto">Presupuesto</button>
     </nav>
-    <section id="tab-itinerario" class="active"></section>
+    <section id="tab-hoy" class="active"></section>
+    <section id="tab-itinerario"></section>
     <section id="tab-clima"></section>
     <section id="tab-mapa"></section>
     <section id="tab-votaciones"></section>
     <section id="tab-checklist"></section>
+    <section id="tab-documentos"></section>
     <section id="tab-presupuesto"></section>
     <div class="footer-note">Todo lo que se vota, anota, edita o el link de foto que pegan acá lo ven los 6 (si el guardado compartido está configurado). Los montos del presupuesto son estimaciones de referencia.</div>
   `;
@@ -470,7 +509,51 @@ function render(){
     });
   });
 
-  renderItinerario(); renderClima(); renderMapa(); renderVotaciones(); renderChecklist(); renderPresupuesto();
+  renderItinerario(); renderClima(); renderMapa(); renderVotaciones(); renderChecklist(); renderPresupuesto(); renderHoy(); renderDocumentos();
+}
+
+function renderHoy(){
+  const el = document.getElementById('tab-hoy');
+  const target = new Date('2026-10-09T19:45:00');
+  const now = new Date();
+  const diffMs = target - now;
+  const daysLeft = diffMs > 0 ? Math.max(0, Math.floor(diffMs / (1000*60*60*24))) : 0;
+
+  const pending = state.checklist.filter(function(i){ return !i.done; });
+  const withDay = pending.filter(function(i){ return !!i.day; }).sort(function(a,b){ return a.day < b.day ? -1 : 1; });
+  const withoutDay = pending.filter(function(i){ return !i.day; });
+  const ordered = withDay.concat(withoutDay);
+  const first = ordered[0] || null;
+
+  const totalBudget = BUDGET_CATEGORIES.reduce(function(s,c){ return s + Number(state.budget[c.id] !== undefined ? state.budget[c.id] : c.def); }, 0);
+
+  const heroSub = first ? ('Próximo: ' + first.name) : 'Todo reservado por ahora';
+
+  let statsHtml = '<div class="hero-stats">'
+    + '<div class="hero-stat"><span class="hs-label">Pendientes</span><span class="hs-value">' + pending.length + '</span></div>'
+    + '<div class="hero-stat"><span class="hs-label">Reservado</span><span class="hs-value">' + (state.checklist.length - pending.length) + '/' + state.checklist.length + '</span></div>'
+    + '<div class="hero-stat"><span class="hs-label">Presupuesto</span><span class="hs-value">€' + totalBudget.toLocaleString('es-AR') + '</span></div>'
+    + '</div>';
+
+  let nextHtml = '<div class="next-card"><h4>Lo próximo</h4>';
+  if(ordered.length === 0){
+    nextHtml += '<p class="empty-note">No quedan tareas pendientes en el checklist. 🎉</p>';
+  } else {
+    ordered.slice(0, 3).forEach(function(item){
+      const dayMeta = item.day ? fmtDay(item.day) : null;
+      const dateHtml = dayMeta ? (dayMeta.num + '<br>' + dayMeta.mo) : '—';
+      nextHtml += '<div class="next-row"><div class="next-date">' + dateHtml + '</div><div><strong>' + (item.name || 'Tarea') + '</strong><span>' + (item.category || '') + '</span></div></div>';
+    });
+  }
+  nextHtml += '</div>';
+
+  el.innerHTML = '<div class="hero-card">'
+    + '<div class="hero-eyebrow">Egipto · Octubre 2026</div>'
+    + '<div class="hero-title">Faltan ' + daysLeft + ' días</div>'
+    + '<p class="hero-sub">' + heroSub + '</p>'
+    + statsHtml
+    + '</div>'
+    + nextHtml;
 }
 
 function renderItinerario(){
@@ -711,6 +794,50 @@ function renderChecklist(){
   document.getElementById('addChecklistRow').addEventListener('click', ()=>{
     state.checklist.push({id:'c'+Date.now(), name:'', category:CHECKLIST_CATEGORIES[0], day:'', done:false, price:0, payer:'', link:''});
     saveShared(); renderChecklist(); updatePrepProgress();
+  });
+}
+
+function isImageLink(url){
+  return /\.(png|jpe?g|gif|webp|svg)(\?.*)?$/i.test(url || '');
+}
+
+function renderDocumentos(){
+  const el = document.getElementById('tab-documentos');
+  const cards = state.docs.map(function(doc){
+    const preview = isImageLink(doc.link) ? ('<img src="' + doc.link + '" alt="" style="width:52px;height:52px;object-fit:cover;border-radius:8px;border:1px solid var(--line);margin-right:4px;">') : '';
+    return '<div class="doc-card" data-id="' + doc.id + '">'
+      + '<div style="display:flex;align-items:center;gap:10px;">' + preview
+      + '<div class="doc-info"><strong>' + (doc.name || 'Documento') + '</strong><span>' + (doc.note || '') + '</span></div></div>'
+      + '<div class="doc-actions">'
+      + (doc.link ? ('<a class="doc-open" href="' + doc.link + '" target="_blank" rel="noopener">Abrir</a>') : '')
+      + '<button class="sync-btn" data-del-doc="' + doc.id + '" title="Borrar">✕</button>'
+      + '</div></div>';
+  }).join('');
+
+  el.innerHTML = '<div class="doc-form">'
+    + '<input type="text" id="docName" placeholder="Nombre (ej: Ticket crucero)">'
+    + '<input type="text" id="docNote" placeholder="Nota (ej: reservado por Pipa)">'
+    + '<input type="text" id="docLink" placeholder="Link de Google Drive / Dropbox">'
+    + '<button class="sync-btn" id="addDocBtn">+ agregar</button>'
+    + '</div>'
+    + '<div class="doc-list">' + (cards || '<p class="empty-note">Todavía no hay documentos cargados. Subilo a Drive/Dropbox, compartilo como "cualquiera con el link" y pegá el link acá arriba.</p>') + '</div>';
+
+  document.getElementById('addDocBtn').addEventListener('click', function(){
+    const name = document.getElementById('docName').value.trim();
+    const note = document.getElementById('docNote').value.trim();
+    const link = document.getElementById('docLink').value.trim();
+    if(!name || !link){ alert('Poné al menos un nombre y un link.'); return; }
+    state.docs.push({ id:'d'+Date.now(), name:name, note:note, link:link });
+    saveShared();
+    renderDocumentos();
+  });
+
+  el.querySelectorAll('[data-del-doc]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      state.docs = state.docs.filter(function(d){ return d.id !== btn.dataset.delDoc; });
+      saveShared();
+      renderDocumentos();
+    });
   });
 }
 
