@@ -638,20 +638,23 @@ function renderItinerario(){
     });
   });
 
-  el.getElementById('itinToggle').querySelectorAll('button').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      el.querySelectorAll('.view-toggle button').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      itinView = btn.dataset.view;
-      if(itinView === 'calendario'){
-        el.querySelector('.day-list').style.display = 'none';
-        el.querySelector('.river-svg')?.parentElement.style.display = 'none';
-      } else {
-        el.querySelector('.day-list').style.display = 'flex';
-        el.querySelector('.river-svg')?.parentElement.style.display = 'block';
-      }
+  const itinToggleEl = el.querySelector('#itinToggle');
+  if(itinToggleEl){
+    itinToggleEl.querySelectorAll('button').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        el.querySelectorAll('.view-toggle button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        itinView = btn.dataset.view;
+        if(itinView === 'calendario'){
+          el.querySelector('.day-list').style.display = 'none';
+          el.querySelector('.river-svg')?.parentElement.style.display = 'none';
+        } else {
+          el.querySelector('.day-list').style.display = 'flex';
+          el.querySelector('.river-svg')?.parentElement.style.display = 'block';
+        }
+      });
     });
-  });
+  }
 }
 
 function renderClima(){
