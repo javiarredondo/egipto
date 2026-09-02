@@ -602,5 +602,217 @@ function renderOverview(){
     });
   });
 }
+function renderItinerario(){
+  const el = document.getElementById('tab-itinerario');
+  const flights = [
+    {route:"SZG → Cairo", time:"Vie 9 oct · 19:45", airline:"Lufthansa"},
+    {route:"Cairo → Aswan", time:"Lun 12 oct · 17:00", airline:"EgyptAir"},
+    {route:"Luxor → Hurghada", time:"Jue 15 oct · transfer", airline:"Autobús 4h"}
+  ];
+  
+  let html = '<div style="margin-bottom:20px;"><div class="view-toggle" id="itinToggle"><button class="active" data-view="lista">Lista</button><button data-view="calendario">Calendario</button></div>';
+  html += flights.map(f=>`<div class="flight-card"><div class="route">${f.route}</div><div><div class="meta">${f.time}</div><div class="meta">${f.airline}</div></div></div>`).join('');
+  html += '</div>' + riverSvg();
+  html += '<div class="day-list">';
+  
+  DAY_STRINGS.forEach(dstr=>{
+    const day = fmtDay(dstr);
+    const text = state.calendar[dstr] || DEFAULT_CALENDAR[dstr] || '';
+    html += `<div class="day-card" data-date="${dstr}">
+      <div class="d"><span class="num">${day.num}</span><span class="wd">${day.wd}</span></div>
+      <div class="body">
+        <div class="flag">${dstr}</div>
+        <textarea placeholder="Notas de este día...">${text}</textarea>
+      </div>
+    </div>`;
+  });
+  
+  html += '</div>';
+  el.innerHTML = html;
+  
+  el.querySelectorAll('textarea').forEach(ta=>{
+    ta.addEventListener('change', (e)=>{
+      const date = e.target.closest('.day-card').dataset.date;
+      state.calendar[date] = e.target.value;
+      saveShared();
+    });
+  });
 
+  el.getElementById('itinToggle').querySelectorAll('button').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      el.querySelectorAll('.view-toggle button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      itinView = btn.dataset.view;
+      if(itinView === 'calendario'){
+        el.querySelector('.day-list').style.display = 'none';
+        el.querySelector('.river-svg')?.parentElement.style.display = 'none';
+      } else {
+        el.querySelector('.day-list').style.display = 'flex';
+        el.querySelector('.river-svg')?.parentElement.style.display = 'block';
+      }
+    });
+  });
+}
+
+function renderClima(){
+  const el = document.getElementById('tab-clima');
+  let html = '<div class="weather-grid">';
+  
+  WEATHER_CITIES.forEach(city=>{
+    const data = weatherCache[city.id];
+    const temp = data?.current?.temperature_2m || '—';
+    const code = data?.current?.weather_code || 0;
+    const icon = weatherIcon(code);
+    const daily = data?.daily || {};
+    const temps = daily.temperature_2m_max || [];
+    
+    html += `<div class="wcard">
+      <h4>${city.name}</h4>
+      <div class="wdays">${city.daysNote}</div>
+      <div class="wnow">
+        <div class="icon">${icon}</div>
+        <div class="temp">${Math.round(temp)}°C</div>
+      </div>
+      <div class="wforecast">`;
+    
+    for(let i=0; i<Math.min(5, temps.length); i++){
+      const maxT = Math.round(temps[i]);
+      html += `<div class="wday"><div class="wd-icon">${weatherIcon(daily.weather_code?.[i] || 0)}</div><div class="wd-max">${maxT}°</div></div>`;
+    }
+    
+    html += `</div><div class="whist">${city.hist}</div></div>`;
+  });
+  
+  html += '</div>';
+  el.innerHTML = html;
+}
+
+function renderMapa(){
+  const el = document.getElementById('tab-mapa');
+  el.innerHTML = '<div style="padding:20px;"><p>Mapa de ubicaciones. <a href="https://www.google.com/maps/place/Pir%C3%A1mides+de+Guiza/" target="_blank">Ver en Google Maps →</a></p><div style="background:var(--papyrus-card);border-radius:8px;padding:40px;text-align:center;color:var(--ink-soft);">📍 El Cairo · Asuán · Luxor · Hurghada</div></div>';
+}
+
+function renderVotaciones(){
+  const el = document.getElementById('tab-votaciones');
+  let html = '';
+  
+  PLACES.forEach(segment=>{
+    html += `<div class="poll"><h3>${segment.segment}</h3>`;
+    html += '<div class="opt-grid">';
+    
+    segment.items.forEach(place=>{
+      const votes = Object.keys(state.interest).filter(p=> state.interest[p] && state.interest[p].includes(place.id));
+      const picked = votes.includes(state.me);
+      const photo = place.imgUrl || (wikiCache[place.wiki] ? wikiCache[place.wiki] : null);
+      
+      html += `<div class="opt ${picked?'picked':''}">
+        <div class="photo ${!photo?'empty':''}"><img src="${photo}" alt="${place.name}" style="width:100%;height:100%;object-fit:cover;" onload="this.style.opacity=1" onerror="this.parentElement.innerHTML='<svg>'+ICONS.temple+'</svg>'" /></div>
+        <div class="clickzone" data-place="${place.id}">
+          <div class="name">${place.name}</div>
+          <div class="odesc">${place.desc}</div>
+          <div class="votes-row">`;
+      
+      votes.forEach(voter=>{
+        html += `<div class="vote-badge">${initials(voter)}</div>`;
+      });
+      html += `<span class="vote-count">${votes.length} ${votes.length===1?'voto':'votos'}</span></div></div></div>`;
+    });
+    
+    html += '</div></div>';
+  });
+  
+  el.innerHTML = html;
+  
+  el.querySelectorAll('.clickzone').forEach(zone=>{
+    zone.addEventListener('click', ()=>{
+      const placeId = zone.dataset.place;
+      if(!state.me) return;
+      if(!state.interest[state.me]) state.interest[state.me] = [];
+      if(state.interest[state.me].includes(placeId)){
+        state.interest[state.me] = state.interest[state.me].filter(p=>p!==placeId);
+      } else {
+        state.interest[state.me].push(placeId);
+      }
+      saveShared();
+      renderVotaciones();
+    });
+  });
+}
+
+function renderChecklist(){
+  const el = document.getElementById('tab-checklist');
+  let html = '<div>';
+  
+  CHECKLIST_CATEGORIES.forEach(cat=>{
+    const items = state.checklist.filter(i=>i.category===cat);
+    if(!items.length) return;
+    
+    html += `<div style="margin-bottom:20px;"><h3 style="margin:0 0 12px;font-size:16px;color:${CATEGORY_COLORS[cat] || '#000'};">${cat}</h3>`;
+    
+    items.forEach(item=>{
+      html += `<div style="margin-bottom:10px;padding:12px;background:var(--papyrus-card);border-radius:8px;border-left:4px solid ${CATEGORY_COLORS[item.category] || '#ccc'};">
+        <div style="display:flex;gap:10px;align-items:flex-start;">
+          <input type="checkbox" ${item.done?'checked':''} data-item-id="${item.id}" style="margin-top:3px;cursor:pointer;">
+          <div style="flex:1;">
+            <strong style="text-decoration:${item.done?'line-through':'none'};color:${item.done?'var(--ink-soft)':'var(--ink)'};">${item.name}</strong>
+            <p style="margin:4px 0 0;font-size:13px;color:var(--ink-soft);">${item.category} ${item.day?'• '+fmtDay(item.day).num+' '+fmtDay(item.day).mo:''}</p>
+            ${item.link?'<p style="margin:4px 0 0;font-size:12px;color:var(--nile);">'+item.link+'</p>':''}
+          </div>
+        </div>
+      </div>`;
+    });
+    
+    html += '</div>';
+  });
+  
+  html += '</div>';
+  el.innerHTML = html;
+  
+  el.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change', (e)=>{
+      const item = state.checklist.find(i=>i.id===e.target.dataset.itemId);
+      if(item) item.done = e.target.checked;
+      saveShared();
+      updatePrepProgress();
+      renderChecklist();
+    });
+  });
+}
+
+function renderPresupuesto(){
+  const el = document.getElementById('tab-presupuesto');
+  let html = '<div class="fx-box"><h4>Cotización EUR → EGP</h4><div class="fx-row"><input type="number" id="fxInput" value="1" min="0" step="0.1"><span style="font-size:14px;">EUR = <strong>'+(fxRate ? fxRate.toFixed(2) : '~17.50')+' EGP</strong></span></div><div class="fx-rate">Última actualización: '+new Date().toLocaleDateString()+'</div></div>';
+  html += '<table class="budget"><thead><tr><th>Concepto</th><th>€/pp</th><th>Notas</th></tr></thead><tbody>';
+  
+  let total = 0;
+  BUDGET_CATEGORIES.forEach(cat=>{
+    const val = Number(state.budget[cat.id] ?? cat.def);
+    total += val;
+    html += `<tr><td><strong>${cat.name}</strong></td><td><input type="number" data-budget-id="${cat.id}" value="${val}" min="0" step="10"></td><td><span class="badge-pp">${cat.note}</span></td></tr>`;
+  });
+  
+  html += '</tbody></table>';
+  html += '<div class="budget-summary">';
+  html += `<div class="metric"><div class="label">Total por persona</div><div class="value">€${total.toLocaleString('es-AR')}</div></div>`;
+  html += `<div class="metric"><div class="label">Total para 6</div><div class="value">€${(total*6).toLocaleString('es-AR')}</div></div>`;
+  if(fxRate) html += `<div class="metric"><div class="label">Total en EGP</div><div class="value">${(total*fxRate*6).toLocaleString('es-AR')} EGP</div></div>`;
+  html += '</div>';
+  html += '<div class="sunk-note">Los montos son estimaciones de referencia. Las entradas de templos y excursiones pueden variar según la época y proveedor.</div>';
+  
+  el.innerHTML = html;
+  
+  el.querySelectorAll('input[type=number][data-budget-id]').forEach(inp=>{
+    inp.addEventListener('change', (e)=>{
+      const catId = e.target.dataset.budgetId;
+      state.budget[catId] = Number(e.target.value);
+      saveShared();
+      renderPresupuesto();
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
 
