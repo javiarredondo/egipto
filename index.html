@@ -165,6 +165,20 @@
   .tip-item:first-of-type{border-top:none;padding-top:2px;}
   .tip-item strong{display:block;font-size:14.5px;color:var(--ink);margin-bottom:3px;}
   .tip-item p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.55;}
+  .meta-chips{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px;}
+  .chip-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:var(--nile-light);color:var(--nile-dark);padding:4px 9px;border-radius:999px;border:none;}
+  .chip-link{cursor:pointer;background:var(--nile);color:#fff;transition:transform .1s ease;}
+  .chip-link:active{transform:scale(.95);}
+  .opt.wide{grid-column:1 / -1;}
+  .ficha{margin-top:8px;border-top:1px dashed var(--line);padding-top:4px;}
+  .ficha summary{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--nile);padding:7px 0;list-style:none;}
+  .ficha summary::-webkit-details-marker{display:none;}
+  .ficha summary::after{content:' ▾';}
+  .ficha[open] summary::after{content:' ▴';}
+  .ficha h5{margin:12px 0 4px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.05em;color:var(--nile-dark);text-transform:uppercase;}
+  .ficha ul{margin:0;padding-left:18px;}
+  .ficha li{font-size:13px;color:var(--ink-soft);line-height:1.55;margin-bottom:5px;}
+  .ficha-warn{margin-top:8px;background:#FBEBD0;border:1px solid var(--gold);border-radius:8px;padding:9px 11px;font-size:12.5px;color:var(--ink);line-height:1.5;}
 
   .doc-form{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;background:var(--papyrus-card);border:1px solid var(--line);border-radius:10px;padding:12px;}
   .doc-form input{flex:1;min-width:140px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-family:'Lora',serif;font-size:13.5px;background:#fff;color:var(--ink);}
@@ -289,7 +303,9 @@ const PLACES = [
     {id:"edfu", name:"Templo de Edfu", desc:"Día 3 del crucero. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", imgUrl:null, status:"decidido"},
     {id:"luxortemplo", name:"Templo de Luxor", desc:"Día 3 del crucero, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", imgUrl:null, status:"decidido"},
     {id:"globo", name:"Paseo en globo aerostático", desc:"Día 4 del crucero, al amanecer sobre el Valle de los Reyes. Incluido en el tour.", wiki:null, imgUrl:"https://media.tacdn.com/media/attractions-splice-spp-674x446/09/a8/4a/dc.jpg", status:"decidido"},
+    {id:"colossi", name:"Colosos de Memnón", desc:"Día 4 del crucero. Dos estatuas gigantes de Amenhotep III que custodiaban la entrada de su templo funerario. Entrada incluida en el tour.", wiki:"Colosos de Memnón", imgUrl:null, status:"decidido"},
     {id:"valle", name:"Valle de los Reyes", desc:"Día 4 del crucero. Necrópolis de los faraones del Imperio Nuevo, incluido Tutankamón.", wiki:"Valle de los Reyes", imgUrl:null, status:"decidido"},
+    {id:"hatshepsut", name:"Templo de Hatshepsut", desc:"Día 4 del crucero. El templo en terrazas de la faraona Hatshepsut, pegado al acantilado de Deir el-Bahari.", wiki:"Templo de Hatshepsut", imgUrl:null, status:"decidido"},
     {id:"karnak", name:"Templo de Karnak", desc:"Día 4 del crucero. El complejo religioso más grande jamás construido.", wiki:"Templo de Karnak", imgUrl:null, status:"decidido"}
   ]},
   {segment:"¿Sumamos aparte? (nos las perdemos por embarcar el martes)", items:[
@@ -303,6 +319,238 @@ const PLACES = [
     {id:"snorkel", name:"Día de snorkel / buceo", desc:"Opciones para un día en vez de playa de hotel: yate 3 islas+delfines+snorkel (55 USD), lancha 2 islas+delfines+snorkel (35 USD), snorkel Isla Giftun (35 USD), Orange Bay (20 USD), o noche de estrellas en el desierto con camello y cena (35 USD).", wiki:null, imgUrl:"https://egyptra.com/wp-content/uploads/2025/06/image-2025-06-29T174349.874-1024x681.jpg", status:"abierto"}
   ]}
 ];
+
+const PLACE_INFO = {
+  guiza:{ date:"2026-10-10", time:"medio día o más",
+    facts:[
+      "La Gran Pirámide (Keops, ~2560 a.C.) fue el edificio más alto del mundo durante unos 3.800 años, y es la única de las siete maravillas antiguas que sigue en pie.",
+      "Las tres pirámides grandes son de una misma familia: Keops, su hijo Kefrén y su nieto Micerinos.",
+      "Kefrén parece más alta que Keops porque está sobre un terreno más elevado y conserva en la punta parte del revestimiento original de piedra pulida.",
+      "La Esfinge mide unos 73 m de largo y 20 m de alto, tallada en la roca natural del lugar; se la asocia con el faraón Kefrén."
+    ],
+    tips:[
+      "Entrar temprano: el calor y la gente suben fuerte después de las 10.",
+      "Dentro del predio hay shuttles gratis entre los monumentos.",
+      "Camello o caballo: acordar el precio por escrito antes de subir (es donde más se aprovechan de los turistas).",
+      "Entrar a la cámara de la Gran Pirámide suele ser con ticket aparte, y es angosto, caluroso y sin aire: solo si no hay claustrofobia.",
+      "Comprar los tickets online con anticipación."
+    ]},
+  khufus:{ date:"2026-10-10", time:"1-2 h",
+    facts:[],
+    tips:[
+      "Abre de 09:00 a 16:00. Reservar con anticipación (+20 10 80058888) y pedir MESA AFUERA: es la que tiene vista a las pirámides.",
+      "Está dentro del sitio arqueológico, así que Uber y taxis no llegan: se entra al predio y se toma el shuttle del propio restaurante.",
+      "Es caro: conviene fijar expectativas con el grupo antes."
+    ]},
+  gem:{ date:"2026-10-11", time:"3-6 h",
+    warn:"Las entradas se reservan online con turno horario (visit-gem.com): ya no se venden en la puerta. Si todavía no sacaron el turno, conviene hacerlo hoy mismo.",
+    facts:[
+      "Es el museo arqueológico más grande del mundo dedicado a una sola civilización, a unos 2 km de las pirámides. Se inauguró oficialmente el 1 de noviembre de 2025.",
+      "Por primera vez desde el hallazgo de Howard Carter (1922), toda la colección de Tutankamón -5.398 piezas- se exhibe junta.",
+      "La máscara funeraria de oro de Tutankamón pesa más de 10 kg.",
+      "La Gran Escalera exhibe estatuas colosales y tiene vistas a las pirámides. El pabellón del bote solar de Keops (de unos 4.500 años) está incluido en la entrada."
+    ],
+    tips:[
+      "Ir directo a las salas de Tutankamón apenas abre (09:00): después se llenan y hay cola para la máscara.",
+      "Calcular entre 3 y 6 horas. Un guía vale la pena (se contrata aparte, dura ~90 min).",
+      "Las salas funcionan de 09:00 a 18:00 en un día normal como el domingo.",
+      "La entrada ronda 1.200-1.600 EGP (~25-30 USD) según la fuente: confirmar el precio al reservar."
+    ]},
+  saqqara:{ date:"2026-10-12", time:"2-3 h",
+    facts:[
+      "La pirámide escalonada de Zoser (~2650 a.C.) es considerada la primera gran construcción de piedra de la historia. La diseñó Imhotep, que siglos después fue venerado como dios de la medicina.",
+      "Tiene seis escalones: es el paso intermedio entre las tumbas tipo banco (mastabas) y las pirámides lisas de Guiza.",
+      "Saqqara fue la necrópolis de Menfis, la capital del Imperio Antiguo.",
+      "Cerca hay tumbas de nobles con relieves muy coloridos y la pirámide de Unas, con los Textos de las Pirámides: de los textos religiosos más antiguos que se conocen."
+    ],
+    tips:[
+      "El hotel de Giza tiene check-out de 10:00 a 12:00: coordinar con el chofer que las valijas viajen con ustedes.",
+      "El vuelo a Asuán sale a las 17:00: calcular la vuelta al aeropuerto con buen margen (el tráfico de Cairo es impredecible).",
+      "Llevar agua y gorro: casi no hay sombra."
+    ]},
+  abusimbel:{ date:"2026-10-13", time:"~7 h con el viaje",
+    facts:[
+      "Ramsés II lo mandó tallar en la roca hace unos 3.200 años para mostrar su poder en la frontera sur con Nubia. El templo chico es para su esposa Nefertari y la diosa Hathor.",
+      "Las cuatro estatuas colosales de la fachada miden unos 20 m.",
+      "En los años 60, por la Presa Alta, el templo se cortó en más de mil bloques y se reconstruyó unos 65 m más arriba y 200 m más atrás: un rescate internacional coordinado por la UNESCO.",
+      "Dos veces al año (22 de octubre y 22 de febrero) el sol del amanecer atraviesa el templo e ilumina el santuario; la estatua de Ptah, ligado al inframundo, queda siempre en sombra. Ustedes van nueve días antes."
+    ],
+    tips:[
+      "Salida de madrugada (3-4 am desde Asuán); el viaje es de unas 3 horas por trayecto.",
+      "Llevar una capa fina para el comienzo, agua y gorro: no hay sombra.",
+      "La entrada no está incluida en el tour: tener efectivo."
+    ]},
+  komombo:{ date:"2026-10-13", time:"~1 h 30",
+    facts:[
+      "Es un templo doble, algo único en Egipto: una mitad para Sobek, el dios cocodrilo, y la otra para Horus el Viejo, con dos entradas, dos santuarios y dos ejes simétricos.",
+      "Es de época ptolemaica (hace unos 2.200 años) y está sobre una loma junto al Nilo.",
+      "Un relieve muestra instrumentos médicos antiguos: bisturíes, pinzas y otros utensilios.",
+      "Al lado hay un pequeño museo con momias de cocodrilos."
+    ],
+    tips:[
+      "Se visita a la tarde, ya con el barco atracado: buena luz para fotos.",
+      "La entrada no está incluida en el tour."
+    ]},
+  edfu:{ date:"2026-10-14", time:"~2 h",
+    facts:[
+      "El templo de Horus es el templo egipcio mejor conservado: casi intacto.",
+      "Se construyó en época ptolemaica (de ~237 a 57 a.C.) y quedó enterrado siglos bajo arena y casas del pueblo, lo que lo protegió.",
+      "Sus muros cuentan el combate mítico de Horus contra Seth."
+    ],
+    tips:[
+      "Desde el muelle se va en calesa (carruaje de caballos), incluida en el tour: dejar propina al cochero.",
+      "La entrada no está incluida en el tour."
+    ]},
+  luxortemplo:{ date:"2026-10-14", time:"~2 h",
+    facts:[
+      "Lo construyó sobre todo Amenhotep III y lo amplió Ramsés II; está en pleno centro de la ciudad.",
+      "Frente a la entrada queda un solo obelisco: su gemelo está desde 1836 en la Plaza de la Concordia, en París.",
+      "Una avenida de esfinges de unos 2,7 km lo unía con Karnak; fue restaurada y reinaugurada en 2021.",
+      "Dentro del templo hay una mezquita del siglo XIII (Abu el-Haggag), todavía en uso."
+    ],
+    tips:[
+      "Se visita al final de la tarde y de noche, con iluminación: más fresco y muy fotogénico.",
+      "La entrada no está incluida en el tour."
+    ]},
+  globo:{ date:"2026-10-15", time:"30-45 min de vuelo",
+    facts:[
+      "Se vuela al amanecer sobre la orilla oeste: se ven el Valle de los Reyes, el templo de Hatshepsut, los Colosos de Memnón y el contraste entre el verde de los cultivos y el desierto.",
+      "Al terminar entregan un certificado de vuelo."
+    ],
+    tips:[
+      "Recogida hacia las 5:00 am.",
+      "No se permiten cámaras en la canasta: solo celular.",
+      "Si el vuelo se cancela (viento u otro motivo), según el tour reembolsan 25 USD por persona."
+    ]},
+  colossi:{ date:"2026-10-15", time:"parada corta",
+    facts:[
+      "Son dos estatuas de Amenhotep III, de unos 18 m, que custodiaban la entrada de su templo funerario (hoy casi desaparecido).",
+      "Griegos y romanos creían que una de ellas cantaba al amanecer: después de un terremoto (27 a.C.) la estatua se agrietó y emitía un sonido. Dejó de hacerlo cuando la repararon, hacia el año 200."
+    ],
+    tips:["Parada corta para fotos. La entrada está incluida en el tour."]},
+  valle:{ date:"2026-10-15", time:"~2 h",
+    facts:[
+      "Necrópolis de los faraones del Imperio Nuevo (~1550-1070 a.C.): se conocen más de 60 tumbas excavadas en la roca, escondidas para evitar saqueos (aun así, casi todas fueron saqueadas en la antigüedad).",
+      "La tumba de Tutankamón (KV62) la encontró casi intacta Howard Carter en 1922. Es chica porque murió joven y lo enterraron a las apuradas.",
+      "Solo unas 8-12 tumbas están abiertas a la vez, por rotación, para conservarlas."
+    ],
+    tips:[
+      "La entrada general da acceso a 3 tumbas a elección; la de Tutankamón y algunas otras (como Ramsés VI o Seti I) se pagan aparte.",
+      "Flash prohibido en todas. En la tumba de Tutankamón no se pueden sacar fotos. En el resto las reglas varían (algunas fuentes dicen que con celular es gratis, otras que hace falta un permiso de ~300 EGP): preguntar en la boletería antes de comprar.",
+      "Llevar efectivo: las entradas no están incluidas en el tour."
+    ]},
+  hatshepsut:{ date:"2026-10-15", time:"~1 h 30",
+    facts:[
+      "Hatshepsut gobernó como faraón (no solo como regente) hace unos 3.500 años; en sus estatuas aparece con la barba ceremonial de los reyes.",
+      "Su templo funerario, en Deir el-Bahari, se levanta en tres terrazas con columnatas pegadas a un acantilado: parece sorprendentemente moderno.",
+      "Sus relieves cuentan una expedición comercial a Punt, tierra del incienso y la mirra.",
+      "Se cree que su sucesor, Tutmosis III, mandó borrar muchas de sus imágenes."
+    ],
+    tips:[
+      "Casi sin sombra: gorro, agua y protector.",
+      "La entrada no está incluida en el tour."
+    ]},
+  karnak:{ date:"2026-10-15", time:"~2 h (da para más)",
+    facts:[
+      "Es el complejo religioso más grande que se construyó: creció durante unos 2.000 años con aportes de decenas de faraones.",
+      "La Sala Hipóstila tiene 134 columnas; las doce centrales miden unos 21 m.",
+      "El obelisco de Hatshepsut, de granito rosa y unos 30 m, es el más alto de Egipto que sigue en pie.",
+      "Junto al lago sagrado los sacerdotes se purificaban antes de los rituales."
+    ],
+    tips:[
+      "Dos horas se quedan cortas: priorizar la Sala Hipóstila, el obelisco y el lago sagrado.",
+      "Gorro y agua. La entrada no está incluida en el tour."
+    ]},
+  philae:{ time:"~2 h",
+    facts:[
+      "Templo dedicado a Isis. Está en una isla y se llega en bote a motor.",
+      "Fue uno de los últimos templos donde se practicó la religión egipcia antigua: lo cerró Justiniano hacia el año 537.",
+      "Con la Presa Alta iba a quedar bajo el agua, así que entre 1972 y 1980 lo desarmaron y lo rearmaron piedra por piedra en la isla de Agilkia."
+    ],
+    tips:["Es parte del día 1 del tour que no van a hacer: habría que sumarlo por separado (unas 2 h)."]},
+  highDam:{ time:"~30 min",
+    facts:[
+      "Se terminó en 1970 y creó el lago Nasser, uno de los lagos artificiales más grandes del mundo (más de 500 km de largo).",
+      "Controla las crecidas y sequías del Nilo y genera electricidad, pero obligó a trasladar templos como Abu Simbel y Philae y a reubicar a decenas de miles de nubios."
+    ],
+    tips:["Parada corta; también es parte del día 1 del tour que no van a hacer."]},
+  obelisk:{
+    facts:[
+      "Habría sido el obelisco más grande de Egipto (unos 42 m y 1.200 toneladas), pero se agrietó mientras lo tallaban y quedó abandonado en la cantera.",
+      "Se ven las marcas de las herramientas con las que lo trabajaban: una ventana a cómo se tallaba la piedra hace 3.500 años."
+    ],
+    tips:["No está en el tour: habría que sumarlo por separado."]},
+  nubian:{
+    facts:[
+      "Los nubios son un pueblo del sur de Egipto y el norte de Sudán, con su propia lengua y casas pintadas de colores.",
+      "Se suele combinar con un paseo en felucca (velero tradicional), sobre todo al atardecer."
+    ],
+    tips:["No está en el tour: habría que contratarlo aparte y acordar el precio antes."]},
+  hurghadaplaya:{ when:"16 al 19 oct", date:"2026-10-16", time:"4 días",
+    facts:[
+      "El Mar Rojo tiene más de mil especies de peces y arrecifes de coral a pocos metros de la costa.",
+      "En octubre el agua ronda los 27 °C."
+    ],
+    tips:[
+      "Llevar escarpines o calzado de agua: protegen de los corales y los erizos.",
+      "No tocar ni pisar el coral: es frágil y protegido.",
+      "Protector solar resistente al agua, y una remera de licra si van a hacer snorkel."
+    ]},
+  snorkel:{
+    facts:[
+      "Giftun es un parque marino protegido frente a Hurghada; Orange Bay es una de sus bahías más conocidas.",
+      "Las salidas en barco suelen incluir 2 o 3 paradas para snorkel y, a veces, delfines."
+    ],
+    tips:[
+      "Precios de referencia: yate 3 islas + delfines + snorkel 55 USD; lancha 2 islas + delfines + snorkel 35 USD; snorkel en Giftun 35 USD; Orange Bay 20 USD; noche de estrellas en el desierto con camello y cena 35 USD.",
+      "Se define allá, según el clima y las ganas."
+    ]}
+};
+
+const openFichas = {};
+
+function placesOn(date){
+  const out = [];
+  PLACES.forEach(function(seg){ seg.items.forEach(function(it){ const info = PLACE_INFO[it.id]; if(info && info.date === date) out.push(it); }); });
+  return out;
+}
+function placeChipsHtml(date){
+  const ps = placesOn(date);
+  if(!ps.length) return '';
+  return '<div class="meta-chips" style="margin-top:12px;"><span class="badge-pp" style="align-self:center;">Fichas:</span>'
+    + ps.map(function(it){ return '<button class="chip-meta chip-link" data-goto-place="' + it.id + '">' + esc(it.name) + '</button>'; }).join('')
+    + '</div>';
+}
+function metaHtml(it){
+  const info = PLACE_INFO[it.id];
+  if(!info) return '';
+  const chips = [];
+  if(info.when){ chips.push('📅 ' + info.when); }
+  else if(info.date){ const dm = fmtDay(info.date); chips.push('📅 ' + dm.wd + ' ' + dm.num + ' ' + dm.mo); }
+  if(info.time){ chips.push('⏱ ' + info.time); }
+  if(!chips.length) return '';
+  return '<div class="meta-chips">' + chips.map(function(x){ return '<span class="chip-meta">' + esc(x) + '</span>'; }).join('') + '</div>';
+}
+function fichaHtml(it){
+  const info = PLACE_INFO[it.id];
+  if(!info) return '';
+  let h = '<details class="ficha" data-ficha="' + it.id + '"' + (openFichas[it.id] ? ' open' : '') + '><summary>Ver ficha</summary>';
+  if(info.warn){ h += '<div class="ficha-warn">⚠ ' + esc(info.warn) + '</div>'; }
+  if(info.facts && info.facts.length){ h += '<h5>Para saber</h5><ul>' + info.facts.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
+  if(info.tips && info.tips.length){ h += '<h5>Para tener en cuenta</h5><ul>' + info.tips.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
+  return h + '</details>';
+}
+function openPlaceFicha(id){
+  openFichas[id] = true;
+  document.querySelectorAll('nav.tabs button').forEach(function(b){ b.classList.remove('active'); });
+  document.querySelectorAll('section').forEach(function(s){ s.classList.remove('active'); });
+  const btn = document.querySelector('nav.tabs button[data-tab="votaciones"]');
+  if(btn) btn.classList.add('active');
+  document.getElementById('tab-votaciones').classList.add('active');
+  renderVotaciones();
+  const card = document.querySelector('[data-place-card="' + id + '"]');
+  if(card && card.scrollIntoView) card.scrollIntoView({behavior:'smooth', block:'start'});
+}
 
 const BUDGET_CATEGORIES = [
   {id:"cruise", name:"Crucero por el Nilo (4 días/3 noches)", note:"desde 279 USD pp + ~80-100 USD entradas no incluidas + propina crew ~10 USD/persona/noche", def:420},
@@ -723,8 +971,8 @@ function renderHoy(){
       + '<p class="hero-sub">' + dm.wd + ' ' + dm.num + ' de ' + dm.mo + '</p>'
       + '</div>';
     const tomorrow = DAY_STRINGS[ts.idx+1];
-    planHtml = '<div class="next-card"><h4>Plan de hoy</h4><p class="plan-text">' + esc(dayText(ts.date)) + '</p></div>'
-      + (tomorrow ? '<div class="next-card"><h4>Mañana</h4><p class="plan-text">' + esc(dayText(tomorrow)) + '</p></div>' : '');
+    planHtml = '<div class="next-card"><h4>Plan de hoy</h4><p class="plan-text">' + esc(dayText(ts.date)) + '</p>' + placeChipsHtml(ts.date) + '</div>'
+      + (tomorrow ? '<div class="next-card"><h4>Mañana</h4><p class="plan-text">' + esc(dayText(tomorrow)) + '</p>' + placeChipsHtml(tomorrow) + '</div>' : '');
   } else if(ts.mode === 'despues'){
     heroHtml = '<div class="hero-card"><div class="hero-eyebrow">Egipto · Octubre 2026</div><div class="hero-title">¡Qué viaje!</div><p class="hero-sub">Gracias por organizarlo entre todos. El itinerario y los documentos quedan acá de recuerdo.</p></div>';
   } else {
@@ -747,6 +995,10 @@ function renderHoy(){
     + planHtml
     + nextHtml
     + openHtml;
+
+  el.querySelectorAll('[data-goto-place]').forEach(function(b){
+    b.addEventListener('click', function(){ openPlaceFicha(b.dataset.gotoPlace); });
+  });
 
   if(fxRate){
     const hoyEur = document.getElementById('hoyFxEur');
@@ -956,11 +1208,13 @@ function renderVotaciones(){
       } else {
         interestedHtml = '<div class="votes-row" style="margin-top:8px;"><span class="vote-count" style="color:var(--nile-dark);font-weight:600;">✓ en el plan</span></div>';
       }
-      return '<div class="opt' + (isOpen?'':' picked') + '">'
+      return '<div class="opt' + (isOpen?'':' picked') + (openFichas[it.id] ? ' wide' : '') + '" data-place-card="' + it.id + '">'
         + '<div class="photo ' + (photoUrl?'':'empty') + '" ' + photoStyle + ' data-photofor="' + it.id + '">' + photoInner + '<span class="addphoto" data-photofor="' + it.id + '">' + (customPhoto?'cambiar foto':'+ foto') + '</span></div>'
         + '<div class="clickzone" style="cursor:default;">'
         + '<div class="name">' + it.name + '</div>'
         + '<div class="odesc">' + it.desc + '</div>'
+        + metaHtml(it)
+        + fichaHtml(it)
         + interestedHtml
         + '</div></div>';
     }).join('');
@@ -974,6 +1228,13 @@ function renderVotaciones(){
       if(!state.interest[id]) state.interest[id] = {};
       state.interest[id][state.me] = !state.interest[id][state.me];
       saveShared(); renderVotaciones();
+    });
+  });
+  el.querySelectorAll('details.ficha').forEach(function(dt){
+    dt.addEventListener('toggle', function(){
+      openFichas[dt.dataset.ficha] = dt.open;
+      const card = dt.closest('.opt');
+      if(card){ if(dt.open) card.classList.add('wide'); else card.classList.remove('wide'); }
     });
   });
   el.querySelectorAll('[data-photofor]').forEach(el2=>{
@@ -1220,3 +1481,4 @@ setInterval(()=>{ const box = document.getElementById('countdownBox'); if(box) b
 </script>
 </body>
 </html>
+
