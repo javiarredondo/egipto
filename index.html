@@ -10,9 +10,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#123B40">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <style>
   :root{
     --papyrus:#EDE3C8; --papyrus-card:#F8F2DE; --ink:#2A2118; --ink-soft:#5B4E3B;
@@ -161,6 +160,11 @@
   .next-row strong{display:block;font-size:13.5px;color:var(--ink);}
   .next-row span{font-size:11.5px;color:var(--ink-soft);}
   .empty-note{font-size:13px;color:var(--ink-soft);}
+  .plan-text{margin:0;font-size:14px;line-height:1.6;white-space:pre-wrap;color:var(--ink);}
+  .tip-item{padding:12px 0;border-top:1px dashed var(--line);}
+  .tip-item:first-of-type{border-top:none;padding-top:2px;}
+  .tip-item strong{display:block;font-size:14.5px;color:var(--ink);margin-bottom:3px;}
+  .tip-item p{margin:0;font-size:13px;color:var(--ink-soft);line-height:1.55;}
 
   .doc-form{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;background:var(--papyrus-card);border:1px solid var(--line);border-radius:10px;padding:12px;}
   .doc-form input{flex:1;min-width:140px;border:1px solid var(--line);border-radius:6px;padding:8px 10px;font-family:'Lora',serif;font-size:13.5px;background:#fff;color:var(--ink);}
@@ -337,10 +341,10 @@ const DEFAULT_CHECKLIST = [
 ];
 
 const WEATHER_CITIES = [
-  {id:"cairo", name:"El Cairo", lat:30.0444, lon:31.2357, daysNote:"9-12 oct", hist:"Octubre típico: 29-31°C de día, 19-21°C de noche. Seco, casi sin lluvia."},
-  {id:"aswan", name:"Asuán", lat:24.0889, lon:32.8998, daysNote:"12-13 oct", hist:"Octubre típico: 36-39°C de día, 22-24°C de noche. Desierto, muy seco y fuerte el sol al mediodía."},
-  {id:"luxor", name:"Luxor", lat:25.6872, lon:32.6396, daysNote:"14-15 oct", hist:"Octubre típico: 35-38°C de día, 21-23°C de noche. Similar a Asuán, arrancar temprano los tours conviene."},
-  {id:"hurghada", name:"Hurghada", lat:27.2579, lon:33.8116, daysNote:"15-19 oct", hist:"Octubre típico: 30-32°C de día, 22-24°C de noche, agua del mar ~27°C. Más húmedo por la costa, pero con brisa."}
+  {id:"cairo", name:"El Cairo", lat:30.0444, lon:31.2357, daysNote:"9-12 oct", from:"2026-10-09", to:"2026-10-12", hist:"Octubre típico: 29-31°C de día, 19-21°C de noche. Seco, casi sin lluvia."},
+  {id:"aswan", name:"Asuán", lat:24.0889, lon:32.8998, daysNote:"12-13 oct", from:"2026-10-12", to:"2026-10-13", hist:"Octubre típico: 36-39°C de día, 22-24°C de noche. Desierto, muy seco y fuerte el sol al mediodía."},
+  {id:"luxor", name:"Luxor", lat:25.6872, lon:32.6396, daysNote:"14-15 oct", from:"2026-10-14", to:"2026-10-15", hist:"Octubre típico: 35-38°C de día, 21-23°C de noche. Similar a Asuán, arrancar temprano los tours conviene."},
+  {id:"hurghada", name:"Hurghada", lat:27.2579, lon:33.8116, daysNote:"15-19 oct", from:"2026-10-15", to:"2026-10-19", hist:"Octubre típico: 30-32°C de día, 22-24°C de noche, agua del mar ~27°C. Más húmedo por la costa, pero con brisa."}
 ];
 
 const SEGMENTS = [
@@ -374,41 +378,78 @@ let itinView = "lista";
 let wikiCache = {};
 let weatherCache = {};
 let fxRate = null; // EGP per 1 EUR
+
+function fetchWithTimeout(url, opts, ms){
+  const ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  const timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, ms || 8000) : null;
+  const o = Object.assign({}, opts || {});
+  if(ctrl) o.signal = ctrl.signal;
+  return fetch(url, o).finally(function(){ if(timer) clearTimeout(timer); });
+}
+function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+const STATE_CACHE_KEY = 'nile-state-cache-v1';
+const AUX_CACHE_KEY = 'nile-aux-cache-v1';
+const DIRTY_KEY = 'nile-dirty-v1';
+function stateSnapshot(){ return {interest:state.interest, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist, docs:state.docs}; }
+function readStateCache(){ try{ return JSON.parse(localStorage.getItem(STATE_CACHE_KEY) || 'null'); }catch(e){ return null; } }
+function writeStateCache(){ try{ localStorage.setItem(STATE_CACHE_KEY, JSON.stringify(stateSnapshot())); }catch(e){} }
+function isDirty(){ try{ return localStorage.getItem(DIRTY_KEY) === '1'; }catch(e){ return false; } }
+function applyRecord(rec){
+  state.interest = rec.interest || rec.votes || {};
+  state.calendar = rec.calendar || {};
+  state.budget = rec.budget || {};
+  state.photos = rec.photos || {};
+  state.checklist = (rec.checklist && rec.checklist.length) ? rec.checklist : DEFAULT_CHECKLIST.map(function(x){ return Object.assign({}, x); });
+  state.docs = rec.docs || [];
+}
+function readAuxCache(){
+  try{
+    const a = JSON.parse(localStorage.getItem(AUX_CACHE_KEY) || 'null');
+    if(a){ if(a.weather) weatherCache = a.weather; if(a.fx) fxRate = a.fx; if(a.wiki) wikiCache = a.wiki; }
+  }catch(e){}
+}
+function writeAuxCache(){ try{ localStorage.setItem(AUX_CACHE_KEY, JSON.stringify({weather:weatherCache, fx:fxRate, wiki:wikiCache})); }catch(e){} }
+
 async function fetchFxRate(){
   try{
-    const res = await fetch('https://open.er-api.com/v6/latest/EUR');
+    const res = await fetchWithTimeout('https://open.er-api.com/v6/latest/EUR', null, 8000);
     const j = await res.json();
-    fxRate = (j.rates && j.rates.EGP) ? j.rates.EGP : null;
-  }catch(e){ fxRate = null; }
+    if(j.rates && j.rates.EGP) fxRate = j.rates.EGP;   // si falla, queda la ultima tasa guardada
+  }catch(e){}
 }
 let syncStatus = STORAGE_READY ? "" : "⚠ falta configurar guardado compartido";
 
 async function loadShared(){
   try{
-    const res = await fetch('/api/state');
+    const res = await fetchWithTimeout('/api/state', null, 8000);
+    if(!res.ok) throw new Error('status '+res.status);
     const rec = await res.json();
-    state.interest = rec.interest || rec.votes || {};
-    state.calendar = rec.calendar || {};
-    state.budget = rec.budget || {};
-    state.photos = rec.photos || {};
-    state.checklist = (rec.checklist && rec.checklist.length) ? rec.checklist : DEFAULT_CHECKLIST.map(x=>Object.assign({},x));
-    state.docs = rec.docs || [];
+    applyRecord(rec);
+    writeStateCache();
     syncStatus = "sincronizado";
-  }catch(e){ syncStatus = "no se pudo sincronizar (¿está deployado en Vercel con KV conectado?)"; }
+    return true;
+  }catch(e){
+    syncStatus = "sin conexión · mostrando lo último guardado en este teléfono";
+    return false;
+  }
 }
 async function saveShared(){
+  writeStateCache();   // siempre queda una copia local
   try{
-    const res = await fetch('/api/state', {
+    const res = await fetchWithTimeout('/api/state', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({interest:state.interest, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist, docs:state.docs})
-    });
+      body: JSON.stringify(stateSnapshot())
+    }, 10000);
     if(!res.ok) throw new Error('status '+res.status);
     syncStatus = "guardado ✓";
     lastSaveFailed = false;
+    try{ localStorage.removeItem(DIRTY_KEY); }catch(e){}
   }catch(e){
-    syncStatus = "⚠ no se guardó - revisá que estés en la URL de Vercel (no el archivo local) y que el KV esté conectado";
+    syncStatus = "⚠ sin conexión: el cambio quedó en este teléfono y se envía solo cuando vuelva internet";
     lastSaveFailed = true;
+    try{ localStorage.setItem(DIRTY_KEY, '1'); }catch(e2){}
   }
   updateSyncLabel();
 }
@@ -434,11 +475,26 @@ function riverSvg(){
   return '<svg class="river-svg" viewBox="0 0 900 46" preserveAspectRatio="none"><path d="M0 23 C 150 5, 300 41, 450 23 S 750 5, 900 23" fill="none" stroke="var(--nile)" stroke-width="3" opacity="0.35"/></svg>';
 }
 
+function tripState(){
+  const t = todayStr();
+  const idx = DAY_STRINGS.indexOf(t);
+  if(idx >= 0) return {mode:'durante', idx:idx, date:t};
+  if(t > DAY_STRINGS[DAY_STRINGS.length-1]) return {mode:'despues'};
+  return {mode:'antes'};
+}
+function dayText(d){ return (state.calendar[d] !== undefined) ? state.calendar[d] : (DEFAULT_CALENDAR[d] || ''); }
+
 function countdownHtml(){
+  const ts = tripState();
+  if(ts.mode === 'durante'){
+    const sg = segmentForDate(ts.date);
+    return '<div class="countdown">🧭 Día <b>'+(ts.idx+1)+'</b> de '+DAY_STRINGS.length+(sg ? ' · '+sg.label : '')+'</div>';
+  }
+  if(ts.mode === 'despues') return '<div class="countdown">✨ ¡Qué viaje!</div>';
   const target = new Date("2026-10-09T19:45:00");
   const now = new Date();
   const diffMs = target - now;
-  if(diffMs <= 0) return '<div class="countdown">✈️ ¡Ya deberían estar viajando o de vuelta!</div>';
+  if(diffMs <= 0) return '<div class="countdown">✈️ ¡Buen viaje!</div>';
   const days = Math.floor(diffMs / (1000*60*60*24));
   const hours = Math.floor((diffMs % (1000*60*60*24)) / (1000*60*60));
   if(days > 0) return '<div class="countdown">✈️ Faltan <b>'+days+'</b> días y <b>'+hours+'</b>h para el vuelo a El Cairo</div>';
@@ -473,7 +529,7 @@ async function fetchWikiThumb(title){
   if(!title) return null;
   if(title in wikiCache) return wikiCache[title];
   try{
-    const res = await fetch('https://es.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title));
+    const res = await fetchWithTimeout('https://es.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title), null, 6000);
     const j = await res.json();
     wikiCache[title] = (j.thumbnail && j.thumbnail.source) ? j.thumbnail.source : null;
   }catch(e){ wikiCache[title] = null; }
@@ -486,27 +542,42 @@ async function prefetchAllThumbs(){
 }
 async function fetchWeather(city){
   try{
-    const url = 'https://api.open-meteo.com/v1/forecast?latitude='+city.lat+'&longitude='+city.lon+'&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=7';
-    const res = await fetch(url);
-    weatherCache[city.id] = await res.json();
-  }catch(e){ weatherCache[city.id] = null; }
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude='+city.lat+'&longitude='+city.lon+'&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=auto&forecast_days=16';
+    const res = await fetchWithTimeout(url, null, 8000);
+    const j = await res.json();
+    if(j && j.current){ weatherCache[city.id] = j; }
+    else if(!weatherCache[city.id]){ weatherCache[city.id] = null; }
+  }catch(e){ if(!weatherCache[city.id]) weatherCache[city.id] = null; }
 }
 async function prefetchAllWeather(){
   await Promise.all(WEATHER_CITIES.map(fetchWeather));
 }
 
+function ensureDefaults(){
+  BUDGET_CATEGORIES.forEach(function(cat){ if(state.budget[cat.id] === undefined) state.budget[cat.id] = cat.def; });
+  if(!state.checklist || !state.checklist.length) state.checklist = DEFAULT_CHECKLIST.map(function(x){ return Object.assign({}, x); });
+}
+
 async function init(){
   loadMe();
-  BUDGET_CATEGORIES.forEach(c=>{ state.budget[c.id] = c.def; });
-  await loadShared();
-  BUDGET_CATEGORIES.forEach(c=>{ if(state.budget[c.id]===undefined) state.budget[c.id] = c.def; });
-  if(!state.checklist || !state.checklist.length) state.checklist = DEFAULT_CHECKLIST.map(x=>Object.assign({},x));
-  render();
-  await Promise.all([prefetchAllThumbs(), prefetchAllWeather(), fetchFxRate()]);
-  renderVotaciones();
-  renderClima();
-  renderPresupuesto();
-  renderHoy();
+  readAuxCache();
+  const cached = readStateCache();
+  if(cached){ applyRecord(cached); }
+  ensureDefaults();
+  syncStatus = cached ? 'actualizando…' : 'cargando…';
+  render();                                   // se dibuja YA, sin esperar a la red
+
+  const before = JSON.stringify(stateSnapshot());
+  let ok;
+  if(isDirty()){ await saveShared(); ok = !lastSaveFailed; }   // hay cambios hechos sin internet: se envian primero
+  else { ok = await loadShared(); }
+  ensureDefaults();
+  if(!cached || JSON.stringify(stateSnapshot()) !== before){ render(); } else { updateSyncLabel(); }
+
+  // lo accesorio se carga en paralelo y cada cosa se pinta apenas llega
+  prefetchAllWeather().then(function(){ writeAuxCache(); renderClima(); renderHoy(); });
+  fetchFxRate().then(function(){ writeAuxCache(); renderPresupuesto(); renderHoy(); });
+  prefetchAllThumbs().then(function(){ writeAuxCache(); renderVotaciones(); });
 }
 
 function render(){
@@ -529,6 +600,7 @@ function render(){
       <button data-tab="votaciones">Lugares</button>
       <button data-tab="checklist">Para reservar</button>
       <button data-tab="documentos">Documentos</button>
+      <button data-tab="tips">Tips</button>
       <button data-tab="presupuesto">Presupuesto</button>
     </nav>
     <div class="nav-hint ${navHintSeen() ? 'hidden' : ''}" id="navHint">›</div>
@@ -539,6 +611,7 @@ function render(){
     <section id="tab-votaciones"></section>
     <section id="tab-checklist"></section>
     <section id="tab-documentos"></section>
+    <section id="tab-tips"></section>
     <section id="tab-presupuesto"></section>
     <div class="footer-note">Todo lo que se vota, anota, edita o el link de foto que pegan acá lo ven los 6 (si el guardado compartido está configurado). Los montos del presupuesto son estimaciones de referencia.</div>
   `;
@@ -566,7 +639,7 @@ function render(){
     try{ localStorage.setItem('nile-nav-hint-seen','1'); }catch(e){}
   }, {once:true});
 
-  renderItinerario(); renderClima(); renderMapa(); renderVotaciones(); renderChecklist(); renderPresupuesto(); renderHoy(); renderDocumentos();
+  renderItinerario(); renderClima(); renderMapa(); renderVotaciones(); renderChecklist(); renderPresupuesto(); renderHoy(); renderDocumentos(); renderTips();
 }
 
 const DATE_CITY = {
@@ -623,7 +696,15 @@ function renderHoy(){
     weatherMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Clima hoy · ' + cityMeta.name + '</h4></div>'
       + '<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:24px;">' + weatherIcon(cityData.current.weather_code) + '</span><span style="font-family:\'JetBrains Mono\',monospace;font-size:20px;color:var(--nile-dark);">' + Math.round(cityData.current.temperature_2m) + '°C</span></div></div>';
   } else {
-    weatherMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Clima</h4></div><p class="empty-note" style="margin:0;">Se activa solo del 9 al 19/10, cuando estén viajando. Mientras tanto, promedios en la pestaña Clima.</p></div>';
+    let pre = '';
+    const cd = weatherCache['cairo'];
+    if(cd && cd.daily){
+      const k = cd.daily.time.indexOf('2026-10-09');
+      if(k >= 0){
+        pre = '<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:24px;">' + weatherIcon(cd.daily.weather_code[k]) + '</span><span class="mono" style="font-size:18px;color:var(--nile-dark);">' + Math.round(cd.daily.temperature_2m_max[k]) + '° / ' + Math.round(cd.daily.temperature_2m_min[k]) + '°</span></div><div class="badge-pp">Cairo · llegada vie 9/10</div>';
+      }
+    }
+    weatherMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Clima</h4></div>' + (pre || '<p class="empty-note" style="margin:0;">Se activa solo del 9 al 19/10, cuando estén viajando. Mientras tanto, mirá la pestaña Clima.</p>') + '</div>';
   }
   const fxMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Cambio rápido</h4></div>'
     + (fxRate
@@ -631,14 +712,41 @@ function renderHoy(){
         : '<p class="empty-note" style="margin:0;">Cargando tasa...</p>')
     + '</div>';
 
-  el.innerHTML = '<div class="hero-card">'
-    + '<div class="hero-eyebrow">Egipto · Octubre 2026</div>'
-    + '<div class="hero-title">Faltan ' + daysLeft + ' días</div>'
-    + '<p class="hero-sub">' + heroSub + '</p>'
-    + statsHtml
-    + '</div>'
+  const ts = tripState();
+  let heroHtml, planHtml = '';
+  if(ts.mode === 'durante'){
+    const sg = segmentForDate(ts.date);
+    const dm = fmtDay(ts.date);
+    heroHtml = '<div class="hero-card">'
+      + '<div class="hero-eyebrow">Día ' + (ts.idx+1) + ' de ' + DAY_STRINGS.length + '</div>'
+      + '<div class="hero-title">Hoy · ' + (sg ? sg.label : '') + '</div>'
+      + '<p class="hero-sub">' + dm.wd + ' ' + dm.num + ' de ' + dm.mo + '</p>'
+      + '</div>';
+    const tomorrow = DAY_STRINGS[ts.idx+1];
+    planHtml = '<div class="next-card"><h4>Plan de hoy</h4><p class="plan-text">' + esc(dayText(ts.date)) + '</p></div>'
+      + (tomorrow ? '<div class="next-card"><h4>Mañana</h4><p class="plan-text">' + esc(dayText(tomorrow)) + '</p></div>' : '');
+  } else if(ts.mode === 'despues'){
+    heroHtml = '<div class="hero-card"><div class="hero-eyebrow">Egipto · Octubre 2026</div><div class="hero-title">¡Qué viaje!</div><p class="hero-sub">Gracias por organizarlo entre todos. El itinerario y los documentos quedan acá de recuerdo.</p></div>';
+  } else {
+    heroHtml = '<div class="hero-card">'
+      + '<div class="hero-eyebrow">Egipto · Octubre 2026</div>'
+      + '<div class="hero-title">Faltan ' + daysLeft + ' días</div>'
+      + '<p class="hero-sub">' + heroSub + '</p>'
+      + statsHtml
+      + '</div>';
+  }
+
+  const openNames = [];
+  PLACES.forEach(function(seg){ seg.items.forEach(function(it){ if(it.status === 'abierto') openNames.push(it.name); }); });
+  const openHtml = (ts.mode !== 'despues' && openNames.length)
+    ? '<div class="next-card"><h4>Todavía sin decidir</h4><p class="plan-text">' + esc(openNames.join(' · ')) + '</p><p class="badge-pp" style="margin:8px 0 0;">En la pestaña Lugares podés marcar "Me interesa".</p></div>'
+    : '';
+
+  el.innerHTML = heroHtml
     + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">' + weatherMini + fxMini + '</div>'
-    + nextHtml;
+    + planHtml
+    + nextHtml
+    + openHtml;
 
   if(fxRate){
     const hoyEur = document.getElementById('hoyFxEur');
@@ -742,10 +850,14 @@ function renderClima(){
     } else if(data && data.current){
       nowHtml = '<div class="wnow"><span class="icon">'+weatherIcon(data.current.weather_code)+'</span><span class="temp">'+Math.round(data.current.temperature_2m)+'°C</span><span class="badge-pp">ahora</span></div>';
       if(data.daily){
-        forecastHtml = '<div class="wforecast">' + data.daily.time.map((t,i)=>{
-          const d = new Date(t+"T12:00:00");
+        let idxs = [];
+        data.daily.time.forEach(function(t,i){ if(t >= city.from && t <= city.to) idxs.push(i); });
+        let label = 'Tus días acá';
+        if(!idxs.length){ idxs = data.daily.time.map(function(t,i){ return i; }).slice(0,7); label = 'Próximos días'; }
+        forecastHtml = '<div class="badge-pp" style="margin:2px 0 6px;">' + label + '</div><div class="wforecast">' + idxs.map(function(i){
+          const d = new Date(data.daily.time[i]+"T12:00:00");
           const wd = d.toLocaleDateString('es-AR',{weekday:'short'}).replace('.','');
-          return '<div class="wday"><div>'+wd+'</div><div class="wd-icon">'+weatherIcon(data.daily.weather_code[i])+'</div><div class="wd-max">'+Math.round(data.daily.temperature_2m_max[i])+'°</div><div>'+Math.round(data.daily.temperature_2m_min[i])+'°</div></div>';
+          return '<div class="wday"><div>'+wd+' '+d.getDate()+'</div><div class="wd-icon">'+weatherIcon(data.daily.weather_code[i])+'</div><div class="wd-max">'+Math.round(data.daily.temperature_2m_max[i])+'°</div><div>'+Math.round(data.daily.temperature_2m_min[i])+'°</div></div>';
         }).join('') + '</div>';
       }
     }
@@ -753,7 +865,7 @@ function renderClima(){
       + '<div class="whist">'+city.hist+'</div></div>';
   }).join('');
   el.innerHTML = '<div class="weather-grid">'+cards+'</div>'
-    + '<p class="badge-pp" style="margin-top:12px;">El pronóstico de 7 días es en tiempo real (se actualiza solo). Como octubre está lejos todavía, hoy muestra el pronóstico de esta semana, no el de la fecha del viaje - va a ser útil de verdad en los días previos a viajar. Los rangos de abajo de cada ciudad son promedios históricos de octubre, no un pronóstico.</p>';
+    + '<p class="badge-pp" style="margin-top:12px;">Pronóstico en vivo (se actualiza solo) para los días que van a estar en cada ciudad. Sin internet muestra el último que se pudo bajar. Los rangos de abajo de cada ciudad son promedios históricos de octubre, no un pronóstico.</p>';
 }
 
 function renderMapa(){
@@ -781,23 +893,45 @@ function renderMapa(){
   });
 }
 
+let leafletPromise = null;
+function loadLeaflet(){
+  if(window.L) return Promise.resolve();
+  if(leafletPromise) return leafletPromise;
+  leafletPromise = new Promise(function(resolve, reject){
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+    document.head.appendChild(css);
+    const s = document.createElement('script');
+    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    s.onload = function(){ resolve(); };
+    s.onerror = function(){ leafletPromise = null; reject(new Error('leaflet')); };
+    document.head.appendChild(s);
+  });
+  return leafletPromise;
+}
 let dayMapInstance = null;
 function initDayMap(){
-  if(typeof L === 'undefined') return;
-  if(dayMapInstance){ dayMapInstance.remove(); dayMapInstance = null; }
-  const container = document.getElementById('dayMapDiv');
-  if(!container) return;
-  dayMapInstance = L.map(container).setView([26.8, 31.5], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap',
-    maxZoom: 18
-  }).addTo(dayMapInstance);
-  MAP_POINTS.forEach(function(p){
-    const seg = SEGMENTS.find(function(s){ return s.label === p.segment; });
-    const color = seg ? seg.color : '#1F5C63';
-    L.circleMarker([p.lat, p.lon], { radius:8, color:color, fillColor:color, fillOpacity:0.9, weight:2 })
-      .addTo(dayMapInstance)
-      .bindPopup('<b>' + p.name + '</b><br>' + p.segment);
+  if(!document.getElementById('dayMapDiv')) return;
+  loadLeaflet().then(function(){
+    const container = document.getElementById('dayMapDiv');
+    if(!container) return;
+    if(dayMapInstance){ dayMapInstance.remove(); dayMapInstance = null; }
+    dayMapInstance = L.map(container).setView([26.8, 31.5], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap',
+      maxZoom: 18
+    }).addTo(dayMapInstance);
+    MAP_POINTS.forEach(function(p){
+      const seg = SEGMENTS.find(function(s){ return s.label === p.segment; });
+      const color = seg ? seg.color : '#1F5C63';
+      L.circleMarker([p.lat, p.lon], { radius:8, color:color, fillColor:color, fillOpacity:0.9, weight:2 })
+        .addTo(dayMapInstance)
+        .bindPopup('<b>' + p.name + '</b><br>' + p.segment);
+    });
+  }).catch(function(){
+    const container = document.getElementById('dayMapDiv');
+    if(container) container.innerHTML = '<p class="empty-note" style="padding:24px;">El mapa por día necesita internet para cargar. Probá de nuevo cuando tengas señal.</p>';
   });
 }
 
@@ -948,6 +1082,46 @@ document.getElementById('imgModal').addEventListener('click', function(e){
   if(e.target.id === 'imgModal') closeImageModal();
 });
 
+const TIPS = [
+  {title:"Antes de salir (últimos días)", items:[
+    {name:"Visa", text:"Depende del pasaporte de cada uno. Opciones: e-visa online en visa2egypt.gov.eg (~30 USD, tarda unos días en aprobarse; tenela descargada o impresa) o visa al llegar al aeropuerto (~30 USD en efectivo; subió en marzo 2026). El pasaporte tiene que tener al menos 6 meses de validez. Confirmá tu caso en el portal oficial."},
+    {name:"Llegada de madrugada al hotel", text:"El check-in del hotel de Giza va de las 14:00 a las 00:00 del viernes. Si el vuelo aterriza más tarde, avisale al hotel (+20 100 344 4483) para que los esperen, y resolvé el traslado desde el aeropuerto (Uber/Careem o un traslado reservado)."},
+    {name:"Efectivo", text:"Llevá USD o EUR en billetes chicos y en buen estado: sirven para la visa, las propinas y las entradas del último día del crucero (~80-100 USD no incluidas). Cambiá a libras egipcias (EGP) allá y tené siempre billetes sueltos de 10/20/50 EGP."},
+    {name:"Internet y mapas", text:"Bajá los mapas offline de Cairo, Luxor, Asuán y Hurghada en Google Maps. Esta app queda disponible sin señal si la abrís una vez con internet (agregala a la pantalla de inicio). Una eSIM prepaga se instala antes de viajar y evita buscar SIM en el aeropuerto a esa hora."},
+    {name:"Enchufes", text:"Egipto usa enchufes tipo C/F de 220 V, los mismos que en Alemania: no hace falta adaptador."},
+    {name:"Papeles a mano", text:"Pasaporte, e-visa (si la sacan), reserva del hotel, ticket del crucero (pestaña Documentos) y seguro de viaje. Una foto de cada uno en el celular, por las dudas."}
+  ]},
+  {title:"Moverse y costumbres", items:[
+    {name:"Uber y Careem", text:"En Cairo y Giza funcionan muy bien y son baratos. Para los 6, pedí dos autos o una van (opción XL). En Luxor y Asuán no hay Uber: taxi acordando el precio antes de subir, o el chofer del tour. En Hurghada andan bien para moverse por la ciudad, pero para el aeropuerto reservá un traslado fijo."},
+    {name:"Baksheesh (propinas)", text:"Es parte de la costumbre, no un extra: guardianes de templos, botones, baños. Llevá billetes chicos sueltos (10, 20 y 50 EGP) para no sacar la billetera. En el crucero la propina sugerida para la tripulación es ~10 USD por persona por noche."},
+    {name:"Templos y mezquitas", text:"Hombros y rodillas cubiertos (un pañuelo liviano alcanza). En las mezquitas se entra sin zapatos: medias limpias."},
+    {name:"Khan el-Khalili", text:"Si no querés comprar y los vendedores insisten: 'La, shukran' (no, gracias) y seguir caminando con paso firme. Para un café histórico menos masivo dentro del mercado: Café El Fishawy, abierto desde el siglo XVIII."},
+    {name:"Sol y agua", text:"Protector, gorro y lentes. Tomá solo agua embotellada sellada. La salida a Abu Simbel es de madrugada: llevá una capa fina."},
+    {name:"Frases útiles", text:"Shukran = gracias · La, shukran = no, gracias · Yalla = vamos · Mashi = dale / ok."}
+  ]},
+  {title:"Cairo: lugares poco comunes (si sobra una tarde)", items:[
+    {name:"Nilómetro de la isla de Rhoda", text:"Pozo de piedra del siglo IX con una columna octogonal sumergida que se usaba para medir las crecidas del Nilo. Se baja por una escalera de caracol hasta la base; muy tranquilo."},
+    {name:"Casa-Museo Gayer-Anderson", text:"Al lado de la mezquita de Ibn Tulun: dos casas tradicionales unidas por un puente, con patios, celosías de madera (mashrabiya) y una azotea muy tranquila en medio de la ciudad."},
+    {name:"Palacio Manial", text:"En la isla de Manial: arquitectura otomana, persa, andaluza y rococó rodeada de jardines. Casi sin turistas."},
+    {name:"Música Zar en el centro cultural Makan", text:"Alternativa auténtica a la cena con danza del vientre: espectáculos de música Zar y folclore egipcio tradicional."},
+    {name:"Ojo con las distancias", text:"Estos cuatro están del otro lado de la ciudad respecto del hotel de Giza (calculá unos 40 minutos de auto cada trayecto): sirven para una tarde libre, no para encajar entre otras visitas."}
+  ]},
+  {title:"Comida callejera imperdible", items:[
+    {name:"Ta'ameya (falafel egipcio)", text:"Se hace con habas y hierbas frescas, no con garbanzos: crujiente por fuera y verde por dentro. Probalo en pan pita caliente con tahina."},
+    {name:"Koshary", text:"El plato nacional: arroz, fideos, lentejas y garbanzos con salsa de tomate picante y cebolla frita. Koshary Abou Tarek, en el centro de Cairo, es una institución."},
+    {name:"Feteer meshaltet", text:"Hojaldre egipcio, salado (queso, carne, verduras) o dulce (miel, crema, frutos secos). El almuerzo del día 2 en Andrea El Mariouteya es justamente de fateer."}
+  ]}
+];
+
+function renderTips(){
+  const el = document.getElementById('tab-tips');
+  el.innerHTML = TIPS.map(function(cat){
+    return '<div class="poll"><h3>' + esc(cat.title) + '</h3>'
+      + cat.items.map(function(it){ return '<div class="tip-item"><strong>' + esc(it.name) + '</strong><p>' + esc(it.text) + '</p></div>'; }).join('')
+      + '</div>';
+  }).join('');
+}
+
 function renderDocumentos(){
   const el = document.getElementById('tab-documentos');
   const cards = state.docs.map(function(doc){
@@ -1038,6 +1212,10 @@ function renderPresupuesto(){
 }
 
 init();
+window.addEventListener('online', function(){ if(isDirty()) saveShared(); });
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){ navigator.serviceWorker.register('/sw.js').catch(function(){}); });
+}
 setInterval(()=>{ const box = document.getElementById('countdownBox'); if(box) box.innerHTML = countdownHtml(); }, 60000);
 </script>
 </body>
