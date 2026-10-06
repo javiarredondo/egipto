@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script>(function(){try{var t=localStorage.getItem("nile-theme")||"auto";var d=t==="dark"||(t==="auto"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.setAttribute("data-theme",d?"dark":"light");}catch(e){}})();</script>
-<title>Egipto Â· Octubre 2026</title>
+<title>Egipto · Octubre 2026</title>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -175,8 +175,8 @@
   .ficha{margin-top:8px;border-top:1px dashed var(--line);padding-top:4px;}
   .ficha summary{cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--nile);padding:7px 0;list-style:none;}
   .ficha summary::-webkit-details-marker{display:none;}
-  .ficha summary::after{content:' â–ľ';}
-  .ficha[open] summary::after{content:' â–´';}
+  .ficha summary::after{content:' ▾';}
+  .ficha[open] summary::after{content:' ▴';}
   .ficha h5{margin:12px 0 4px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.05em;color:var(--nile-dark);text-transform:uppercase;}
   .ficha ul{margin:0;padding-left:18px;}
   .ficha li{font-size:13px;color:var(--ink-soft);line-height:1.55;margin-bottom:5px;}
@@ -365,9 +365,9 @@
 </style>
 </head>
 <body>
-<div class="wrap" id="app"><div class="loading">Cargando el mapa del Niloâ€¦</div></div>
-<div class="img-modal" id="imgModal"><button class="img-modal-close" id="imgModalClose">âś•</button><img id="imgModalImg" src="" alt=""></div>
-<button class="fab" id="fab" aria-label="Acceso rĂˇpido">âšˇ</button>
+<div class="wrap" id="app"><div class="loading">Cargando el mapa del Nilo…</div></div>
+<div class="img-modal" id="imgModal"><button class="img-modal-close" id="imgModalClose">✕</button><img id="imgModalImg" src="" alt=""></div>
+<button class="fab" id="fab" aria-label="Acceso rápido">⚡</button>
 <div class="sheet-backdrop" id="sheetBackdrop"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
 
@@ -375,7 +375,7 @@
 /* ====== GUARDADO COMPARTIDO ======
    Este archivo llama a /api/state (mismo dominio), que guarda los datos en Vercel KV.
    Para que funcione: deployear este proyecto en Vercel con Storage > KV conectado
-   (ver api/state.js). Si lo abrĂ­s suelto (file://) o sin el KV conectado, el fetch
+   (ver api/state.js). Si lo abrís suelto (file://) o sin el KV conectado, el fetch
    va a fallar silenciosamente y nada se va a compartir entre ustedes. */
 const STORAGE_READY = true;
 
@@ -387,16 +387,16 @@ const DAY_STRINGS = ["2026-10-09","2026-10-10","2026-10-11","2026-10-12","2026-1
 
 const DEFAULT_CALENDAR = {
   "2026-10-09": "Llegada a El Cairo (vuelo desde Stuttgart, sale 19:45). Hotel confirmado: Pyramids Holiday Escape, en Giza (11 Gamal Abdel Nasser St) - check-in desde las 14:00. A dormir.",
-  "2026-10-10": "DĂ­a 1 Cairo - PirĂˇmides. Como el hotel ya estĂˇ en Giza, arranque corto hasta la meseta (antes salĂ­an desde Zamalek). Desayuno/almuerzo en Khufu's (reservar antes, pedir mesa afuera - es el lugar con vista a las pirĂˇmides). Tarde: Esfinge, Khafre, Micerinos. Cena: ojo que Crimson Bar & Grill queda en Zamalek - es un viaje mĂˇs largo de vuelta desde Giza, capaz conviene algo mĂˇs cerca del hotel esa noche.",
-  "2026-10-11": "DĂ­a 2 Cairo - Gran Museo Egipcio (GEM), que ademĂˇs estĂˇ a solo ~2km del hotel en Giza. 09:00 directo a las salas de TutankamĂłn (se llena despuĂ©s). Calcular ~6h, vale la pena un guĂ­a. Almuerzo tarde: Andrea El Mariouteya (New Giza, reservar el fateer). Cena: Pier 88 queda en Zamalek, considerar la distancia desde Giza.",
-  "2026-10-12": "DĂ­a 3 - Check-out del hotel de Giza (10:00-12:00). Medio dĂ­a en Cairo: Saqqara (pirĂˇmide escalonada de Zoser). Vuelo interno Cairo â†’ AsuĂˇn, sale 17:00. Noche en AsuĂˇn (hotel). Ojo: al embarcar reciĂ©n el martes nos perdemos el DĂ­a 1 del crucero (Templo de Philae + Presa Alta, incluidos en el tour) - ver si lo sumamos aparte.",
-  "2026-10-13": "DĂ­a 4 - Crucero dĂ­a 2: ~4am salida a Abu Simbel (incluido, ~7h ida y vuelta). Al volver, navegaciĂłn a Kom Ombo y visita al templo (incluida). Noche a bordo.",
-  "2026-10-14": "DĂ­a 5 - Crucero dĂ­a 3: Templo de Edfu (incluido) y llegada a Luxor, visita al Templo de Luxor de noche (incluida). Noche a bordo.",
-  "2026-10-15": "DĂ­a 6 - Crucero dĂ­a 4 (Ăşltimo): paseo en globo aerostĂˇtico al amanecer (incluido), Colosos de MemnĂłn, Valle de los Reyes, Templo de Hatshepsut, Karnak (entradas no incluidas, ~80-100 USD aparte). Fin del crucero - transfer a Hurghada (~4h en auto).",
+  "2026-10-10": "Día 1 Cairo - Pirámides. Como el hotel ya está en Giza, arranque corto hasta la meseta (antes salían desde Zamalek). Desayuno/almuerzo en Khufu's (reservar antes, pedir mesa afuera - es el lugar con vista a las pirámides). Tarde: Esfinge, Khafre, Micerinos. Cena: ojo que Crimson Bar & Grill queda en Zamalek - es un viaje más largo de vuelta desde Giza, capaz conviene algo más cerca del hotel esa noche.",
+  "2026-10-11": "Día 2 Cairo - Gran Museo Egipcio (GEM), que además está a solo ~2km del hotel en Giza. 09:00 directo a las salas de Tutankamón (se llena después). Calcular ~6h, vale la pena un guía. Almuerzo tarde: Andrea El Mariouteya (New Giza, reservar el fateer). Cena: Pier 88 queda en Zamalek, considerar la distancia desde Giza.",
+  "2026-10-12": "Día 3 - Check-out del hotel de Giza (10:00-12:00). Medio día en Cairo: Saqqara (pirámide escalonada de Zoser). Vuelo interno Cairo → Asuán, sale 17:00. Noche en Asuán (hotel). Ojo: al embarcar recién el martes nos perdemos el Día 1 del crucero (Templo de Philae + Presa Alta, incluidos en el tour) - ver si lo sumamos aparte.",
+  "2026-10-13": "Día 4 - Crucero día 2: ~4am salida a Abu Simbel (incluido, ~7h ida y vuelta). Al volver, navegación a Kom Ombo y visita al templo (incluida). Noche a bordo.",
+  "2026-10-14": "Día 5 - Crucero día 3: Templo de Edfu (incluido) y llegada a Luxor, visita al Templo de Luxor de noche (incluida). Noche a bordo.",
+  "2026-10-15": "Día 6 - Crucero día 4 (último): paseo en globo aerostático al amanecer (incluido), Colosos de Memnón, Valle de los Reyes, Templo de Hatshepsut, Karnak (entradas no incluidas, ~80-100 USD aparte). Fin del crucero - transfer a Hurghada (~4h en auto).",
   "2026-10-16": "Hurghada: playa.",
   "2026-10-17": "Hurghada: playa.",
   "2026-10-18": "Hurghada: playa.",
-  "2026-10-19": "Hurghada + vuelo de vuelta (segĂşn el ticket sale 17:20)."
+  "2026-10-19": "Hurghada + vuelo de vuelta (según el ticket sale 17:20)."
 };
 
 const ICONS = {
@@ -414,218 +414,218 @@ function iconSvg(name){ return '<svg width="30" height="30" viewBox="0 0 24 24">
 
 const PLACES = [
   {segment:"El Cairo", items:[
-    {id:"guiza", name:"PirĂˇmides de Guiza", desc:"DĂ­a 1 de Cairo. La Ăşnica de las 7 maravillas del mundo antiguo que sigue en pie.", wiki:"PirĂˇmides de Guiza", imgUrl:null, status:"decidido"},
-    {id:"khufus", name:"Khufu's Restaurant", desc:"Desayuno/almuerzo con vista a las pirĂˇmides desde afuera. Hay que reservar y entrar al predio (Uber no llega).", wiki:null, imgUrl:"https://www.listonegiordano.com/one/wp-content/uploads/2025/01/Khufus-Restaurant-ristorante-vista-piramidi-egitto-giza1-1536x1024.jpg", status:"decidido"},
-    {id:"gem", name:"Gran Museo Egipcio (GEM)", desc:"DĂ­a 2 de Cairo. El museo mĂˇs grande del mundo dedicado a una sola civilizaciĂłn, con la colecciĂłn completa de TutankamĂłn.", wiki:null, imgUrl:"https://elojodelarte.com/media/k2/items/cache/fdcdab7b883db46c6461d37dc1d99b74_S.webp?t=20250121_035239", status:"decidido"},
-    {id:"saqqara", name:"Saqqara", desc:"Medio dĂ­a del lunes. La primera pirĂˇmide de Egipto, la escalonada de Zoser (~2650 a.C.).", wiki:"Saqqara", imgUrl:null, status:"decidido"}
+    {id:"guiza", name:"Pirámides de Guiza", desc:"Día 1 de Cairo. La única de las 7 maravillas del mundo antiguo que sigue en pie.", wiki:"Pirámides de Guiza", imgUrl:null, status:"decidido"},
+    {id:"khufus", name:"Khufu's Restaurant", desc:"Desayuno/almuerzo con vista a las pirámides desde afuera. Hay que reservar y entrar al predio (Uber no llega).", wiki:null, imgUrl:"https://www.listonegiordano.com/one/wp-content/uploads/2025/01/Khufus-Restaurant-ristorante-vista-piramidi-egitto-giza1-1536x1024.jpg", status:"decidido"},
+    {id:"gem", name:"Gran Museo Egipcio (GEM)", desc:"Día 2 de Cairo. El museo más grande del mundo dedicado a una sola civilización, con la colección completa de Tutankamón.", wiki:null, imgUrl:"https://elojodelarte.com/media/k2/items/cache/fdcdab7b883db46c6461d37dc1d99b74_S.webp?t=20250121_035239", status:"decidido"},
+    {id:"saqqara", name:"Saqqara", desc:"Medio día del lunes. La primera pirámide de Egipto, la escalonada de Zoser (~2650 a.C.).", wiki:"Saqqara", imgUrl:null, status:"decidido"}
   ]},
-  {segment:"Crucero por el Nilo (4 dĂ­as, Aswan â†’ Luxor)", items:[
-    {id:"abusimbel", name:"Abu Simbel", desc:"DĂ­a 2 del crucero, salida ~4am. Los templos tallados en la montaĂ±a por RamsĂ©s II.", wiki:"Abu Simbel", imgUrl:null, status:"decidido"},
-    {id:"komombo", name:"Templo de Kom Ombo", desc:"DĂ­a 2 del crucero. Ăšnico templo doble de Egipto, mitad Sobek (cocodrilo) mitad Horus.", wiki:"Templo de Kom Ombo", imgUrl:null, status:"decidido"},
-    {id:"edfu", name:"Templo de Edfu", desc:"DĂ­a 3 del crucero. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", imgUrl:null, status:"decidido"},
-    {id:"luxortemplo", name:"Templo de Luxor", desc:"DĂ­a 3 del crucero, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", imgUrl:null, status:"decidido"},
-    {id:"globo", name:"Paseo en globo aerostĂˇtico", desc:"DĂ­a 4 del crucero, al amanecer sobre el Valle de los Reyes. Incluido en el tour.", wiki:null, imgUrl:"https://media.tacdn.com/media/attractions-splice-spp-674x446/09/a8/4a/dc.jpg", status:"decidido"},
-    {id:"colossi", name:"Colosos de MemnĂłn", desc:"DĂ­a 4 del crucero. Dos estatuas gigantes de Amenhotep III que custodiaban la entrada de su templo funerario. Entrada incluida en el tour.", wiki:"Colosos de MemnĂłn", imgUrl:null, status:"decidido"},
-    {id:"valle", name:"Valle de los Reyes", desc:"DĂ­a 4 del crucero. NecrĂłpolis de los faraones del Imperio Nuevo, incluido TutankamĂłn.", wiki:"Valle de los Reyes", imgUrl:null, status:"decidido"},
-    {id:"hatshepsut", name:"Templo de Hatshepsut", desc:"DĂ­a 4 del crucero. El templo en terrazas de la faraona Hatshepsut, pegado al acantilado de Deir el-Bahari.", wiki:"Templo de Hatshepsut", imgUrl:null, status:"decidido"},
-    {id:"karnak", name:"Templo de Karnak", desc:"DĂ­a 4 del crucero. El complejo religioso mĂˇs grande jamĂˇs construido.", wiki:"Templo de Karnak", imgUrl:null, status:"decidido"}
+  {segment:"Crucero por el Nilo (4 días, Aswan → Luxor)", items:[
+    {id:"abusimbel", name:"Abu Simbel", desc:"Día 2 del crucero, salida ~4am. Los templos tallados en la montaña por Ramsés II.", wiki:"Abu Simbel", imgUrl:null, status:"decidido"},
+    {id:"komombo", name:"Templo de Kom Ombo", desc:"Día 2 del crucero. Único templo doble de Egipto, mitad Sobek (cocodrilo) mitad Horus.", wiki:"Templo de Kom Ombo", imgUrl:null, status:"decidido"},
+    {id:"edfu", name:"Templo de Edfu", desc:"Día 3 del crucero. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", imgUrl:null, status:"decidido"},
+    {id:"luxortemplo", name:"Templo de Luxor", desc:"Día 3 del crucero, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", imgUrl:null, status:"decidido"},
+    {id:"globo", name:"Paseo en globo aerostático", desc:"Día 4 del crucero, al amanecer sobre el Valle de los Reyes. Incluido en el tour.", wiki:null, imgUrl:"https://media.tacdn.com/media/attractions-splice-spp-674x446/09/a8/4a/dc.jpg", status:"decidido"},
+    {id:"colossi", name:"Colosos de Memnón", desc:"Día 4 del crucero. Dos estatuas gigantes de Amenhotep III que custodiaban la entrada de su templo funerario. Entrada incluida en el tour.", wiki:"Colosos de Memnón", imgUrl:null, status:"decidido"},
+    {id:"valle", name:"Valle de los Reyes", desc:"Día 4 del crucero. Necrópolis de los faraones del Imperio Nuevo, incluido Tutankamón.", wiki:"Valle de los Reyes", imgUrl:null, status:"decidido"},
+    {id:"hatshepsut", name:"Templo de Hatshepsut", desc:"Día 4 del crucero. El templo en terrazas de la faraona Hatshepsut, pegado al acantilado de Deir el-Bahari.", wiki:"Templo de Hatshepsut", imgUrl:null, status:"decidido"},
+    {id:"karnak", name:"Templo de Karnak", desc:"Día 4 del crucero. El complejo religioso más grande jamás construido.", wiki:"Templo de Karnak", imgUrl:null, status:"decidido"}
   ]},
-  {segment:"ÂżSumamos aparte? (nos las perdemos por embarcar el martes)", items:[
-    {id:"philae", name:"Templo de Philae", desc:"DĂ­a 1 del crucero que nos perdemos. Templo de Isis reconstruido en una isla del Nilo.", wiki:"Templo de FilĂ©", imgUrl:null, status:"abierto"},
-    {id:"highDam", name:"Presa Alta de AsuĂˇn", desc:"DĂ­a 1 del crucero que nos perdemos. FormĂł el lago Nasser, parada corta e icĂłnica.", wiki:"Presa de AsuĂˇn", imgUrl:null, status:"abierto"},
-    {id:"obelisk", name:"Obelisco Inacabado", desc:"No estĂˇ en el tour. Obelisco gigante abandonado en la cantera, se ve cĂłmo lo tallaban.", wiki:null, imgUrl:"https://www.luxorandaswan.com/images/16587742560The-Unfinshed-Obelisk.jpg", status:"abierto"},
-    {id:"nubian", name:"Pueblo Nubio", desc:"No estĂˇ en el tour. Casas de colores a orillas del Nilo, a veces con paseo en felucca.", wiki:null, imgUrl:"https://www.egiptoexclusivo.com/wp-content/uploads/2023/06/destino-nubia.jpg", icon:"village", status:"abierto"}
+  {segment:"¿Sumamos aparte? (nos las perdemos por embarcar el martes)", items:[
+    {id:"philae", name:"Templo de Philae", desc:"Día 1 del crucero que nos perdemos. Templo de Isis reconstruido en una isla del Nilo.", wiki:"Templo de Filé", imgUrl:null, status:"abierto"},
+    {id:"highDam", name:"Presa Alta de Asuán", desc:"Día 1 del crucero que nos perdemos. Formó el lago Nasser, parada corta e icónica.", wiki:"Presa de Asuán", imgUrl:null, status:"abierto"},
+    {id:"obelisk", name:"Obelisco Inacabado", desc:"No está en el tour. Obelisco gigante abandonado en la cantera, se ve cómo lo tallaban.", wiki:null, imgUrl:"https://www.luxorandaswan.com/images/16587742560The-Unfinshed-Obelisk.jpg", status:"abierto"},
+    {id:"nubian", name:"Pueblo Nubio", desc:"No está en el tour. Casas de colores a orillas del Nilo, a veces con paseo en felucca.", wiki:null, imgUrl:"https://www.egiptoexclusivo.com/wp-content/uploads/2023/06/destino-nubia.jpg", icon:"village", status:"abierto"}
   ]},
-  {segment:"Hurghada (4 dĂ­as de playa)", items:[
-    {id:"hurghadaplaya", name:"Playa / resort", desc:"Del jueves a la noche hasta el lunes del vuelo. Como estĂˇ el plan, es descanso puro.", wiki:"Hurghada", imgUrl:null, status:"decidido"},
-    {id:"snorkel", name:"DĂ­a de snorkel / buceo", desc:"Opciones para un dĂ­a en vez de playa de hotel: yate 3 islas+delfines+snorkel (55 USD), lancha 2 islas+delfines+snorkel (35 USD), snorkel Isla Giftun (35 USD), Orange Bay (20 USD), o noche de estrellas en el desierto con camello y cena (35 USD).", wiki:null, imgUrl:"https://egyptra.com/wp-content/uploads/2025/06/image-2025-06-29T174349.874-1024x681.jpg", status:"abierto"}
+  {segment:"Hurghada (4 días de playa)", items:[
+    {id:"hurghadaplaya", name:"Playa / resort", desc:"Del jueves a la noche hasta el lunes del vuelo. Como está el plan, es descanso puro.", wiki:"Hurghada", imgUrl:null, status:"decidido"},
+    {id:"snorkel", name:"Día de snorkel / buceo", desc:"Opciones para un día en vez de playa de hotel: yate 3 islas+delfines+snorkel (55 USD), lancha 2 islas+delfines+snorkel (35 USD), snorkel Isla Giftun (35 USD), Orange Bay (20 USD), o noche de estrellas en el desierto con camello y cena (35 USD).", wiki:null, imgUrl:"https://egyptra.com/wp-content/uploads/2025/06/image-2025-06-29T174349.874-1024x681.jpg", status:"abierto"}
   ]}
 ];
 
 const PLACE_INFO = {
-  guiza:{ date:"2026-10-10", time:"medio dĂ­a o mĂˇs",
+  guiza:{ date:"2026-10-10", time:"medio día o más",
     facts:[
-      "La Gran PirĂˇmide (Keops, ~2560 a.C.) fue el edificio mĂˇs alto del mundo durante unos 3.800 aĂ±os, y es la Ăşnica de las siete maravillas antiguas que sigue en pie.",
-      "Las tres pirĂˇmides grandes son de una misma familia: Keops, su hijo KefrĂ©n y su nieto Micerinos.",
-      "KefrĂ©n parece mĂˇs alta que Keops porque estĂˇ sobre un terreno mĂˇs elevado y conserva en la punta parte del revestimiento original de piedra pulida.",
-      "La Esfinge mide unos 73 m de largo y 20 m de alto, tallada en la roca natural del lugar; se la asocia con el faraĂłn KefrĂ©n."
+      "La Gran Pirámide (Keops, ~2560 a.C.) fue el edificio más alto del mundo durante unos 3.800 años, y es la única de las siete maravillas antiguas que sigue en pie.",
+      "Las tres pirámides grandes son de una misma familia: Keops, su hijo Kefrén y su nieto Micerinos.",
+      "Kefrén parece más alta que Keops porque está sobre un terreno más elevado y conserva en la punta parte del revestimiento original de piedra pulida.",
+      "La Esfinge mide unos 73 m de largo y 20 m de alto, tallada en la roca natural del lugar; se la asocia con el faraón Kefrén."
     ],
     tips:[
-      "Entrar temprano: el calor y la gente suben fuerte despuĂ©s de las 10.",
+      "Entrar temprano: el calor y la gente suben fuerte después de las 10.",
       "Dentro del predio hay shuttles gratis entre los monumentos.",
-      "Camello o caballo: acordar el precio por escrito antes de subir (es donde mĂˇs se aprovechan de los turistas).",
-      "Entrar a la cĂˇmara de la Gran PirĂˇmide suele ser con ticket aparte, y es angosto, caluroso y sin aire: solo si no hay claustrofobia.",
-      "Comprar los tickets online con anticipaciĂłn."
+      "Camello o caballo: acordar el precio por escrito antes de subir (es donde más se aprovechan de los turistas).",
+      "Entrar a la cámara de la Gran Pirámide suele ser con ticket aparte, y es angosto, caluroso y sin aire: solo si no hay claustrofobia.",
+      "Comprar los tickets online con anticipación."
     ]},
   khufus:{ date:"2026-10-10", time:"1-2 h",
     facts:[],
     tips:[
-      "Abre de 09:00 a 16:00. Reservar con anticipaciĂłn (+20 10 80058888) y pedir MESA AFUERA: es la que tiene vista a las pirĂˇmides.",
-      "EstĂˇ dentro del sitio arqueolĂłgico, asĂ­ que Uber y taxis no llegan: se entra al predio y se toma el shuttle del propio restaurante.",
+      "Abre de 09:00 a 16:00. Reservar con anticipación (+20 10 80058888) y pedir MESA AFUERA: es la que tiene vista a las pirámides.",
+      "Está dentro del sitio arqueológico, así que Uber y taxis no llegan: se entra al predio y se toma el shuttle del propio restaurante.",
       "Es caro: conviene fijar expectativas con el grupo antes."
     ]},
   gem:{ date:"2026-10-11", time:"3-6 h",
-    warn:"Las entradas se reservan online con turno horario (visit-gem.com): ya no se venden en la puerta. Si todavĂ­a no sacaron el turno, conviene hacerlo hoy mismo.",
+    warn:"Las entradas se reservan online con turno horario (visit-gem.com): ya no se venden en la puerta. Si todavía no sacaron el turno, conviene hacerlo hoy mismo.",
     facts:[
-      "Es el museo arqueolĂłgico mĂˇs grande del mundo dedicado a una sola civilizaciĂłn, a unos 2 km de las pirĂˇmides. Se inaugurĂł oficialmente el 1 de noviembre de 2025.",
-      "Por primera vez desde el hallazgo de Howard Carter (1922), toda la colecciĂłn de TutankamĂłn -5.398 piezas- se exhibe junta.",
-      "La mĂˇscara funeraria de oro de TutankamĂłn pesa mĂˇs de 10 kg.",
-      "La Gran Escalera exhibe estatuas colosales y tiene vistas a las pirĂˇmides. El pabellĂłn del bote solar de Keops (de unos 4.500 aĂ±os) estĂˇ incluido en la entrada."
+      "Es el museo arqueológico más grande del mundo dedicado a una sola civilización, a unos 2 km de las pirámides. Se inauguró oficialmente el 1 de noviembre de 2025.",
+      "Por primera vez desde el hallazgo de Howard Carter (1922), toda la colección de Tutankamón -5.398 piezas- se exhibe junta.",
+      "La máscara funeraria de oro de Tutankamón pesa más de 10 kg.",
+      "La Gran Escalera exhibe estatuas colosales y tiene vistas a las pirámides. El pabellón del bote solar de Keops (de unos 4.500 años) está incluido en la entrada."
     ],
     tips:[
-      "Ir directo a las salas de TutankamĂłn apenas abre (09:00): despuĂ©s se llenan y hay cola para la mĂˇscara.",
-      "Calcular entre 3 y 6 horas. Un guĂ­a vale la pena (se contrata aparte, dura ~90 min).",
-      "Las salas funcionan de 09:00 a 18:00 en un dĂ­a normal como el domingo.",
-      "La entrada ronda 1.200-1.600 EGP (~25-30 USD) segĂşn la fuente: confirmar el precio al reservar."
+      "Ir directo a las salas de Tutankamón apenas abre (09:00): después se llenan y hay cola para la máscara.",
+      "Calcular entre 3 y 6 horas. Un guía vale la pena (se contrata aparte, dura ~90 min).",
+      "Las salas funcionan de 09:00 a 18:00 en un día normal como el domingo.",
+      "La entrada ronda 1.200-1.600 EGP (~25-30 USD) según la fuente: confirmar el precio al reservar."
     ]},
   saqqara:{ date:"2026-10-12", time:"2-3 h",
     facts:[
-      "La pirĂˇmide escalonada de Zoser (~2650 a.C.) es considerada la primera gran construcciĂłn de piedra de la historia. La diseĂ±Ăł Imhotep, que siglos despuĂ©s fue venerado como dios de la medicina.",
-      "Tiene seis escalones: es el paso intermedio entre las tumbas tipo banco (mastabas) y las pirĂˇmides lisas de Guiza.",
-      "Saqqara fue la necrĂłpolis de Menfis, la capital del Imperio Antiguo.",
-      "Cerca hay tumbas de nobles con relieves muy coloridos y la pirĂˇmide de Unas, con los Textos de las PirĂˇmides: de los textos religiosos mĂˇs antiguos que se conocen."
+      "La pirámide escalonada de Zoser (~2650 a.C.) es considerada la primera gran construcción de piedra de la historia. La diseñó Imhotep, que siglos después fue venerado como dios de la medicina.",
+      "Tiene seis escalones: es el paso intermedio entre las tumbas tipo banco (mastabas) y las pirámides lisas de Guiza.",
+      "Saqqara fue la necrópolis de Menfis, la capital del Imperio Antiguo.",
+      "Cerca hay tumbas de nobles con relieves muy coloridos y la pirámide de Unas, con los Textos de las Pirámides: de los textos religiosos más antiguos que se conocen."
     ],
     tips:[
       "El hotel de Giza tiene check-out de 10:00 a 12:00: coordinar con el chofer que las valijas viajen con ustedes.",
-      "El vuelo a AsuĂˇn sale a las 17:00: calcular la vuelta al aeropuerto con buen margen (el trĂˇfico de Cairo es impredecible).",
+      "El vuelo a Asuán sale a las 17:00: calcular la vuelta al aeropuerto con buen margen (el tráfico de Cairo es impredecible).",
       "Llevar agua y gorro: casi no hay sombra."
     ]},
   abusimbel:{ date:"2026-10-13", time:"~7 h con el viaje",
     facts:[
-      "RamsĂ©s II lo mandĂł tallar en la roca hace unos 3.200 aĂ±os para mostrar su poder en la frontera sur con Nubia. El templo chico es para su esposa Nefertari y la diosa Hathor.",
+      "Ramsés II lo mandó tallar en la roca hace unos 3.200 años para mostrar su poder en la frontera sur con Nubia. El templo chico es para su esposa Nefertari y la diosa Hathor.",
       "Las cuatro estatuas colosales de la fachada miden unos 20 m.",
-      "En los aĂ±os 60, por la Presa Alta, el templo se cortĂł en mĂˇs de mil bloques y se reconstruyĂł unos 65 m mĂˇs arriba y 200 m mĂˇs atrĂˇs: un rescate internacional coordinado por la UNESCO.",
-      "Dos veces al aĂ±o (22 de octubre y 22 de febrero) el sol del amanecer atraviesa el templo e ilumina el santuario; la estatua de Ptah, ligado al inframundo, queda siempre en sombra. Ustedes van nueve dĂ­as antes."
+      "En los años 60, por la Presa Alta, el templo se cortó en más de mil bloques y se reconstruyó unos 65 m más arriba y 200 m más atrás: un rescate internacional coordinado por la UNESCO.",
+      "Dos veces al año (22 de octubre y 22 de febrero) el sol del amanecer atraviesa el templo e ilumina el santuario; la estatua de Ptah, ligado al inframundo, queda siempre en sombra. Ustedes van nueve días antes."
     ],
     tips:[
-      "Salida de madrugada (3-4 am desde AsuĂˇn); el viaje es de unas 3 horas por trayecto.",
+      "Salida de madrugada (3-4 am desde Asuán); el viaje es de unas 3 horas por trayecto.",
       "Llevar una capa fina para el comienzo, agua y gorro: no hay sombra.",
-      "La entrada no estĂˇ incluida en el tour: tener efectivo."
+      "La entrada no está incluida en el tour: tener efectivo."
     ]},
   komombo:{ date:"2026-10-13", time:"~1 h 30",
     facts:[
-      "Es un templo doble, algo Ăşnico en Egipto: una mitad para Sobek, el dios cocodrilo, y la otra para Horus el Viejo, con dos entradas, dos santuarios y dos ejes simĂ©tricos.",
-      "Es de Ă©poca ptolemaica (hace unos 2.200 aĂ±os) y estĂˇ sobre una loma junto al Nilo.",
-      "Un relieve muestra instrumentos mĂ©dicos antiguos: bisturĂ­es, pinzas y otros utensilios.",
-      "Al lado hay un pequeĂ±o museo con momias de cocodrilos."
+      "Es un templo doble, algo único en Egipto: una mitad para Sobek, el dios cocodrilo, y la otra para Horus el Viejo, con dos entradas, dos santuarios y dos ejes simétricos.",
+      "Es de época ptolemaica (hace unos 2.200 años) y está sobre una loma junto al Nilo.",
+      "Un relieve muestra instrumentos médicos antiguos: bisturíes, pinzas y otros utensilios.",
+      "Al lado hay un pequeño museo con momias de cocodrilos."
     ],
     tips:[
       "Se visita a la tarde, ya con el barco atracado: buena luz para fotos.",
-      "La entrada no estĂˇ incluida en el tour."
+      "La entrada no está incluida en el tour."
     ]},
   edfu:{ date:"2026-10-14", time:"~2 h",
     facts:[
       "El templo de Horus es el templo egipcio mejor conservado: casi intacto.",
-      "Se construyĂł en Ă©poca ptolemaica (de ~237 a 57 a.C.) y quedĂł enterrado siglos bajo arena y casas del pueblo, lo que lo protegiĂł.",
-      "Sus muros cuentan el combate mĂ­tico de Horus contra Seth."
+      "Se construyó en época ptolemaica (de ~237 a 57 a.C.) y quedó enterrado siglos bajo arena y casas del pueblo, lo que lo protegió.",
+      "Sus muros cuentan el combate mítico de Horus contra Seth."
     ],
     tips:[
       "Desde el muelle se va en calesa (carruaje de caballos), incluida en el tour: dejar propina al cochero.",
-      "La entrada no estĂˇ incluida en el tour."
+      "La entrada no está incluida en el tour."
     ]},
   luxortemplo:{ date:"2026-10-14", time:"~2 h",
     facts:[
-      "Lo construyĂł sobre todo Amenhotep III y lo ampliĂł RamsĂ©s II; estĂˇ en pleno centro de la ciudad.",
-      "Frente a la entrada queda un solo obelisco: su gemelo estĂˇ desde 1836 en la Plaza de la Concordia, en ParĂ­s.",
-      "Una avenida de esfinges de unos 2,7 km lo unĂ­a con Karnak; fue restaurada y reinaugurada en 2021.",
-      "Dentro del templo hay una mezquita del siglo XIII (Abu el-Haggag), todavĂ­a en uso."
+      "Lo construyó sobre todo Amenhotep III y lo amplió Ramsés II; está en pleno centro de la ciudad.",
+      "Frente a la entrada queda un solo obelisco: su gemelo está desde 1836 en la Plaza de la Concordia, en París.",
+      "Una avenida de esfinges de unos 2,7 km lo unía con Karnak; fue restaurada y reinaugurada en 2021.",
+      "Dentro del templo hay una mezquita del siglo XIII (Abu el-Haggag), todavía en uso."
     ],
     tips:[
-      "Se visita al final de la tarde y de noche, con iluminaciĂłn: mĂˇs fresco y muy fotogĂ©nico.",
-      "La entrada no estĂˇ incluida en el tour."
+      "Se visita al final de la tarde y de noche, con iluminación: más fresco y muy fotogénico.",
+      "La entrada no está incluida en el tour."
     ]},
   globo:{ date:"2026-10-15", time:"30-45 min de vuelo",
     facts:[
-      "Se vuela al amanecer sobre la orilla oeste: se ven el Valle de los Reyes, el templo de Hatshepsut, los Colosos de MemnĂłn y el contraste entre el verde de los cultivos y el desierto.",
+      "Se vuela al amanecer sobre la orilla oeste: se ven el Valle de los Reyes, el templo de Hatshepsut, los Colosos de Memnón y el contraste entre el verde de los cultivos y el desierto.",
       "Al terminar entregan un certificado de vuelo."
     ],
     tips:[
       "Recogida hacia las 5:00 am.",
-      "No se permiten cĂˇmaras en la canasta: solo celular.",
-      "Si el vuelo se cancela (viento u otro motivo), segĂşn el tour reembolsan 25 USD por persona."
+      "No se permiten cámaras en la canasta: solo celular.",
+      "Si el vuelo se cancela (viento u otro motivo), según el tour reembolsan 25 USD por persona."
     ]},
   colossi:{ date:"2026-10-15", time:"parada corta",
     facts:[
       "Son dos estatuas de Amenhotep III, de unos 18 m, que custodiaban la entrada de su templo funerario (hoy casi desaparecido).",
-      "Griegos y romanos creĂ­an que una de ellas cantaba al amanecer: despuĂ©s de un terremoto (27 a.C.) la estatua se agrietĂł y emitĂ­a un sonido. DejĂł de hacerlo cuando la repararon, hacia el aĂ±o 200."
+      "Griegos y romanos creían que una de ellas cantaba al amanecer: después de un terremoto (27 a.C.) la estatua se agrietó y emitía un sonido. Dejó de hacerlo cuando la repararon, hacia el año 200."
     ],
-    tips:["Parada corta para fotos. La entrada estĂˇ incluida en el tour."]},
+    tips:["Parada corta para fotos. La entrada está incluida en el tour."]},
   valle:{ date:"2026-10-15", time:"~2 h",
     facts:[
-      "NecrĂłpolis de los faraones del Imperio Nuevo (~1550-1070 a.C.): se conocen mĂˇs de 60 tumbas excavadas en la roca, escondidas para evitar saqueos (aun asĂ­, casi todas fueron saqueadas en la antigĂĽedad).",
-      "La tumba de TutankamĂłn (KV62) la encontrĂł casi intacta Howard Carter en 1922. Es chica porque muriĂł joven y lo enterraron a las apuradas.",
-      "Solo unas 8-12 tumbas estĂˇn abiertas a la vez, por rotaciĂłn, para conservarlas."
+      "Necrópolis de los faraones del Imperio Nuevo (~1550-1070 a.C.): se conocen más de 60 tumbas excavadas en la roca, escondidas para evitar saqueos (aun así, casi todas fueron saqueadas en la antigüedad).",
+      "La tumba de Tutankamón (KV62) la encontró casi intacta Howard Carter en 1922. Es chica porque murió joven y lo enterraron a las apuradas.",
+      "Solo unas 8-12 tumbas están abiertas a la vez, por rotación, para conservarlas."
     ],
     tips:[
-      "La entrada general da acceso a 3 tumbas a elecciĂłn; la de TutankamĂłn y algunas otras (como RamsĂ©s VI o Seti I) se pagan aparte.",
-      "Flash prohibido en todas. En la tumba de TutankamĂłn no se pueden sacar fotos. En el resto las reglas varĂ­an (algunas fuentes dicen que con celular es gratis, otras que hace falta un permiso de ~300 EGP): preguntar en la boleterĂ­a antes de comprar.",
-      "Llevar efectivo: las entradas no estĂˇn incluidas en el tour."
+      "La entrada general da acceso a 3 tumbas a elección; la de Tutankamón y algunas otras (como Ramsés VI o Seti I) se pagan aparte.",
+      "Flash prohibido en todas. En la tumba de Tutankamón no se pueden sacar fotos. En el resto las reglas varían (algunas fuentes dicen que con celular es gratis, otras que hace falta un permiso de ~300 EGP): preguntar en la boletería antes de comprar.",
+      "Llevar efectivo: las entradas no están incluidas en el tour."
     ]},
   hatshepsut:{ date:"2026-10-15", time:"~1 h 30",
     facts:[
-      "Hatshepsut gobernĂł como faraĂłn (no solo como regente) hace unos 3.500 aĂ±os; en sus estatuas aparece con la barba ceremonial de los reyes.",
+      "Hatshepsut gobernó como faraón (no solo como regente) hace unos 3.500 años; en sus estatuas aparece con la barba ceremonial de los reyes.",
       "Su templo funerario, en Deir el-Bahari, se levanta en tres terrazas con columnatas pegadas a un acantilado: parece sorprendentemente moderno.",
-      "Sus relieves cuentan una expediciĂłn comercial a Punt, tierra del incienso y la mirra.",
-      "Se cree que su sucesor, Tutmosis III, mandĂł borrar muchas de sus imĂˇgenes."
+      "Sus relieves cuentan una expedición comercial a Punt, tierra del incienso y la mirra.",
+      "Se cree que su sucesor, Tutmosis III, mandó borrar muchas de sus imágenes."
     ],
     tips:[
       "Casi sin sombra: gorro, agua y protector.",
-      "La entrada no estĂˇ incluida en el tour."
+      "La entrada no está incluida en el tour."
     ]},
-  karnak:{ date:"2026-10-15", time:"~2 h (da para mĂˇs)",
+  karnak:{ date:"2026-10-15", time:"~2 h (da para más)",
     facts:[
-      "Es el complejo religioso mĂˇs grande que se construyĂł: creciĂł durante unos 2.000 aĂ±os con aportes de decenas de faraones.",
-      "La Sala HipĂłstila tiene 134 columnas; las doce centrales miden unos 21 m.",
-      "El obelisco de Hatshepsut, de granito rosa y unos 30 m, es el mĂˇs alto de Egipto que sigue en pie.",
+      "Es el complejo religioso más grande que se construyó: creció durante unos 2.000 años con aportes de decenas de faraones.",
+      "La Sala Hipóstila tiene 134 columnas; las doce centrales miden unos 21 m.",
+      "El obelisco de Hatshepsut, de granito rosa y unos 30 m, es el más alto de Egipto que sigue en pie.",
       "Junto al lago sagrado los sacerdotes se purificaban antes de los rituales."
     ],
     tips:[
-      "Dos horas se quedan cortas: priorizar la Sala HipĂłstila, el obelisco y el lago sagrado.",
-      "Gorro y agua. La entrada no estĂˇ incluida en el tour."
+      "Dos horas se quedan cortas: priorizar la Sala Hipóstila, el obelisco y el lago sagrado.",
+      "Gorro y agua. La entrada no está incluida en el tour."
     ]},
   philae:{ time:"~2 h",
     facts:[
-      "Templo dedicado a Isis. EstĂˇ en una isla y se llega en bote a motor.",
-      "Fue uno de los Ăşltimos templos donde se practicĂł la religiĂłn egipcia antigua: lo cerrĂł Justiniano hacia el aĂ±o 537.",
-      "Con la Presa Alta iba a quedar bajo el agua, asĂ­ que entre 1972 y 1980 lo desarmaron y lo rearmaron piedra por piedra en la isla de Agilkia."
+      "Templo dedicado a Isis. Está en una isla y se llega en bote a motor.",
+      "Fue uno de los últimos templos donde se practicó la religión egipcia antigua: lo cerró Justiniano hacia el año 537.",
+      "Con la Presa Alta iba a quedar bajo el agua, así que entre 1972 y 1980 lo desarmaron y lo rearmaron piedra por piedra en la isla de Agilkia."
     ],
-    tips:["Es parte del dĂ­a 1 del tour que no van a hacer: habrĂ­a que sumarlo por separado (unas 2 h)."]},
+    tips:["Es parte del día 1 del tour que no van a hacer: habría que sumarlo por separado (unas 2 h)."]},
   highDam:{ time:"~30 min",
     facts:[
-      "Se terminĂł en 1970 y creĂł el lago Nasser, uno de los lagos artificiales mĂˇs grandes del mundo (mĂˇs de 500 km de largo).",
-      "Controla las crecidas y sequĂ­as del Nilo y genera electricidad, pero obligĂł a trasladar templos como Abu Simbel y Philae y a reubicar a decenas de miles de nubios."
+      "Se terminó en 1970 y creó el lago Nasser, uno de los lagos artificiales más grandes del mundo (más de 500 km de largo).",
+      "Controla las crecidas y sequías del Nilo y genera electricidad, pero obligó a trasladar templos como Abu Simbel y Philae y a reubicar a decenas de miles de nubios."
     ],
-    tips:["Parada corta; tambiĂ©n es parte del dĂ­a 1 del tour que no van a hacer."]},
+    tips:["Parada corta; también es parte del día 1 del tour que no van a hacer."]},
   obelisk:{
     facts:[
-      "HabrĂ­a sido el obelisco mĂˇs grande de Egipto (unos 42 m y 1.200 toneladas), pero se agrietĂł mientras lo tallaban y quedĂł abandonado en la cantera.",
-      "Se ven las marcas de las herramientas con las que lo trabajaban: una ventana a cĂłmo se tallaba la piedra hace 3.500 aĂ±os."
+      "Habría sido el obelisco más grande de Egipto (unos 42 m y 1.200 toneladas), pero se agrietó mientras lo tallaban y quedó abandonado en la cantera.",
+      "Se ven las marcas de las herramientas con las que lo trabajaban: una ventana a cómo se tallaba la piedra hace 3.500 años."
     ],
-    tips:["No estĂˇ en el tour: habrĂ­a que sumarlo por separado."]},
+    tips:["No está en el tour: habría que sumarlo por separado."]},
   nubian:{
     facts:[
-      "Los nubios son un pueblo del sur de Egipto y el norte de SudĂˇn, con su propia lengua y casas pintadas de colores.",
+      "Los nubios son un pueblo del sur de Egipto y el norte de Sudán, con su propia lengua y casas pintadas de colores.",
       "Se suele combinar con un paseo en felucca (velero tradicional), sobre todo al atardecer."
     ],
-    tips:["No estĂˇ en el tour: habrĂ­a que contratarlo aparte y acordar el precio antes."]},
-  hurghadaplaya:{ when:"16 al 19 oct", date:"2026-10-16", time:"4 dĂ­as",
+    tips:["No está en el tour: habría que contratarlo aparte y acordar el precio antes."]},
+  hurghadaplaya:{ when:"16 al 19 oct", date:"2026-10-16", time:"4 días",
     facts:[
-      "El Mar Rojo tiene mĂˇs de mil especies de peces y arrecifes de coral a pocos metros de la costa.",
-      "En octubre el agua ronda los 27 Â°C."
+      "El Mar Rojo tiene más de mil especies de peces y arrecifes de coral a pocos metros de la costa.",
+      "En octubre el agua ronda los 27 °C."
     ],
     tips:[
       "Llevar escarpines o calzado de agua: protegen de los corales y los erizos.",
-      "No tocar ni pisar el coral: es frĂˇgil y protegido.",
+      "No tocar ni pisar el coral: es frágil y protegido.",
       "Protector solar resistente al agua, y una remera de licra si van a hacer snorkel."
     ]},
   snorkel:{
     facts:[
-      "Giftun es un parque marino protegido frente a Hurghada; Orange Bay es una de sus bahĂ­as mĂˇs conocidas.",
+      "Giftun es un parque marino protegido frente a Hurghada; Orange Bay es una de sus bahías más conocidas.",
       "Las salidas en barco suelen incluir 2 o 3 paradas para snorkel y, a veces, delfines."
     ],
     tips:[
       "Precios de referencia: yate 3 islas + delfines + snorkel 55 USD; lancha 2 islas + delfines + snorkel 35 USD; snorkel en Giftun 35 USD; Orange Bay 20 USD; noche de estrellas en el desierto con camello y cena 35 USD.",
-      "Se define allĂˇ, segĂşn el clima y las ganas."
+      "Se define allá, según el clima y las ganas."
     ]}
 };
 
@@ -647,9 +647,9 @@ function metaHtml(it){
   const info = PLACE_INFO[it.id];
   if(!info) return '';
   const chips = [];
-  if(info.when){ chips.push('đź“… ' + info.when); }
-  else if(info.date){ const dm = fmtDay(info.date); chips.push('đź“… ' + dm.wd + ' ' + dm.num + ' ' + dm.mo); }
-  if(info.time){ chips.push('âŹ± ' + info.time); }
+  if(info.when){ chips.push('📅 ' + info.when); }
+  else if(info.date){ const dm = fmtDay(info.date); chips.push('📅 ' + dm.wd + ' ' + dm.num + ' ' + dm.mo); }
+  if(info.time){ chips.push('⏱ ' + info.time); }
   if(!chips.length) return '';
   return '<div class="meta-chips">' + chips.map(function(x){ return '<span class="chip-meta">' + esc(x) + '</span>'; }).join('') + '</div>';
 }
@@ -657,7 +657,7 @@ function fichaHtml(it){
   const info = PLACE_INFO[it.id];
   if(!info) return '';
   let h = '<details class="ficha" data-ficha="' + it.id + '"' + (openFichas[it.id] ? ' open' : '') + '><summary>Ver ficha</summary>';
-  if(info.warn){ h += '<div class="ficha-warn">âš  ' + esc(info.warn) + '</div>'; }
+  if(info.warn){ h += '<div class="ficha-warn">⚠ ' + esc(info.warn) + '</div>'; }
   if(info.facts && info.facts.length){ h += '<h5>Para saber</h5><ul>' + info.facts.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
   if(info.tips && info.tips.length){ h += '<h5>Para tener en cuenta</h5><ul>' + info.tips.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
   return h + '</details>';
@@ -671,14 +671,14 @@ function openPlaceFicha(id){
 }
 
 const BUDGET_CATEGORIES = [
-  {id:"cruise", name:"Crucero por el Nilo (4 dĂ­as/3 noches)", note:"desde 279 USD pp + ~80-100 USD entradas no incluidas + propina crew ~10 USD/persona/noche", def:420},
-  {id:"vueloInterno", name:"Vuelo interno Cairo â†’ AsuĂˇn", note:"sale 17:00 del lunes", def:90},
-  {id:"hotelCairo", name:"Hotel en Giza (Pyramids Holiday Escape)", note:"confirmado: 3 noches, 3 habitaciones, 6 adultos - US$327,89 total (~301â‚¬, ~50â‚¬ pp)", def:50},
-  {id:"hotelAswan", name:"Hotel en AsuĂˇn (noche del lunes)", note:"antes de subir al barco el martes", def:60},
+  {id:"cruise", name:"Crucero por el Nilo (4 días/3 noches)", note:"desde 279 USD pp + ~80-100 USD entradas no incluidas + propina crew ~10 USD/persona/noche", def:420},
+  {id:"vueloInterno", name:"Vuelo interno Cairo → Asuán", note:"sale 17:00 del lunes", def:90},
+  {id:"hotelCairo", name:"Hotel en Giza (Pyramids Holiday Escape)", note:"confirmado: 3 noches, 3 habitaciones, 6 adultos - US$327,89 total (~301€, ~50€ pp)", def:50},
+  {id:"hotelAswan", name:"Hotel en Asuán (noche del lunes)", note:"antes de subir al barco el martes", def:60},
   {id:"hotelHurghada", name:"Hotel/resort en Hurghada", note:"4 noches de playa", def:280},
-  {id:"entradas", name:"Entradas a templos y sitios", note:"Giza, Saqqara, GEM, Karnak/Valle de los Reyes del Ăşltimo dĂ­a del crucero, etc.", def:180},
-  {id:"traslados", name:"Traslados y guĂ­a", note:"transfers, chofer/guĂ­a compartido en Cairo", def:120},
-  {id:"comidas", name:"Comidas fuera del crucero/hotel", note:"Khufu's, Andrea, Crimson, Pier 88, dĂ­as en Hurghada", def:160},
+  {id:"entradas", name:"Entradas a templos y sitios", note:"Giza, Saqqara, GEM, Karnak/Valle de los Reyes del último día del crucero, etc.", def:180},
+  {id:"traslados", name:"Traslados y guía", note:"transfers, chofer/guía compartido en Cairo", def:120},
+  {id:"comidas", name:"Comidas fuera del crucero/hotel", note:"Khufu's, Andrea, Crimson, Pier 88, días en Hurghada", def:160},
   {id:"extras", name:"Extras e imprevistos", note:"propinas, souvenirs, agua, camello/caballo en Guiza, etc.", def:90}
 ];
 
@@ -689,28 +689,28 @@ const CATEGORY_COLORS = {
 };
 const DEFAULT_CHECKLIST = [
   {id:"c1", name:"Crucero Aswan-Luxor 4d/3n (Go Tours, Abu Simbel+globo)", category:"Crucero", day:"2026-10-13", done:true, price:0, payer:"Pipa", link:"Reservado y pagado - viator.com d796-331802P3"},
-  {id:"c2", name:"Vuelo interno Cairo â†’ AsuĂˇn (17:00)", category:"Vuelo interno", day:"2026-10-12", done:false, price:0, payer:"", link:"Falta dato de AgustĂ­n para completar"},
-  {id:"c3", name:"Entradas Karnak/Valle de los Reyes/Hatshepsut (dĂ­a 4 crucero)", category:"Entrada", day:"2026-10-15", done:false, price:0, payer:"", link:"no incluidas en el tour, ~80-100 USD"},
-  {id:"c4", name:"Entradas Giza (pirĂˇmides + Esfinge)", category:"Entrada", day:"2026-10-10", done:false, price:0, payer:"", link:"comprar online con anticipaciĂłn"},
+  {id:"c2", name:"Vuelo interno Cairo → Asuán (17:00)", category:"Vuelo interno", day:"2026-10-12", done:false, price:0, payer:"", link:"Falta dato de Agustín para completar"},
+  {id:"c3", name:"Entradas Karnak/Valle de los Reyes/Hatshepsut (día 4 crucero)", category:"Entrada", day:"2026-10-15", done:false, price:0, payer:"", link:"no incluidas en el tour, ~80-100 USD"},
+  {id:"c4", name:"Entradas Giza (pirámides + Esfinge)", category:"Entrada", day:"2026-10-10", done:false, price:0, payer:"", link:"comprar online con anticipación"},
   {id:"c5", name:"Khufu's Restaurant - reserva mesa afuera", category:"Restaurante", day:"2026-10-10", done:false, price:0, payer:"", link:"+20 10 80058888"},
   {id:"c6", name:"Crimson Bar & Grill - reserva cena", category:"Restaurante", day:"2026-10-10", done:false, price:0, payer:"", link:"+20 12 75055555 - 16 Kamal Al Tawil St"},
-  {id:"c7", name:"GEM - entrada + guĂ­a", category:"Entrada", day:"2026-10-11", done:false, price:0, payer:"", link:"reservar online, considerar guĂ­a"},
+  {id:"c7", name:"GEM - entrada + guía", category:"Entrada", day:"2026-10-11", done:false, price:0, payer:"", link:"reservar online, considerar guía"},
   {id:"c8", name:"Andrea El Mariouteya - reserva fateer", category:"Restaurante", day:"2026-10-11", done:false, price:0, payer:"", link:"+20 10 03531000"},
   {id:"c9", name:"Pier 88 - reserva cena", category:"Restaurante", day:"2026-10-11", done:false, price:0, payer:"", link:"+20 10 80888840 - 19 Saray El Gezira St"},
   {id:"c10", name:"Hotel en Giza - Pyramids Holiday Escape", category:"Alojamiento", day:"2026-10-09", done:true, price:50, payer:"", link:"Reservado - US$327,89 total (3 hab., 3 noches, 6 adultos) - tel +201003444483"},
-  {id:"c11", name:"Hotel en AsuĂˇn (noche del lunes)", category:"Alojamiento", day:"2026-10-12", done:false, price:0, payer:"", link:""},
+  {id:"c11", name:"Hotel en Asuán (noche del lunes)", category:"Alojamiento", day:"2026-10-12", done:false, price:0, payer:"", link:""},
   {id:"c12", name:"Hotel/resort en Hurghada", category:"Alojamiento", day:"2026-10-16", done:false, price:0, payer:"", link:""},
   {id:"c13", name:"SIM local (Vodafone/Orange, aeropuerto)", category:"Otro", day:"2026-10-09", done:false, price:0, payer:"", link:""},
   {id:"c14", name:"Visa / e-visa Egipto", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""},
   {id:"c15", name:"Seguro de viaje", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""},
-  {id:"c16", name:"ExcursiĂłn Hurghada (elegir: yate 3 islas 55$ / lancha 2 islas 35$ / snorkel Giftun 35$ / Orange Bay 20$ / desierto+camello+cena 35$)", category:"Otro", day:"2026-10-16", done:false, price:0, payer:"", link:""}
+  {id:"c16", name:"Excursión Hurghada (elegir: yate 3 islas 55$ / lancha 2 islas 35$ / snorkel Giftun 35$ / Orange Bay 20$ / desierto+camello+cena 35$)", category:"Otro", day:"2026-10-16", done:false, price:0, payer:"", link:""}
 ];
 
 const WEATHER_CITIES = [
-  {id:"cairo", name:"El Cairo", lat:30.0444, lon:31.2357, daysNote:"9-12 oct", from:"2026-10-09", to:"2026-10-12", hist:"Octubre tĂ­pico: 29-31Â°C de dĂ­a, 19-21Â°C de noche. Seco, casi sin lluvia."},
-  {id:"aswan", name:"AsuĂˇn", lat:24.0889, lon:32.8998, daysNote:"12-13 oct", from:"2026-10-12", to:"2026-10-13", hist:"Octubre tĂ­pico: 36-39Â°C de dĂ­a, 22-24Â°C de noche. Desierto, muy seco y fuerte el sol al mediodĂ­a."},
-  {id:"luxor", name:"Luxor", lat:25.6872, lon:32.6396, daysNote:"14-15 oct", from:"2026-10-14", to:"2026-10-15", hist:"Octubre tĂ­pico: 35-38Â°C de dĂ­a, 21-23Â°C de noche. Similar a AsuĂˇn, arrancar temprano los tours conviene."},
-  {id:"hurghada", name:"Hurghada", lat:27.2579, lon:33.8116, daysNote:"15-19 oct", from:"2026-10-15", to:"2026-10-19", hist:"Octubre tĂ­pico: 30-32Â°C de dĂ­a, 22-24Â°C de noche, agua del mar ~27Â°C. MĂˇs hĂşmedo por la costa, pero con brisa."}
+  {id:"cairo", name:"El Cairo", lat:30.0444, lon:31.2357, daysNote:"9-12 oct", from:"2026-10-09", to:"2026-10-12", hist:"Octubre típico: 29-31°C de día, 19-21°C de noche. Seco, casi sin lluvia."},
+  {id:"aswan", name:"Asuán", lat:24.0889, lon:32.8998, daysNote:"12-13 oct", from:"2026-10-12", to:"2026-10-13", hist:"Octubre típico: 36-39°C de día, 22-24°C de noche. Desierto, muy seco y fuerte el sol al mediodía."},
+  {id:"luxor", name:"Luxor", lat:25.6872, lon:32.6396, daysNote:"14-15 oct", from:"2026-10-14", to:"2026-10-15", hist:"Octubre típico: 35-38°C de día, 21-23°C de noche. Similar a Asuán, arrancar temprano los tours conviene."},
+  {id:"hurghada", name:"Hurghada", lat:27.2579, lon:33.8116, daysNote:"15-19 oct", from:"2026-10-15", to:"2026-10-19", hist:"Octubre típico: 30-32°C de día, 22-24°C de noche, agua del mar ~27°C. Más húmedo por la costa, pero con brisa."}
 ];
 
 const SEGMENTS = [
@@ -723,13 +723,13 @@ function segmentForDate(d){ return SEGMENTS.find(s=> d>=s.start && d<=s.end) || 
 
 const MAP_POINTS = [
   {name:"Hotel: Pyramids Holiday Escape (aprox.)", lat:29.9838, lon:31.1290, segment:"El Cairo"},
-  {name:"PirĂˇmides de Guiza", lat:29.9792, lon:31.1341, segment:"El Cairo"},
+  {name:"Pirámides de Guiza", lat:29.9792, lon:31.1341, segment:"El Cairo"},
   {name:"Khufu's Restaurant", lat:29.9765, lon:31.1325, segment:"El Cairo"},
   {name:"Gran Museo Egipcio (GEM)", lat:29.9950, lon:31.1193, segment:"El Cairo"},
   {name:"Saqqara", lat:29.8713, lon:31.2164, segment:"El Cairo"},
   {name:"Abu Simbel", lat:22.3369, lon:31.6256, segment:"Crucero"},
   {name:"Templo de Philae", lat:24.0208, lon:32.8894, segment:"Crucero"},
-  {name:"Presa Alta de AsuĂˇn", lat:23.9709, lon:32.8776, segment:"Crucero"},
+  {name:"Presa Alta de Asuán", lat:23.9709, lon:32.8776, segment:"Crucero"},
   {name:"Obelisco Inacabado", lat:24.0866, lon:32.8894, segment:"Crucero"},
   {name:"Templo de Kom Ombo", lat:24.4513, lon:32.9284, segment:"Crucero"},
   {name:"Templo de Edfu", lat:24.9781, lon:32.8734, segment:"Crucero"},
@@ -786,7 +786,7 @@ async function fetchFxRate(){
     if(j.rates && j.rates.EGP) fxRate = j.rates.EGP;   // si falla, queda la ultima tasa guardada
   }catch(e){}
 }
-let syncStatus = STORAGE_READY ? "" : "âš  falta configurar guardado compartido";
+let syncStatus = STORAGE_READY ? "" : "⚠ falta configurar guardado compartido";
 
 async function loadShared(){
   try{
@@ -798,7 +798,7 @@ async function loadShared(){
     syncStatus = "sincronizado";
     return true;
   }catch(e){
-    syncStatus = "sin conexiĂłn Â· mostrando lo Ăşltimo guardado en este telĂ©fono";
+    syncStatus = "sin conexión · mostrando lo último guardado en este teléfono";
     return false;
   }
 }
@@ -811,11 +811,11 @@ async function saveShared(){
       body: JSON.stringify(stateSnapshot())
     }, 10000);
     if(!res.ok) throw new Error('status '+res.status);
-    syncStatus = "guardado âś“";
+    syncStatus = "guardado ✓";
     lastSaveFailed = false;
     try{ localStorage.removeItem(DIRTY_KEY); }catch(e){}
   }catch(e){
-    syncStatus = "âš  sin conexiĂłn: el cambio quedĂł en este telĂ©fono y se envĂ­a solo cuando vuelva internet";
+    syncStatus = "⚠ sin conexión: el cambio quedó en este teléfono y se envía solo cuando vuelva internet";
     lastSaveFailed = true;
     try{ localStorage.setItem(DIRTY_KEY, '1'); }catch(e2){}
   }
@@ -856,18 +856,18 @@ function countdownHtml(){
   const ts = tripState();
   if(ts.mode === 'durante'){
     const sg = segmentForDate(ts.date);
-    return '<div class="countdown">đź§­ DĂ­a <b>'+(ts.idx+1)+'</b> de '+DAY_STRINGS.length+(sg ? ' Â· '+sg.label : '')+'</div>';
+    return '<div class="countdown">🧭 Día <b>'+(ts.idx+1)+'</b> de '+DAY_STRINGS.length+(sg ? ' · '+sg.label : '')+'</div>';
   }
-  if(ts.mode === 'despues') return '<div class="countdown">âś¨ ÂˇQuĂ© viaje!</div>';
+  if(ts.mode === 'despues') return '<div class="countdown">✨ ¡Qué viaje!</div>';
   const target = new Date("2026-10-09T19:45:00");
   const now = new Date();
   const diffMs = target - now;
-  if(diffMs <= 0) return '<div class="countdown">âś�ď¸Ź ÂˇBuen viaje!</div>';
+  if(diffMs <= 0) return '<div class="countdown">✈️ ¡Buen viaje!</div>';
   const days = Math.floor(diffMs / (1000*60*60*24));
   const hours = Math.floor((diffMs % (1000*60*60*24)) / (1000*60*60));
-  if(days > 0) return '<div class="countdown">âś�ď¸Ź Faltan <b>'+days+'</b> dĂ­as y <b>'+hours+'</b>h para el vuelo a El Cairo</div>';
+  if(days > 0) return '<div class="countdown">✈️ Faltan <b>'+days+'</b> días y <b>'+hours+'</b>h para el vuelo a El Cairo</div>';
   const mins = Math.floor((diffMs % (1000*60*60)) / (1000*60));
-  return '<div class="countdown">âś�ď¸Ź Faltan <b>'+hours+'</b>h <b>'+mins+'</b>min para el vuelo</div>';
+  return '<div class="countdown">✈️ Faltan <b>'+hours+'</b>h <b>'+mins+'</b>min para el vuelo</div>';
 }
 
 function prepProgressHtml(){
@@ -884,13 +884,13 @@ function updatePrepProgress(){
 }
 
 function weatherIcon(code){
-  if(code===0) return 'â�€ď¸Ź';
-  if(code>=1 && code<=3) return 'đźŚ¤ď¸Ź';
-  if(code===45||code===48) return 'đźŚ«ď¸Ź';
-  if(code>=51 && code<=67) return 'đźŚ§ď¸Ź';
-  if(code>=80 && code<=82) return 'đźŚ¦ď¸Ź';
-  if(code>=95) return 'â›�ď¸Ź';
-  return 'â�€ď¸Ź';
+  if(code===0) return '☀️';
+  if(code>=1 && code<=3) return '🌤️';
+  if(code===45||code===48) return '🌫️';
+  if(code>=51 && code<=67) return '🌧️';
+  if(code>=80 && code<=82) return '🌦️';
+  if(code>=95) return '⛈️';
+  return '☀️';
 }
 
 async function fetchWikiThumb(title){
@@ -934,7 +934,7 @@ async function init(){
   const cached = readStateCache();
   if(cached){ applyRecord(cached); }
   ensureDefaults();
-  syncStatus = cached ? 'actualizandoâ€¦' : 'cargandoâ€¦';
+  syncStatus = cached ? 'actualizando…' : 'cargando…';
   render();                                   // se dibuja YA, sin esperar a la red
 
   const before = JSON.stringify(stateSnapshot());
@@ -952,63 +952,63 @@ async function init(){
 
 // ================= MODO VIAJE =================
 const KEY_EVENTS = [
-  {date:"2026-10-09", time:"desde las 14:00 hasta las 00:00", label:"Check-in hotel en Giza (Pyramids Holiday Escape)", note:"si llegan despuĂ©s de las 00:00, avisar: +20 100 344 4483"},
-  {date:"2026-10-09", time:"19:45", label:"Vuelo Stuttgart â†’ El Cairo", note:"1 escala"},
+  {date:"2026-10-09", time:"desde las 14:00 hasta las 00:00", label:"Check-in hotel en Giza (Pyramids Holiday Escape)", note:"si llegan después de las 00:00, avisar: +20 100 344 4483"},
+  {date:"2026-10-09", time:"19:45", label:"Vuelo Stuttgart → El Cairo", note:"1 escala"},
   {date:"2026-10-11", time:"09:00 (ideal)", label:"Llegar al Gran Museo Egipcio", note:"turno online obligatorio en visit-gem.com"},
   {date:"2026-10-12", time:"10:00 a 12:00", label:"Check-out del hotel de Giza", note:"coordinar con el chofer que las valijas viajen con ustedes"},
-  {date:"2026-10-12", time:"17:00", label:"Vuelo interno El Cairo â†’ AsuĂˇn", note:"llegar al aeropuerto con buen margen"},
+  {date:"2026-10-12", time:"17:00", label:"Vuelo interno El Cairo → Asuán", note:"llegar al aeropuerto con buen margen"},
   {date:"2026-10-13", time:"madrugada (3-4 am)", label:"Salida a Abu Simbel", note:"unas 3 h de viaje por trayecto"},
-  {date:"2026-10-15", time:"~5:00", label:"Globo aerostĂˇtico: recogida", note:"si se cancela por clima, reembolsan 25 USD por persona"},
-  {date:"2026-10-15", time:"a definir", label:"Fin del crucero y traslado a Hurghada (~4 h)", note:"confirmar que el traslado estĂ© reservado"},
-  {date:"2026-10-19", time:"17:20", label:"Vuelo Hurghada â†’ Stuttgart", note:"1 escala"}
+  {date:"2026-10-15", time:"~5:00", label:"Globo aerostático: recogida", note:"si se cancela por clima, reembolsan 25 USD por persona"},
+  {date:"2026-10-15", time:"a definir", label:"Fin del crucero y traslado a Hurghada (~4 h)", note:"confirmar que el traslado esté reservado"},
+  {date:"2026-10-19", time:"17:20", label:"Vuelo Hurghada → Stuttgart", note:"1 escala"}
 ];
 const EMERGENCY_NUMBERS = [
-  {ico:"đźš“", name:"PolicĂ­a", num:"122"},
-  {ico:"đź›‚", name:"PolicĂ­a turĂ­stica", num:"126"},
-  {ico:"đźš‘", name:"Ambulancia", num:"123"},
-  {ico:"đźš’", name:"Bomberos", num:"180"},
-  {ico:"đź†�", name:"Emergencias (unificado)", num:"112", note:"puede no funcionar en todas las zonas: probĂˇ primero los de arriba"}
+  {ico:"🚓", name:"Policía", num:"122"},
+  {ico:"🛂", name:"Policía turística", num:"126"},
+  {ico:"🚑", name:"Ambulancia", num:"123"},
+  {ico:"🚒", name:"Bomberos", num:"180"},
+  {ico:"🆘", name:"Emergencias (unificado)", num:"112", note:"puede no funcionar en todas las zonas: probá primero los de arriba"}
 ];
 const DEFAULT_CONTACTS = [
   {id:"k1", name:"Hotel Pyramids Holiday Escape (Giza)", phone:"+20 100 344 4483"},
-  {id:"k2", name:"Agencia / guĂ­a del crucero", phone:""},
+  {id:"k2", name:"Agencia / guía del crucero", phone:""},
   {id:"k3", name:"Hotel en Hurghada", phone:""},
-  {id:"k4", name:"Asistencia del seguro mĂ©dico", phone:""},
+  {id:"k4", name:"Asistencia del seguro médico", phone:""},
   {id:"k5", name:"Embajada / consulado", phone:""}
 ];
 const FRASES = [
-  {title:"Lo bĂˇsico", items:[
+  {title:"Lo básico", items:[
     ["Ahlan", "Hola / bienvenido"],
-    ["Sabah el-kheir", "Buen dĂ­a"],
+    ["Sabah el-kheir", "Buen día"],
     ["Masa' el-kheir", "Buenas tardes / noches"],
     ["Shukran", "Gracias"],
     ["Afwan", "De nada"],
-    ["Aywa / La", "SĂ­ / No"],
-    ["Min fadlak (a un hombre) Â· min fadlik (a una mujer)", "Por favor"],
+    ["Aywa / La", "Sí / No"],
+    ["Min fadlak (a un hombre) · min fadlik (a una mujer)", "Por favor"],
     ["Law samaht", "Disculpe / permiso"],
     ["Ma'a es-salama", "Chau"]
   ]},
   {title:"Comprar y regatear", items:[
-    ["Bikam da?", "ÂżCuĂˇnto cuesta esto?"],
+    ["Bikam da?", "¿Cuánto cuesta esto?"],
     ["Ghali awi", "Muy caro"],
     ["La, shukran", "No, gracias"],
-    ["Mish ayez (hombre) Â· mish ayza (mujer)", "No quiero"],
-    ["Shwaya shwaya", "Poco a poco / mĂˇs despacio"],
+    ["Mish ayez (hombre) · mish ayza (mujer)", "No quiero"],
+    ["Shwaya shwaya", "Poco a poco / más despacio"],
     ["Khalas", "Listo / basta"],
     ["El-hesab, min fadlak", "La cuenta, por favor"]
   ]},
   {title:"Moverse y comer", items:[
-    ["Fein el-hammam?", "ÂżDĂłnde estĂˇ el baĂ±o?"],
+    ["Fein el-hammam?", "¿Dónde está el baño?"],
     ["Mayya", "Agua"],
     ["Yalla", "Vamos / dale"],
-    ["Mashi", "EstĂˇ bien / ok"],
-    ["Ana mish fahem (hombre) Â· mish fahma (mujer)", "No entiendo"],
-    ["Betetkallem ingleezi?", "ÂżHabla inglĂ©s?"],
+    ["Mashi", "Está bien / ok"],
+    ["Ana mish fahem (hombre) · mish fahma (mujer)", "No entiendo"],
+    ["Betetkallem ingleezi?", "¿Habla inglés?"],
     ["Lazeez", "Delicioso"]
   ]},
-  {title:"NĂşmeros", items:[
-    ["1 wahed Â· 2 etneen Â· 3 talata Â· 4 arba'a Â· 5 khamsa", "del uno al cinco"],
-    ["6 setta Â· 7 sab'a Â· 8 tamanya Â· 9 tes'a Â· 10 'ashara", "del seis al diez"]
+  {title:"Números", items:[
+    ["1 wahed · 2 etneen · 3 talata · 4 arba'a · 5 khamsa", "del uno al cinco"],
+    ["6 setta · 7 sab'a · 8 tamanya · 9 tes'a · 10 'ashara", "del seis al diez"]
   ]}
 ];
 
@@ -1035,16 +1035,16 @@ function keyEventsHtml(ts){
   if(!list.length) return '';
   const rows = list.map(function(e){
     let badge;
-    if(ts.mode === 'durante'){ badge = (e.date === t) ? 'HOY' : 'MAĂ‘.'; }
+    if(ts.mode === 'durante'){ badge = (e.date === t) ? 'HOY' : 'MAÑ.'; }
     else { const dm = fmtDay(e.date); badge = dm.num + '<br>' + dm.mo; }
-    return '<div class="next-row"><div class="next-date">' + badge + '</div><div><strong>' + esc(e.label) + '</strong><span>' + esc(e.time) + (e.note ? ' Â· ' + esc(e.note) : '') + '</span></div></div>';
+    return '<div class="next-row"><div class="next-date">' + badge + '</div><div><strong>' + esc(e.label) + '</strong><span>' + esc(e.time) + (e.note ? ' · ' + esc(e.note) : '') + '</span></div></div>';
   }).join('');
   return '<div class="next-card"><h4>Horarios clave</h4>' + rows + '</div>';
 }
 
 // ---------- tema claro / oscuro / automatico ----------
 function themePref(){ try{ return localStorage.getItem('nile-theme') || 'auto'; }catch(e){ return 'auto'; } }
-function themeLabel(){ const p = themePref(); return p === 'dark' ? 'Oscuro' : (p === 'light' ? 'Claro' : 'AutomĂˇtico'); }
+function themeLabel(){ const p = themePref(); return p === 'dark' ? 'Oscuro' : (p === 'light' ? 'Claro' : 'Automático'); }
 function applyTheme(){
   const pref = themePref();
   const sysDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -1053,7 +1053,7 @@ function applyTheme(){
   const m = document.querySelector('meta[name="theme-color"]');
   if(m) m.setAttribute('content', dark ? '#000000' : '#123B40');
   const tb = document.getElementById('themeBtn');
-  if(tb) tb.textContent = pref === 'dark' ? 'đźŚ™' : (pref === 'light' ? 'â�€ď¸Ź' : 'đźŚ“');
+  if(tb) tb.textContent = pref === 'dark' ? '🌙' : (pref === 'light' ? '☀️' : '🌓');
 }
 function cycleTheme(){
   const order = ['auto', 'light', 'dark'];
@@ -1093,8 +1093,8 @@ function closeSheet(){
   document.body.classList.remove('sheet-open');
 }
 function sheetHead(title, back){
-  return '<div class="sheet-head">' + (back ? '<button class="sheet-back" data-sheet-back>â€ą AtrĂˇs</button>' : '<span style="min-width:44px"></span>')
-    + '<div class="sheet-title">' + esc(title) + '</div><button class="sheet-x" data-sheet-close>âś•</button></div>';
+  return '<div class="sheet-head">' + (back ? '<button class="sheet-back" data-sheet-back>‹ Atrás</button>' : '<span style="min-width:44px"></span>')
+    + '<div class="sheet-title">' + esc(title) + '</div><button class="sheet-x" data-sheet-close>✕</button></div>';
 }
 function qaBtn(view, ico, label){ return '<button class="qa-btn" data-qa="' + view + '"><span class="qa-ico">' + ico + '</span><span>' + label + '</span></button>'; }
 function tabBtn(tab, ico, label){ return '<button class="qa-btn" data-go-tab="' + tab + '"><span class="qa-ico">' + ico + '</span><span>' + label + '</span></button>'; }
@@ -1107,15 +1107,15 @@ function renderSheet(){
   let h = '';
 
   if(sheetView === 'menu'){
-    h = sheetHead('Acceso rĂˇpido', false)
-      + '<div class="qa-grid">' + qaBtn('docs', 'đź“„', 'Documentos') + qaBtn('emerg', 'đźš‘', 'Emergencias') + qaBtn('frases', 'đź—Łď¸Ź', 'Frases') + qaBtn('notas', 'đź“ť', 'Nota rĂˇpida') + '</div>';
+    h = sheetHead('Acceso rápido', false)
+      + '<div class="qa-grid">' + qaBtn('docs', '📄', 'Documentos') + qaBtn('emerg', '🚑', 'Emergencias') + qaBtn('frases', '🗣️', 'Frases') + qaBtn('notas', '📝', 'Nota rápida') + '</div>';
   } else if(sheetView === 'mas'){
-    h = sheetHead('MĂˇs secciones', false)
-      + '<div class="qa-grid">' + tabBtn('documentos', 'đź“„', 'Documentos') + tabBtn('tips', 'đź’ˇ', 'Tips') + tabBtn('mapa', 'đź—şď¸Ź', 'Mapa') + tabBtn('clima', 'â›…', 'Clima') + tabBtn('checklist', 'âś…', 'Para reservar') + tabBtn('presupuesto', 'đź’¶', 'Presupuesto') + '</div>'
-      + '<div class="qa-row2"><button class="qa-wide" data-theme-cycle>Tema: ' + themeLabel() + '</button><button class="qa-wide" data-sync>đź”„ Sincronizar</button></div>';
+    h = sheetHead('Más secciones', false)
+      + '<div class="qa-grid">' + tabBtn('documentos', '📄', 'Documentos') + tabBtn('tips', '💡', 'Tips') + tabBtn('mapa', '🗺️', 'Mapa') + tabBtn('clima', '⛅', 'Clima') + tabBtn('checklist', '✅', 'Para reservar') + tabBtn('presupuesto', '💶', 'Presupuesto') + '</div>'
+      + '<div class="qa-row2"><button class="qa-wide" data-theme-cycle>Tema: ' + themeLabel() + '</button><button class="qa-wide" data-sync>🔄 Sincronizar</button></div>';
   } else if(sheetView === 'docs'){
     h = sheetHead('Documentos', true);
-    if(!state.docs.length){ h += '<p class="qa-hint">TodavĂ­a no hay documentos cargados.</p>'; }
+    if(!state.docs.length){ h += '<p class="qa-hint">Todavía no hay documentos cargados.</p>'; }
     h += state.docs.map(function(doc){
       const isImg = isImageLink(doc.link);
       const act = isImg
@@ -1123,7 +1123,7 @@ function renderSheet(){
         : (doc.link ? '<a class="qa-btn-sm" href="' + attr(doc.link) + '" target="_blank" rel="noopener">Abrir</a>' : '');
       return '<div class="qa-doc"><div class="qa-info"><b>' + esc(doc.name || 'Documento') + '</b><span>' + esc(doc.note || '') + '</span></div>' + act + '</div>';
     }).join('');
-    h += '<p class="qa-hint">Las imĂˇgenes del propio sitio (como /crucero.png) abren sin seĂ±al si ya las abriste una vez con internet; los links a Drive necesitan internet. Para lo crĂ­tico (pasaporte, visa, tickets) tenĂ© tambiĂ©n una captura en Fotos o Archivos del telĂ©fono.</p>'
+    h += '<p class="qa-hint">Las imágenes del propio sitio (como /crucero.png) abren sin señal si ya las abriste una vez con internet; los links a Drive necesitan internet. Para lo crítico (pasaporte, visa, tickets) tené también una captura en Fotos o Archivos del teléfono.</p>'
       + '<button class="qa-wide" style="width:100%" data-go-tab="documentos">Agregar o administrar documentos</button>';
   } else if(sheetView === 'emerg'){
     h = sheetHead('Emergencias', true)
@@ -1132,24 +1132,24 @@ function renderSheet(){
         }).join('')
       + '<div class="qa-group">Contactos del viaje</div>'
       + (state.contacts || []).map(function(k){
-          const ph = k.phone ? '<a href="' + telHref(k.phone) + '">' + esc(k.phone) + '</a>' : 'sin telĂ©fono: tocĂˇ âśŽ para completarlo';
-          return '<div class="qa-contact"><div class="qa-info"><b>' + esc(k.name) + '</b><span>' + ph + '</span></div><div><button class="qa-x" data-edit-contact="' + attr(k.id) + '">âśŽ</button><button class="qa-x" data-del-contact="' + attr(k.id) + '">âś•</button></div></div>';
+          const ph = k.phone ? '<a href="' + telHref(k.phone) + '">' + esc(k.phone) + '</a>' : 'sin teléfono: tocá ✎ para completarlo';
+          return '<div class="qa-contact"><div class="qa-info"><b>' + esc(k.name) + '</b><span>' + ph + '</span></div><div><button class="qa-x" data-edit-contact="' + attr(k.id) + '">✎</button><button class="qa-x" data-del-contact="' + attr(k.id) + '">✕</button></div></div>';
         }).join('')
-      + '<div class="qa-form"><input class="qa-input" id="ctName" placeholder="Nombre (ej: GuĂ­a del crucero)"><input class="qa-input" id="ctPhone" type="tel" placeholder="TelĂ©fono (+20 â€¦)"><button class="qa-save" id="ctAdd" style="margin:0">Agregar contacto</button></div>'
-      + '<p class="qa-hint">CargĂˇ acĂˇ lo que falte (hotel de Hurghada, guĂ­a, seguro, embajada). Lo ven los 6. No guardes nĂşmeros de pasaporte ni de tarjetas.</p>';
+      + '<div class="qa-form"><input class="qa-input" id="ctName" placeholder="Nombre (ej: Guía del crucero)"><input class="qa-input" id="ctPhone" type="tel" placeholder="Teléfono (+20 …)"><button class="qa-save" id="ctAdd" style="margin:0">Agregar contacto</button></div>'
+      + '<p class="qa-hint">Cargá acá lo que falte (hotel de Hurghada, guía, seguro, embajada). Lo ven los 6. No guardes números de pasaporte ni de tarjetas.</p>';
   } else if(sheetView === 'frases'){
-    h = sheetHead('Frases en Ăˇrabe', true)
+    h = sheetHead('Frases en árabe', true)
       + FRASES.map(function(g){
           return '<div class="qa-group">' + esc(g.title) + '</div>' + g.items.map(function(p){ return '<div class="qa-phrase"><b>' + esc(p[0]) + '</b><span>' + esc(p[1]) + '</span></div>'; }).join('');
         }).join('')
-      + '<p class="qa-hint">PronunciaciĂłn aproximada (Ăˇrabe egipcio). Si no te entienden, mostrales la pantalla.</p>';
+      + '<p class="qa-hint">Pronunciación aproximada (árabe egipcio). Si no te entienden, mostrales la pantalla.</p>';
   } else if(sheetView === 'notas'){
-    h = sheetHead('Nota rĂˇpida', true)
-      + '<textarea id="qaNoteText" placeholder="Ej: taxi al aeropuerto 300 EGP Â· el guĂ­a se llamaâ€¦"></textarea>'
+    h = sheetHead('Nota rápida', true)
+      + '<textarea id="qaNoteText" placeholder="Ej: taxi al aeropuerto 300 EGP · el guía se llama…"></textarea>'
       + '<button class="qa-save" id="qaNoteSave">Guardar nota</button>'
-      + (state.notes.length ? '' : '<p class="qa-hint">TodavĂ­a no hay notas. Las ven los 6 y quedan guardadas aunque no haya seĂ±al.</p>')
+      + (state.notes.length ? '' : '<p class="qa-hint">Todavía no hay notas. Las ven los 6 y quedan guardadas aunque no haya señal.</p>')
       + state.notes.slice(0, 30).map(function(n){
-          return '<div class="qa-note"><div class="qa-note-meta"><span>' + esc(fmtNoteTime(n.t)) + (n.by ? ' Â· ' + esc(n.by) : '') + '</span><button class="qa-x" data-del-note="' + attr(n.id) + '">âś•</button></div><p>' + esc(n.text) + '</p></div>';
+          return '<div class="qa-note"><div class="qa-note-meta"><span>' + esc(fmtNoteTime(n.t)) + (n.by ? ' · ' + esc(n.by) : '') + '</span><button class="qa-x" data-del-note="' + attr(n.id) + '">✕</button></div><p>' + esc(n.text) + '</p></div>';
         }).join('');
   }
 
@@ -1187,7 +1187,7 @@ function renderSheet(){
     addContact.addEventListener('click', function(){
       const name = document.getElementById('ctName').value.trim();
       const phone = document.getElementById('ctPhone').value.trim();
-      if(!name){ alert('PonĂ© al menos un nombre.'); return; }
+      if(!name){ alert('Poné al menos un nombre.'); return; }
       state.contacts.push({id:'k' + Date.now(), name:name, phone:phone});
       document.getElementById('ctName').value = '';
       document.getElementById('ctPhone').value = '';
@@ -1200,7 +1200,7 @@ function renderSheet(){
       if(!k) return;
       const name = prompt('Nombre:', k.name);
       if(name === null) return;
-      const phone = prompt('TelĂ©fono (con +cĂłdigo de paĂ­s):', k.phone);
+      const phone = prompt('Teléfono (con +código de país):', k.phone);
       if(phone === null) return;
       k.name = name.trim() || k.name;
       k.phone = phone.trim();
@@ -1219,25 +1219,25 @@ function render(){
   const app = document.getElementById('app');
   app.innerHTML = `
     <header>
-      <div class="eyebrow"><span>Grupo Â· 6 viajeros</span><span style="display:flex;gap:8px;align-items:center;"><span id="syncStatus">${syncStatus}</span><button class="sync-btn" id="themeBtn" title="Tema">đźŚ“</button><button class="sync-btn" id="syncBtn">Sincronizar</button></span></div>
+      <div class="eyebrow"><span>Grupo · 6 viajeros</span><span style="display:flex;gap:8px;align-items:center;"><span id="syncStatus">${syncStatus}</span><button class="sync-btn" id="themeBtn" title="Tema">🌓</button><button class="sync-btn" id="syncBtn">Sincronizar</button></span></div>
       <h1>Egipto, octubre 2026</h1>
-      <p class="sub">Stuttgart â†’ El Cairo â†’ AsuĂˇn â†’ crucero â†’ Luxor â†’ Hurghada â†’ Stuttgart</p>
+      <p class="sub">Stuttgart → El Cairo → Asuán → crucero → Luxor → Hurghada → Stuttgart</p>
       <div id="countdownBox">${countdownHtml()}</div>
       <div class="prep-progress" id="prepProgressBox">${prepProgressHtml()}</div>
       <div class="people-row" id="peopleRow"></div>
-      <div class="whoami-note">${state.me ? 'EstĂˇs votando como <b>'+state.me+'</b>.' : 'ElegĂ­ quiĂ©n sos para poder votar y anotar cosas.'}</div>
+      <div class="whoami-note">${state.me ? 'Estás votando como <b>'+state.me+'</b>.' : 'Elegí quién sos para poder votar y anotar cosas.'}</div>
     </header>
     <nav class="tabs" id="tabs">
-      <button data-tab="hoy" class="active" data-icon="đźŹ ">Hoy</button>
-      <button data-tab="itinerario" data-icon="đź—“ď¸Ź">Itinerario</button>
+      <button data-tab="hoy" class="active" data-icon="🏠">Hoy</button>
+      <button data-tab="itinerario" data-icon="🗓️">Itinerario</button>
       <button data-tab="clima" class="sec">Clima</button>
       <button data-tab="mapa" class="sec">Mapa</button>
-      <button data-tab="votaciones" data-icon="đź“Ť">Lugares</button>
+      <button data-tab="votaciones" data-icon="📍">Lugares</button>
       <button data-tab="checklist" class="sec">Para reservar</button>
       <button data-tab="documentos" class="sec">Documentos</button>
       <button data-tab="tips" class="sec">Tips</button>
       <button data-tab="presupuesto" class="sec">Presupuesto</button>
-      <button class="more-btn" id="moreBtn" data-icon="â�°">MĂˇs</button>
+      <button class="more-btn" id="moreBtn" data-icon="☰">Más</button>
     </nav>
     <section id="tab-hoy" class="active"></section>
     <section id="tab-itinerario"></section>
@@ -1248,10 +1248,10 @@ function render(){
     <section id="tab-documentos"></section>
     <section id="tab-tips"></section>
     <section id="tab-presupuesto"></section>
-    <div class="footer-note">Todo lo que se vota, anota, edita o el link de foto que pegan acĂˇ lo ven los 6 (si el guardado compartido estĂˇ configurado). Los montos del presupuesto son estimaciones de referencia.</div>
+    <div class="footer-note">Todo lo que se vota, anota, edita o el link de foto que pegan acá lo ven los 6 (si el guardado compartido está configurado). Los montos del presupuesto son estimaciones de referencia.</div>
   `;
 
-  document.getElementById('syncBtn').addEventListener('click', async ()=>{ syncStatus='sincronizandoâ€¦'; updateSyncLabel(); await loadShared(); render(); });
+  document.getElementById('syncBtn').addEventListener('click', async ()=>{ syncStatus='sincronizando…'; updateSyncLabel(); await loadShared(); render(); });
 
   const peopleRow = document.getElementById('peopleRow');
   peopleRow.innerHTML = PEOPLE.map(p=>`<div class="chip ${state.me===p?'active':''}" data-person="${p}"><span class="dot">${initials(p)}</span>${p}</div>`).join('');
@@ -1296,21 +1296,21 @@ function renderHoy(){
 
   const totalBudget = BUDGET_CATEGORIES.reduce(function(s,c){ return s + Number(state.budget[c.id] !== undefined ? state.budget[c.id] : c.def); }, 0);
 
-  const heroSub = first ? ('PrĂłximo: ' + first.name) : 'Todo reservado por ahora';
+  const heroSub = first ? ('Próximo: ' + first.name) : 'Todo reservado por ahora';
 
   let statsHtml = '<div class="hero-stats">'
     + '<div class="hero-stat"><span class="hs-label">Pendientes</span><span class="hs-value">' + pending.length + '</span></div>'
     + '<div class="hero-stat"><span class="hs-label">Reservado</span><span class="hs-value">' + (state.checklist.length - pending.length) + '/' + state.checklist.length + '</span></div>'
-    + '<div class="hero-stat"><span class="hs-label">Presupuesto</span><span class="hs-value">â‚¬' + totalBudget.toLocaleString('es-AR') + '</span></div>'
+    + '<div class="hero-stat"><span class="hs-label">Presupuesto</span><span class="hs-value">€' + totalBudget.toLocaleString('es-AR') + '</span></div>'
     + '</div>';
 
-  let nextHtml = '<div class="next-card"><h4>Lo prĂłximo</h4>';
+  let nextHtml = '<div class="next-card"><h4>Lo próximo</h4>';
   if(ordered.length === 0){
-    nextHtml += '<p class="empty-note">No quedan tareas pendientes en el checklist. đźŽ‰</p>';
+    nextHtml += '<p class="empty-note">No quedan tareas pendientes en el checklist. 🎉</p>';
   } else {
     ordered.slice(0, 3).forEach(function(item){
       const dayMeta = item.day ? fmtDay(item.day) : null;
-      const dateHtml = dayMeta ? (dayMeta.num + '<br>' + dayMeta.mo) : 'â€”';
+      const dateHtml = dayMeta ? (dayMeta.num + '<br>' + dayMeta.mo) : '—';
       nextHtml += '<div class="next-row"><div class="next-date">' + dateHtml + '</div><div><strong>' + (item.name || 'Tarea') + '</strong><span>' + (item.category || '') + '</span></div></div>';
     });
   }
@@ -1322,23 +1322,23 @@ function renderHoy(){
   const cityMeta = cityId ? WEATHER_CITIES.find(function(c){ return c.id === cityId; }) : null;
   let weatherMini;
   if(cityMeta && cityData && cityData.current){
-    weatherMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Clima hoy Â· ' + cityMeta.name + '</h4></div>'
-      + '<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:24px;">' + weatherIcon(cityData.current.weather_code) + '</span><span style="font-family:\'JetBrains Mono\',monospace;font-size:20px;color:var(--nile-dark);">' + Math.round(cityData.current.temperature_2m) + 'Â°C</span></div></div>';
+    weatherMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Clima hoy · ' + cityMeta.name + '</h4></div>'
+      + '<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:24px;">' + weatherIcon(cityData.current.weather_code) + '</span><span style="font-family:\'JetBrains Mono\',monospace;font-size:20px;color:var(--nile-dark);">' + Math.round(cityData.current.temperature_2m) + '°C</span></div></div>';
   } else {
     let pre = '';
     const cd = weatherCache['cairo'];
     if(cd && cd.daily){
       const k = cd.daily.time.indexOf('2026-10-09');
       if(k >= 0){
-        pre = '<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:24px;">' + weatherIcon(cd.daily.weather_code[k]) + '</span><span class="mono" style="font-size:18px;color:var(--nile-dark);">' + Math.round(cd.daily.temperature_2m_max[k]) + 'Â° / ' + Math.round(cd.daily.temperature_2m_min[k]) + 'Â°</span></div><div class="badge-pp">Cairo Â· llegada vie 9/10</div>';
+        pre = '<div style="display:flex;align-items:center;gap:8px;"><span style="font-size:24px;">' + weatherIcon(cd.daily.weather_code[k]) + '</span><span class="mono" style="font-size:18px;color:var(--nile-dark);">' + Math.round(cd.daily.temperature_2m_max[k]) + '° / ' + Math.round(cd.daily.temperature_2m_min[k]) + '°</span></div><div class="badge-pp">Cairo · llegada vie 9/10</div>';
       }
     }
-    weatherMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Clima</h4></div>' + (pre || '<p class="empty-note" style="margin:0;">' + (tripState().mode === 'durante' ? 'Sin datos de clima guardados: se cargan solos cuando haya internet.' : 'Se activa solo del 9 al 19/10, cuando estĂ©n viajando. Mientras tanto, mirĂˇ la pestaĂ±a Clima.') + '</p>') + '</div>';
+    weatherMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Clima</h4></div>' + (pre || '<p class="empty-note" style="margin:0;">' + (tripState().mode === 'durante' ? 'Sin datos de clima guardados: se cargan solos cuando haya internet.' : 'Se activa solo del 9 al 19/10, cuando estén viajando. Mientras tanto, mirá la pestaña Clima.') + '</p>') + '</div>';
   }
-  const fxMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Cambio rĂˇpido</h4></div>'
+  const fxMini = '<div class="mini-card" style="margin:0;"><div class="mini-top"><h4>Cambio rápido</h4></div>'
     + (fxRate
-        ? ('<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><input type="number" id="hoyFxEur" value="1" style="width:56px;border:1px solid var(--line);border-radius:6px;padding:6px 7px;font-family:\'JetBrains Mono\',monospace;font-size:13px;"><span style="font-size:12px;">â‚¬ =</span><input type="number" id="hoyFxEgp" value="' + fxRate.toFixed(0) + '" style="width:66px;border:1px solid var(--line);border-radius:6px;padding:6px 7px;font-family:\'JetBrains Mono\',monospace;font-size:13px;"><span style="font-size:12px;">EGP</span></div>')
-        : '<p class="empty-note" style="margin:0;">Sin tasa guardada todavĂ­a: se carga sola cuando haya internet.</p>')
+        ? ('<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"><input type="number" id="hoyFxEur" value="1" style="width:56px;border:1px solid var(--line);border-radius:6px;padding:6px 7px;font-family:\'JetBrains Mono\',monospace;font-size:13px;"><span style="font-size:12px;">€ =</span><input type="number" id="hoyFxEgp" value="' + fxRate.toFixed(0) + '" style="width:66px;border:1px solid var(--line);border-radius:6px;padding:6px 7px;font-family:\'JetBrains Mono\',monospace;font-size:13px;"><span style="font-size:12px;">EGP</span></div>')
+        : '<p class="empty-note" style="margin:0;">Sin tasa guardada todavía: se carga sola cuando haya internet.</p>')
     + '</div>';
 
   const ts = tripState();
@@ -1347,19 +1347,19 @@ function renderHoy(){
     const sg = segmentForDate(ts.date);
     const dm = fmtDay(ts.date);
     heroHtml = '<div class="hero-card">'
-      + '<div class="hero-eyebrow">DĂ­a ' + (ts.idx+1) + ' de ' + DAY_STRINGS.length + '</div>'
-      + '<div class="hero-title">Hoy Â· ' + (sg ? sg.label : '') + '</div>'
+      + '<div class="hero-eyebrow">Día ' + (ts.idx+1) + ' de ' + DAY_STRINGS.length + '</div>'
+      + '<div class="hero-title">Hoy · ' + (sg ? sg.label : '') + '</div>'
       + '<p class="hero-sub">' + dm.wd + ' ' + dm.num + ' de ' + dm.mo + '</p>'
       + '</div>';
     const tomorrow = DAY_STRINGS[ts.idx+1];
     planHtml = '<div class="next-card"><h4>Plan de hoy</h4><p class="plan-text">' + esc(dayText(ts.date)) + '</p>' + placeChipsHtml(ts.date) + '</div>';
-    planTomorrowHtml = tomorrow ? '<div class="next-card"><h4>MaĂ±ana</h4><p class="plan-text">' + esc(dayText(tomorrow)) + '</p>' + placeChipsHtml(tomorrow) + '</div>' : '';
+    planTomorrowHtml = tomorrow ? '<div class="next-card"><h4>Mañana</h4><p class="plan-text">' + esc(dayText(tomorrow)) + '</p>' + placeChipsHtml(tomorrow) + '</div>' : '';
   } else if(ts.mode === 'despues'){
-    heroHtml = '<div class="hero-card"><div class="hero-eyebrow">Egipto Â· Octubre 2026</div><div class="hero-title">ÂˇQuĂ© viaje!</div><p class="hero-sub">Gracias por organizarlo entre todos. El itinerario y los documentos quedan acĂˇ de recuerdo.</p></div>';
+    heroHtml = '<div class="hero-card"><div class="hero-eyebrow">Egipto · Octubre 2026</div><div class="hero-title">¡Qué viaje!</div><p class="hero-sub">Gracias por organizarlo entre todos. El itinerario y los documentos quedan acá de recuerdo.</p></div>';
   } else {
     heroHtml = '<div class="hero-card">'
-      + '<div class="hero-eyebrow">Egipto Â· Octubre 2026</div>'
-      + '<div class="hero-title">Faltan ' + daysLeft + ' dĂ­as</div>'
+      + '<div class="hero-eyebrow">Egipto · Octubre 2026</div>'
+      + '<div class="hero-title">Faltan ' + daysLeft + ' días</div>'
       + '<p class="hero-sub">' + heroSub + '</p>'
       + statsHtml
       + '</div>';
@@ -1368,7 +1368,7 @@ function renderHoy(){
   const openNames = [];
   PLACES.forEach(function(seg){ seg.items.forEach(function(it){ if(it.status === 'abierto') openNames.push(it.name); }); });
   const openHtml = (ts.mode !== 'despues' && openNames.length)
-    ? '<div class="next-card"><h4>TodavĂ­a sin decidir</h4><p class="plan-text">' + esc(openNames.join(' Â· ')) + '</p><p class="badge-pp" style="margin:8px 0 0;">En la pestaĂ±a Lugares podĂ©s marcar "Me interesa".</p></div>'
+    ? '<div class="next-card"><h4>Todavía sin decidir</h4><p class="plan-text">' + esc(openNames.join(' · ')) + '</p><p class="badge-pp" style="margin:8px 0 0;">En la pestaña Lugares podés marcar "Me interesa".</p></div>'
     : '';
 
   const todayKey = todayStr();
@@ -1378,15 +1378,15 @@ function renderHoy(){
     const resv = state.checklist.filter(function(i){ return i.day === todayKey; });
     if(resv.length){
       reservasHtml = '<div class="next-card"><h4>Reservas de hoy</h4>' + resv.map(function(i){
-        return '<div class="next-row"><div class="next-date">' + (i.done ? 'âś“' : 'âŹł') + '</div><div><strong>' + esc(i.name) + '</strong><span>' + linkify(i.link || '') + '</span></div></div>';
+        return '<div class="next-row"><div class="next-date">' + (i.done ? '✓' : '⏳') + '</div><div><strong>' + esc(i.name) + '</strong><span>' + linkify(i.link || '') + '</span></div></div>';
       }).join('') + '</div>';
     }
     const todayNotes = (state.notes || []).filter(function(n){ return localDateStr(new Date(n.t)) === todayKey; });
     notasHtml = '<div class="next-card"><h4>Notas de hoy</h4>'
       + (todayNotes.length ? todayNotes.map(function(n){
-          return '<p class="plan-text" style="margin-bottom:8px;"><span class="badge-pp">' + esc(fmtNoteTime(n.t)) + (n.by ? ' Â· ' + esc(n.by) : '') + '</span><br>' + esc(n.text) + '</p>';
-        }).join('') : '<p class="empty-note">Sin notas todavĂ­a.</p>')
-      + '<button class="sync-btn" data-open-sheet="notas" style="margin-top:6px;">ďĽ‹ Nota rĂˇpida</button></div>';
+          return '<p class="plan-text" style="margin-bottom:8px;"><span class="badge-pp">' + esc(fmtNoteTime(n.t)) + (n.by ? ' · ' + esc(n.by) : '') + '</span><br>' + esc(n.text) + '</p>';
+        }).join('') : '<p class="empty-note">Sin notas todavía.</p>')
+      + '<button class="sync-btn" data-open-sheet="notas" style="margin-top:6px;">＋ Nota rápida</button></div>';
   }
 
   el.innerHTML = heroHtml
@@ -1424,8 +1424,8 @@ function renderItinerario(){
     + '</div>';
 
   const flightsHtml = `
-    <div class="flight-card"><div><div class="route">STR â†’ CAI</div><div style="font-size:12.5px;opacity:.85">Vie 09.10.2026 Â· Economy Light Â· 1 escala</div></div><div class="meta">Sale 19:45</div></div>
-    <div class="flight-card"><div><div class="route">HRG â†’ STR</div><div style="font-size:12.5px;opacity:.85">Lun 19.10.2026 Â· Economy Light Â· 1 escala</div></div><div class="meta">Sale 17:20</div></div>`;
+    <div class="flight-card"><div><div class="route">STR → CAI</div><div style="font-size:12.5px;opacity:.85">Vie 09.10.2026 · Economy Light · 1 escala</div></div><div class="meta">Sale 19:45</div></div>
+    <div class="flight-card"><div><div class="route">HRG → STR</div><div style="font-size:12.5px;opacity:.85">Lun 19.10.2026 · Economy Light · 1 escala</div></div><div class="meta">Sale 17:20</div></div>`;
 
   if(itinView === 'calendario'){
     el.innerHTML = flightsHtml + toggleHtml + buildCalendarGrid();
@@ -1433,8 +1433,8 @@ function renderItinerario(){
     const days = DAY_STRINGS.map((d,i)=>{
       const {num,wd,mo} = fmtDay(d);
       let flag = '';
-      if(i===0) flag = 'Llegada Â· vuelo STR â†’ CAI (sale 19:45 del 9/10)';
-      if(i===DAY_STRINGS.length-1) flag = 'Vuelo de vuelta Â· HRG â†’ STR, sale 17:20';
+      if(i===0) flag = 'Llegada · vuelo STR → CAI (sale 19:45 del 9/10)';
+      if(i===DAY_STRINGS.length-1) flag = 'Vuelo de vuelta · HRG → STR, sale 17:20';
       const note = (state.calendar[d] !== undefined) ? state.calendar[d] : (DEFAULT_CALENDAR[d] || '');
       const seg = segmentForDate(d);
       const barStyle = seg ? 'border-left:4px solid '+seg.color+';' : '';
@@ -1442,7 +1442,7 @@ function renderItinerario(){
           <div class="d"><span class="num">${num}</span><span class="wd">${wd} ${mo}</span></div>
           <div class="body">
             ${flag ? `<div class="flag">${flag}</div>` : ''}
-            <textarea data-date="${d}" placeholder="Plan del dĂ­a...">${note}</textarea>
+            <textarea data-date="${d}" placeholder="Plan del día...">${note}</textarea>
           </div>
         </div>`;
     }).join('');
@@ -1473,7 +1473,7 @@ function renderItinerario(){
 
 function buildCalendarGrid(){
   const legend = '<div class="cal-legend">' + SEGMENTS.map(s=>'<span><i style="background:'+s.color+'"></i>'+s.label+'</span>').join('') + '</div>';
-  const dows = ['Lun','Mar','MiĂ©','Jue','Vie','SĂˇb','Dom'];
+  const dows = ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
   const dowRow = dows.map(d=>'<div class="cal-dow">'+d+'</div>').join('');
 
   const year = 2026, month = 9; // October = index 9
@@ -1501,21 +1501,21 @@ function renderClima(){
   const el = document.getElementById('tab-clima');
   const cards = WEATHER_CITIES.map(city=>{
     const data = weatherCache[city.id];
-    let nowHtml = '<span class="badge-pp">cargandoâ€¦</span>';
+    let nowHtml = '<span class="badge-pp">cargando…</span>';
     let forecastHtml = '';
     if(data === null){
-      nowHtml = '<span class="badge-pp">no se pudo cargar el pronĂłstico ahora</span>';
+      nowHtml = '<span class="badge-pp">no se pudo cargar el pronóstico ahora</span>';
     } else if(data && data.current){
-      nowHtml = '<div class="wnow"><span class="icon">'+weatherIcon(data.current.weather_code)+'</span><span class="temp">'+Math.round(data.current.temperature_2m)+'Â°C</span><span class="badge-pp">ahora</span></div>';
+      nowHtml = '<div class="wnow"><span class="icon">'+weatherIcon(data.current.weather_code)+'</span><span class="temp">'+Math.round(data.current.temperature_2m)+'°C</span><span class="badge-pp">ahora</span></div>';
       if(data.daily){
         let idxs = [];
         data.daily.time.forEach(function(t,i){ if(t >= city.from && t <= city.to) idxs.push(i); });
-        let label = 'Tus dĂ­as acĂˇ';
-        if(!idxs.length){ idxs = data.daily.time.map(function(t,i){ return i; }).slice(0,7); label = 'PrĂłximos dĂ­as'; }
+        let label = 'Tus días acá';
+        if(!idxs.length){ idxs = data.daily.time.map(function(t,i){ return i; }).slice(0,7); label = 'Próximos días'; }
         forecastHtml = '<div class="badge-pp" style="margin:2px 0 6px;">' + label + '</div><div class="wforecast">' + idxs.map(function(i){
           const d = new Date(data.daily.time[i]+"T12:00:00");
           const wd = d.toLocaleDateString('es-AR',{weekday:'short'}).replace('.','');
-          return '<div class="wday"><div>'+wd+' '+d.getDate()+'</div><div class="wd-icon">'+weatherIcon(data.daily.weather_code[i])+'</div><div class="wd-max">'+Math.round(data.daily.temperature_2m_max[i])+'Â°</div><div>'+Math.round(data.daily.temperature_2m_min[i])+'Â°</div></div>';
+          return '<div class="wday"><div>'+wd+' '+d.getDate()+'</div><div class="wd-icon">'+weatherIcon(data.daily.weather_code[i])+'</div><div class="wd-max">'+Math.round(data.daily.temperature_2m_max[i])+'°</div><div>'+Math.round(data.daily.temperature_2m_min[i])+'°</div></div>';
         }).join('') + '</div>';
       }
     }
@@ -1523,15 +1523,15 @@ function renderClima(){
       + '<div class="whist">'+city.hist+'</div></div>';
   }).join('');
   el.innerHTML = '<div class="weather-grid">'+cards+'</div>'
-    + '<p class="badge-pp" style="margin-top:12px;">PronĂłstico en vivo (se actualiza solo) para los dĂ­as que van a estar en cada ciudad. Sin internet muestra el Ăşltimo que se pudo bajar. Los rangos de abajo de cada ciudad son promedios histĂłricos de octubre, no un pronĂłstico.</p>';
+    + '<p class="badge-pp" style="margin-top:12px;">Pronóstico en vivo (se actualiza solo) para los días que van a estar en cada ciudad. Sin internet muestra el último que se pudo bajar. Los rangos de abajo de cada ciudad son promedios históricos de octubre, no un pronóstico.</p>';
 }
 
 function renderMapa(){
   const el = document.getElementById('tab-mapa');
-  el.innerHTML = '<div class="view-toggle" id="mapToggle"><button class="active" data-view="categoria">Por categorĂ­a</button><button data-view="dia">Por dĂ­a</button></div>'
+  el.innerHTML = '<div class="view-toggle" id="mapToggle"><button class="active" data-view="categoria">Por categoría</button><button data-view="dia">Por día</button></div>'
     + '<div id="mapCategoria">'
     + '<iframe src="https://www.google.com/maps/d/embed?mid=1XryATKAlA2VuziEw-gYsULqJAhhhrRE&ehbc=2E312F" width="100%" height="480" style="border:1px solid var(--line);border-radius:10px;"></iframe>'
-    + '<p class="badge-pp" style="margin-top:8px;">Mapa de MyMaps del grupo - templos, museos, comida y mĂˇs, por categorĂ­a.</p>'
+    + '<p class="badge-pp" style="margin-top:8px;">Mapa de MyMaps del grupo - templos, museos, comida y más, por categoría.</p>'
     + '</div>'
     + '<div id="mapDia" style="display:none;">'
     + '<div id="dayMapDiv" style="height:420px;border-radius:10px;border:1px solid var(--line);overflow:hidden;"></div>'
@@ -1589,7 +1589,7 @@ function initDayMap(){
     });
   }).catch(function(){
     const container = document.getElementById('dayMapDiv');
-    if(container) container.innerHTML = '<p class="empty-note" style="padding:24px;">El mapa por dĂ­a necesita internet para cargar. ProbĂˇ de nuevo cuando tengas seĂ±al.</p>';
+    if(container) container.innerHTML = '<p class="empty-note" style="padding:24px;">El mapa por día necesita internet para cargar. Probá de nuevo cuando tengas señal.</p>';
   });
 }
 
@@ -1608,11 +1608,11 @@ function renderVotaciones(){
         const interested = Object.keys(state.interest[it.id] || {}).filter(p=>state.interest[it.id][p]);
         const mine = state.me && state.interest[it.id] && state.interest[it.id][state.me];
         interestedHtml = '<div class="votes-row" style="margin-top:8px;">'
-          + '<button class="sync-btn interest-btn" data-interest="'+it.id+'" style="'+(mine?'background:var(--nile);color:#fff;':'')+'">'+(mine?'âś“ Me interesa':'Me interesa')+'</button>'
+          + '<button class="sync-btn interest-btn" data-interest="'+it.id+'" style="'+(mine?'background:var(--nile);color:#fff;':'')+'">'+(mine?'✓ Me interesa':'Me interesa')+'</button>'
           + interested.map(p=>'<span class="vote-badge" title="'+p+'">'+initials(p)+'</span>').join('')
           + '</div>';
       } else {
-        interestedHtml = '<div class="votes-row" style="margin-top:8px;"><span class="vote-count" style="color:var(--nile-dark);font-weight:600;">âś“ en el plan</span></div>';
+        interestedHtml = '<div class="votes-row" style="margin-top:8px;"><span class="vote-count" style="color:var(--nile-dark);font-weight:600;">✓ en el plan</span></div>';
       }
       return '<div class="opt' + (isOpen?'':' picked') + (openFichas[it.id] ? ' wide' : '') + '" data-place-card="' + it.id + '">'
         + '<div class="photo ' + (photoUrl?'':'empty') + '" ' + photoStyle + ' data-photofor="' + it.id + '">' + photoInner + '<span class="addphoto" data-photofor="' + it.id + '">' + (customPhoto?'cambiar foto':'+ foto') + '</span></div>'
@@ -1629,7 +1629,7 @@ function renderVotaciones(){
 
   el.querySelectorAll('[data-interest]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
-      if(!state.me){ alert('Primero elegĂ­ quiĂ©n sos, arriba de todo.'); return; }
+      if(!state.me){ alert('Primero elegí quién sos, arriba de todo.'); return; }
       const id = btn.dataset.interest;
       if(!state.interest[id]) state.interest[id] = {};
       state.interest[id][state.me] = !state.interest[id][state.me];
@@ -1648,7 +1648,7 @@ function renderVotaciones(){
       e.stopPropagation();
       const id = el2.dataset.photofor;
       const current = state.photos[id] || '';
-      const url = prompt('PegĂˇ el link de una foto (jpg/png) - dejalo vacĂ­o para volver a la foto automĂˇtica:', current);
+      const url = prompt('Pegá el link de una foto (jpg/png) - dejalo vacío para volver a la foto automática:', current);
       if(url===null) return;
       if(url.trim()==='') delete state.photos[id]; else state.photos[id] = url.trim();
       saveShared(); renderVotaciones();
@@ -1665,7 +1665,7 @@ function dayOptionsHtml(selected){
   return out;
 }
 function payerOptionsHtml(selected){
-  let out = '<option value=""'+(selected===""?" selected":"")+'>â€”</option>';
+  let out = '<option value=""'+(selected===""?" selected":"")+'>—</option>';
   PEOPLE.forEach(p=>{ out += '<option value="'+p+'"'+(selected===p?" selected":"")+'>'+p+'</option>'; });
   return out;
 }
@@ -1680,13 +1680,13 @@ function renderChecklist(){
     const catColor = CATEGORY_COLORS[item.category] || '#8A8272';
     return '<tr data-id="'+item.id+'">'
       + '<td data-label="Reservado" style="border-left:4px solid '+catColor+';padding-left:8px;"><input type="checkbox" data-field="done" '+(item.done?'checked':'')+'></td>'
-      + '<td data-label="ĂŤtem"><input type="text" data-field="name" value="'+(item.name||'').replace(/"/g,'&quot;')+'" placeholder="QuĂ© hay que sacar" style="width:170px"></td>'
-      + '<td data-label="CategorĂ­a"><select data-field="category">'+categoryOptionsHtml(item.category)+'</select></td>'
-      + '<td data-label="DĂ­a"><select data-field="day">'+dayOptionsHtml(item.day||'')+'</select></td>'
-      + '<td data-label="Precio"><input type="number" min="0" step="10" data-field="price" value="'+(item.price||0)+'" style="width:80px"> â‚¬</td>'
-      + '<td data-label="PagĂł"><select data-field="payer">'+payerOptionsHtml(item.payer||'')+'</select></td>'
+      + '<td data-label="Ítem"><input type="text" data-field="name" value="'+(item.name||'').replace(/"/g,'&quot;')+'" placeholder="Qué hay que sacar" style="width:170px"></td>'
+      + '<td data-label="Categoría"><select data-field="category">'+categoryOptionsHtml(item.category)+'</select></td>'
+      + '<td data-label="Día"><select data-field="day">'+dayOptionsHtml(item.day||'')+'</select></td>'
+      + '<td data-label="Precio"><input type="number" min="0" step="10" data-field="price" value="'+(item.price||0)+'" style="width:80px"> €</td>'
+      + '<td data-label="Pagó"><select data-field="payer">'+payerOptionsHtml(item.payer||'')+'</select></td>'
       + '<td data-label="Link / hotel"><input type="text" data-field="link" value="'+(item.link||'').replace(/"/g,'&quot;')+'" placeholder="hotel / link" style="width:150px"></td>'
-      + '<td data-label=""><button class="sync-btn" data-del="'+item.id+'" title="Borrar">âś•</button></td>'
+      + '<td data-label=""><button class="sync-btn" data-del="'+item.id+'" title="Borrar">✕</button></td>'
       + '</tr>';
   }).join('');
 
@@ -1694,13 +1694,13 @@ function renderChecklist(){
   const totalPaid = state.checklist.filter(i=>i.done).reduce((s,i)=>s+Number(i.price||0),0);
   const totalPending = state.checklist.filter(i=>!i.done).reduce((s,i)=>s+Number(i.price||0),0);
 
-  el.innerHTML = '<table class="budget"><thead><tr><th></th><th>ĂŤtem</th><th>CategorĂ­a</th><th>DĂ­a</th><th>Precio</th><th>PagĂł</th><th>Hotel / link</th><th></th></tr></thead>'
+  el.innerHTML = '<table class="budget"><thead><tr><th></th><th>Ítem</th><th>Categoría</th><th>Día</th><th>Precio</th><th>Pagó</th><th>Hotel / link</th><th></th></tr></thead>'
     + '<tbody id="checklistBody">' + rows + '</tbody></table>'
-    + '<button class="sync-btn" id="addChecklistRow" style="margin-top:12px;">+ agregar Ă­tem</button>'
+    + '<button class="sync-btn" id="addChecklistRow" style="margin-top:12px;">+ agregar ítem</button>'
     + '<div class="budget-summary">'
     + '<div class="metric"><div class="label">Reservado</div><div class="value">'+doneCount+' / '+state.checklist.length+'</div></div>'
-    + '<div class="metric"><div class="label">Ya pagado</div><div class="value">â‚¬'+totalPaid.toLocaleString('es-AR')+'</div></div>'
-    + '<div class="metric"><div class="label">Pendiente (estimado)</div><div class="value">â‚¬'+totalPending.toLocaleString('es-AR')+'</div></div>'
+    + '<div class="metric"><div class="label">Ya pagado</div><div class="value">€'+totalPaid.toLocaleString('es-AR')+'</div></div>'
+    + '<div class="metric"><div class="label">Pendiente (estimado)</div><div class="value">€'+totalPending.toLocaleString('es-AR')+'</div></div>'
     + '</div>';
 
   function findItem(id){ return state.checklist.find(i=>i.id===id); }
@@ -1759,33 +1759,33 @@ if(window.matchMedia){
 }
 
 const TIPS = [
-  {title:"Antes de salir (Ăşltimos dĂ­as)", items:[
-    {name:"Visa", text:"Depende del pasaporte de cada uno. Opciones: e-visa online en visa2egypt.gov.eg (~30 USD, tarda unos dĂ­as en aprobarse; tenela descargada o impresa) o visa al llegar al aeropuerto (~30 USD en efectivo; subiĂł en marzo 2026). El pasaporte tiene que tener al menos 6 meses de validez. ConfirmĂˇ tu caso en el portal oficial."},
-    {name:"Llegada de madrugada al hotel", text:"El check-in del hotel de Giza va de las 14:00 a las 00:00 del viernes. Si el vuelo aterriza mĂˇs tarde, avisale al hotel (+20 100 344 4483) para que los esperen, y resolvĂ© el traslado desde el aeropuerto (Uber/Careem o un traslado reservado)."},
-    {name:"Efectivo", text:"LlevĂˇ USD o EUR en billetes chicos y en buen estado: sirven para la visa, las propinas y las entradas del Ăşltimo dĂ­a del crucero (~80-100 USD no incluidas). CambiĂˇ a libras egipcias (EGP) allĂˇ y tenĂ© siempre billetes sueltos de 10/20/50 EGP."},
-    {name:"Internet y mapas", text:"BajĂˇ los mapas offline de Cairo, Luxor, AsuĂˇn y Hurghada en Google Maps. Esta app queda disponible sin seĂ±al si la abrĂ­s una vez con internet (agregala a la pantalla de inicio). Una eSIM prepaga se instala antes de viajar y evita buscar SIM en el aeropuerto a esa hora."},
+  {title:"Antes de salir (últimos días)", items:[
+    {name:"Visa", text:"Depende del pasaporte de cada uno. Opciones: e-visa online en visa2egypt.gov.eg (~30 USD, tarda unos días en aprobarse; tenela descargada o impresa) o visa al llegar al aeropuerto (~30 USD en efectivo; subió en marzo 2026). El pasaporte tiene que tener al menos 6 meses de validez. Confirmá tu caso en el portal oficial."},
+    {name:"Llegada de madrugada al hotel", text:"El check-in del hotel de Giza va de las 14:00 a las 00:00 del viernes. Si el vuelo aterriza más tarde, avisale al hotel (+20 100 344 4483) para que los esperen, y resolvé el traslado desde el aeropuerto (Uber/Careem o un traslado reservado)."},
+    {name:"Efectivo", text:"Llevá USD o EUR en billetes chicos y en buen estado: sirven para la visa, las propinas y las entradas del último día del crucero (~80-100 USD no incluidas). Cambiá a libras egipcias (EGP) allá y tené siempre billetes sueltos de 10/20/50 EGP."},
+    {name:"Internet y mapas", text:"Bajá los mapas offline de Cairo, Luxor, Asuán y Hurghada en Google Maps. Esta app queda disponible sin señal si la abrís una vez con internet (agregala a la pantalla de inicio). Una eSIM prepaga se instala antes de viajar y evita buscar SIM en el aeropuerto a esa hora."},
     {name:"Enchufes", text:"Egipto usa enchufes tipo C/F de 220 V, los mismos que en Alemania: no hace falta adaptador."},
-    {name:"Papeles a mano", text:"Pasaporte, e-visa (si la sacan), reserva del hotel, ticket del crucero (pestaĂ±a Documentos) y seguro de viaje. Una foto de cada uno en el celular, por las dudas."}
+    {name:"Papeles a mano", text:"Pasaporte, e-visa (si la sacan), reserva del hotel, ticket del crucero (pestaña Documentos) y seguro de viaje. Una foto de cada uno en el celular, por las dudas."}
   ]},
   {title:"Moverse y costumbres", items:[
-    {name:"Uber y Careem", text:"En Cairo y Giza funcionan muy bien y son baratos. Para los 6, pedĂ­ dos autos o una van (opciĂłn XL). En Luxor y AsuĂˇn no hay Uber: taxi acordando el precio antes de subir, o el chofer del tour. En Hurghada andan bien para moverse por la ciudad, pero para el aeropuerto reservĂˇ un traslado fijo."},
-    {name:"Baksheesh (propinas)", text:"Es parte de la costumbre, no un extra: guardianes de templos, botones, baĂ±os. LlevĂˇ billetes chicos sueltos (10, 20 y 50 EGP) para no sacar la billetera. En el crucero la propina sugerida para la tripulaciĂłn es ~10 USD por persona por noche."},
-    {name:"Templos y mezquitas", text:"Hombros y rodillas cubiertos (un paĂ±uelo liviano alcanza). En las mezquitas se entra sin zapatos: medias limpias."},
-    {name:"Khan el-Khalili", text:"Si no querĂ©s comprar y los vendedores insisten: 'La, shukran' (no, gracias) y seguir caminando con paso firme. Para un cafĂ© histĂłrico menos masivo dentro del mercado: CafĂ© El Fishawy, abierto desde el siglo XVIII."},
-    {name:"Sol y agua", text:"Protector, gorro y lentes. TomĂˇ solo agua embotellada sellada. La salida a Abu Simbel es de madrugada: llevĂˇ una capa fina."},
-    {name:"Frases Ăştiles", text:"Shukran = gracias Â· La, shukran = no, gracias Â· Yalla = vamos Â· Mashi = dale / ok."}
+    {name:"Uber y Careem", text:"En Cairo y Giza funcionan muy bien y son baratos. Para los 6, pedí dos autos o una van (opción XL). En Luxor y Asuán no hay Uber: taxi acordando el precio antes de subir, o el chofer del tour. En Hurghada andan bien para moverse por la ciudad, pero para el aeropuerto reservá un traslado fijo."},
+    {name:"Baksheesh (propinas)", text:"Es parte de la costumbre, no un extra: guardianes de templos, botones, baños. Llevá billetes chicos sueltos (10, 20 y 50 EGP) para no sacar la billetera. En el crucero la propina sugerida para la tripulación es ~10 USD por persona por noche."},
+    {name:"Templos y mezquitas", text:"Hombros y rodillas cubiertos (un pañuelo liviano alcanza). En las mezquitas se entra sin zapatos: medias limpias."},
+    {name:"Khan el-Khalili", text:"Si no querés comprar y los vendedores insisten: 'La, shukran' (no, gracias) y seguir caminando con paso firme. Para un café histórico menos masivo dentro del mercado: Café El Fishawy, abierto desde el siglo XVIII."},
+    {name:"Sol y agua", text:"Protector, gorro y lentes. Tomá solo agua embotellada sellada. La salida a Abu Simbel es de madrugada: llevá una capa fina."},
+    {name:"Frases útiles", text:"Shukran = gracias · La, shukran = no, gracias · Yalla = vamos · Mashi = dale / ok."}
   ]},
   {title:"Cairo: lugares poco comunes (si sobra una tarde)", items:[
-    {name:"NilĂłmetro de la isla de Rhoda", text:"Pozo de piedra del siglo IX con una columna octogonal sumergida que se usaba para medir las crecidas del Nilo. Se baja por una escalera de caracol hasta la base; muy tranquilo."},
-    {name:"Casa-Museo Gayer-Anderson", text:"Al lado de la mezquita de Ibn Tulun: dos casas tradicionales unidas por un puente, con patios, celosĂ­as de madera (mashrabiya) y una azotea muy tranquila en medio de la ciudad."},
-    {name:"Palacio Manial", text:"En la isla de Manial: arquitectura otomana, persa, andaluza y rococĂł rodeada de jardines. Casi sin turistas."},
-    {name:"MĂşsica Zar en el centro cultural Makan", text:"Alternativa autĂ©ntica a la cena con danza del vientre: espectĂˇculos de mĂşsica Zar y folclore egipcio tradicional."},
-    {name:"Ojo con las distancias", text:"Estos cuatro estĂˇn del otro lado de la ciudad respecto del hotel de Giza (calculĂˇ unos 40 minutos de auto cada trayecto): sirven para una tarde libre, no para encajar entre otras visitas."}
+    {name:"Nilómetro de la isla de Rhoda", text:"Pozo de piedra del siglo IX con una columna octogonal sumergida que se usaba para medir las crecidas del Nilo. Se baja por una escalera de caracol hasta la base; muy tranquilo."},
+    {name:"Casa-Museo Gayer-Anderson", text:"Al lado de la mezquita de Ibn Tulun: dos casas tradicionales unidas por un puente, con patios, celosías de madera (mashrabiya) y una azotea muy tranquila en medio de la ciudad."},
+    {name:"Palacio Manial", text:"En la isla de Manial: arquitectura otomana, persa, andaluza y rococó rodeada de jardines. Casi sin turistas."},
+    {name:"Música Zar en el centro cultural Makan", text:"Alternativa auténtica a la cena con danza del vientre: espectáculos de música Zar y folclore egipcio tradicional."},
+    {name:"Ojo con las distancias", text:"Estos cuatro están del otro lado de la ciudad respecto del hotel de Giza (calculá unos 40 minutos de auto cada trayecto): sirven para una tarde libre, no para encajar entre otras visitas."}
   ]},
   {title:"Comida callejera imperdible", items:[
     {name:"Ta'ameya (falafel egipcio)", text:"Se hace con habas y hierbas frescas, no con garbanzos: crujiente por fuera y verde por dentro. Probalo en pan pita caliente con tahina."},
-    {name:"Koshary", text:"El plato nacional: arroz, fideos, lentejas y garbanzos con salsa de tomate picante y cebolla frita. Koshary Abou Tarek, en el centro de Cairo, es una instituciĂłn."},
-    {name:"Feteer meshaltet", text:"Hojaldre egipcio, salado (queso, carne, verduras) o dulce (miel, crema, frutos secos). El almuerzo del dĂ­a 2 en Andrea El Mariouteya es justamente de fateer."}
+    {name:"Koshary", text:"El plato nacional: arroz, fideos, lentejas y garbanzos con salsa de tomate picante y cebolla frita. Koshary Abou Tarek, en el centro de Cairo, es una institución."},
+    {name:"Feteer meshaltet", text:"Hojaldre egipcio, salado (queso, carne, verduras) o dulce (miel, crema, frutos secos). El almuerzo del día 2 en Andrea El Mariouteya es justamente de fateer."}
   ]}
 ];
 
@@ -1811,7 +1811,7 @@ function renderDocumentos(){
       + '<div class="doc-info"><strong>' + (doc.name || 'Documento') + '</strong><span>' + (doc.note || '') + '</span></div></div>'
       + '<div class="doc-actions">'
       + openBtn
-      + '<button class="sync-btn" data-del-doc="' + doc.id + '" title="Borrar">âś•</button>'
+      + '<button class="sync-btn" data-del-doc="' + doc.id + '" title="Borrar">✕</button>'
       + '</div></div>';
   }).join('');
 
@@ -1821,13 +1821,13 @@ function renderDocumentos(){
     + '<input type="text" id="docLink" placeholder="Link de Google Drive / Dropbox">'
     + '<button class="sync-btn" id="addDocBtn">+ agregar</button>'
     + '</div>'
-    + '<div class="doc-list">' + (cards || '<p class="empty-note">TodavĂ­a no hay documentos cargados. Subilo a Drive/Dropbox, compartilo como "cualquiera con el link" y pegĂˇ el link acĂˇ arriba.</p>') + '</div>';
+    + '<div class="doc-list">' + (cards || '<p class="empty-note">Todavía no hay documentos cargados. Subilo a Drive/Dropbox, compartilo como "cualquiera con el link" y pegá el link acá arriba.</p>') + '</div>';
 
   document.getElementById('addDocBtn').addEventListener('click', function(){
     const name = document.getElementById('docName').value.trim();
     const note = document.getElementById('docNote').value.trim();
     const link = document.getElementById('docLink').value.trim();
-    if(!name || !link){ alert('PonĂ© al menos un nombre y un link.'); return; }
+    if(!name || !link){ alert('Poné al menos un nombre y un link.'); return; }
     state.docs.push({ id:'d'+Date.now(), name:name, note:note, link:link });
     saveShared();
     renderDocumentos();
@@ -1849,28 +1849,28 @@ function renderPresupuesto(){
   const el = document.getElementById('tab-presupuesto');
   const rows = BUDGET_CATEGORIES.map(c=>{
     const val = state.budget[c.id] ?? c.def;
-    return `<tr><td data-label="Rubro">${c.name}<div class="badge-pp">${c.note}</div></td><td data-label="" class="hide-mobile"><span class="badge-pp">por persona</span></td><td data-label="Estimado"><input type="number" min="0" step="10" data-cat="${c.id}" value="${val}"> â‚¬</td></tr>`;
+    return `<tr><td data-label="Rubro">${c.name}<div class="badge-pp">${c.note}</div></td><td data-label="" class="hide-mobile"><span class="badge-pp">por persona</span></td><td data-label="Estimado"><input type="number" min="0" step="10" data-cat="${c.id}" value="${val}"> €</td></tr>`;
   }).join('');
   const totalPP = BUDGET_CATEGORIES.reduce((s,c)=> s + Number(state.budget[c.id] ?? c.def), 0);
   const totalGroup = totalPP * PEOPLE.length;
   const fxHtml = fxRate
-    ? `<div class="fx-box"><h4>Conversor rĂˇpido</h4>
+    ? `<div class="fx-box"><h4>Conversor rápido</h4>
         <div class="fx-row">
           <input type="number" id="fxEur" placeholder="EUR" value="1">
-          <span>â‚¬ =</span>
+          <span>€ =</span>
           <input type="number" id="fxEgp" placeholder="EGP" value="${(fxRate).toFixed(0)}">
           <span>EGP</span>
         </div>
-        <div class="fx-rate">1 EUR â‰� ${fxRate.toFixed(2)} EGP (tasa oficial en vivo - las casas de cambio suelen dar un poco menos)</div>
+        <div class="fx-rate">1 EUR ≈ ${fxRate.toFixed(2)} EGP (tasa oficial en vivo - las casas de cambio suelen dar un poco menos)</div>
       </div>`
-    : `<div class="fx-box"><h4>Conversor rĂˇpido</h4><div class="fx-rate">No se pudo cargar la tasa en vivo ahora mismo.</div></div>`;
+    : `<div class="fx-box"><h4>Conversor rápido</h4><div class="fx-rate">No se pudo cargar la tasa en vivo ahora mismo.</div></div>`;
 
   el.innerHTML = fxHtml + `
     <table class="budget"><thead><tr><th>Rubro</th><th></th><th>Estimado</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="sunk-note">Los vuelos STRâ†”CAI/HRG ya estĂˇn reservados, no estĂˇn incluidos en este cĂˇlculo.</div>
+    <div class="sunk-note">Los vuelos STR↔CAI/HRG ya están reservados, no están incluidos en este cálculo.</div>
     <div class="budget-summary">
-      <div class="metric"><div class="label">Por persona</div><div class="value">â‚¬${totalPP.toLocaleString('es-AR')}</div></div>
-      <div class="metric"><div class="label">Grupo (6 personas)</div><div class="value">â‚¬${totalGroup.toLocaleString('es-AR')}</div></div>
+      <div class="metric"><div class="label">Por persona</div><div class="value">€${totalPP.toLocaleString('es-AR')}</div></div>
+      <div class="metric"><div class="label">Grupo (6 personas)</div><div class="value">€${totalGroup.toLocaleString('es-AR')}</div></div>
     </div>`;
   el.querySelectorAll('input[type=number]').forEach(inp=>{
     if(inp.id==='fxEur' || inp.id==='fxEgp') return;
@@ -1896,3 +1896,4 @@ setInterval(()=>{ const box = document.getElementById('countdownBox'); if(box) b
 </script>
 </body>
 </html>
+
