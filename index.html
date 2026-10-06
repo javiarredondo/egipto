@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>(function(){try{var t=localStorage.getItem("nile-theme")||"auto";var d=t==="dark"||(t==="auto"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.setAttribute("data-theme",d?"dark":"light");}catch(e){}})();</script>
 <title>Egipto · Octubre 2026</title>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="/apple-touch-icon.png">
@@ -243,11 +244,117 @@
     table.budget td.hide-mobile{display:none;}
     table.budget td input[type=text], table.budget td input[type=number], table.budget td select{width:auto !important;flex:1;min-width:0;max-width:60%;}
   }
+
+  /* ===== mini-cards de Hoy (les faltaba el estilo) ===== */
+  .mini-card{background:var(--papyrus-card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 3px 12px rgba(18,59,64,.05);}
+  .mini-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .mini-top h4{margin:0;font-family:'Cinzel',serif;font-size:13px;color:var(--nile-dark);}
+
+  /* ===== navegacion: 4 principales + "Mas" en el celular ===== */
+  nav.tabs button.more-btn{display:none;}
+  .nav-hint{display:none !important;}
+
+  /* ===== acceso rapido ===== */
+  .fab{position:fixed;right:20px;bottom:24px;width:58px;height:58px;border-radius:50%;border:none;background:var(--gold);color:#fff;font-size:26px;line-height:1;cursor:pointer;z-index:40;box-shadow:0 6px 18px rgba(0,0,0,.28);transition:transform .12s ease;}
+  .fab:active{transform:scale(.92);}
+  body.sheet-open .fab{display:none;}
+  .sheet-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;}
+  .sheet-backdrop.open{display:block;}
+  .sheet{position:fixed;left:0;right:0;bottom:0;margin:0 auto;max-width:560px;max-height:86vh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--papyrus-card);border-radius:22px 22px 0 0;z-index:60;padding:16px 16px calc(22px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .22s ease;box-shadow:0 -10px 30px rgba(0,0,0,.25);}
+  .sheet.open{transform:translateY(0);}
+  .sheet{visibility:hidden;transition:transform .22s ease, visibility 0s linear .22s;}
+  .sheet.open{visibility:visible;transition:transform .22s ease, visibility 0s;}
+  .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px;}
+  .sheet-title{font-family:'Cinzel',serif;font-size:17px;color:var(--nile-dark);text-align:center;flex:1;}
+  .sheet-back,.sheet-x{background:none;border:1px solid var(--line);color:var(--nile);border-radius:10px;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:13px;cursor:pointer;min-width:44px;min-height:44px;}
+  .qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .qa-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:104px;border-radius:16px;border:1px solid var(--line);background:var(--papyrus);color:var(--ink);font-family:'Cinzel',serif;font-size:14px;cursor:pointer;transition:transform .1s ease;}
+  .qa-btn:active{transform:scale(.96);}
+  .qa-ico{font-size:30px;line-height:1;}
+  .qa-row2{display:flex;gap:10px;margin-top:14px;}
+  .qa-wide{flex:1;min-height:52px;border-radius:14px;border:1px solid var(--line);background:var(--papyrus);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:12.5px;cursor:pointer;}
+  .qa-call{display:flex;align-items:center;gap:12px;min-height:60px;padding:10px 14px;margin-bottom:10px;border-radius:14px;background:var(--nile);color:#fff;text-decoration:none;}
+  .qa-call .qa-ico2{font-size:24px;}
+  .qa-call-main{flex:1;display:flex;flex-direction:column;}
+  .qa-call-main b{font-size:15px;}
+  .qa-call-main small{font-size:11px;opacity:.85;}
+  .qa-num{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:600;}
+  .qa-group{margin:16px 0 6px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--nile-dark);}
+  .qa-phrase{display:flex;flex-direction:column;gap:2px;padding:10px 12px;margin-bottom:6px;border-radius:12px;background:var(--papyrus);border:1px solid var(--line);}
+  .qa-phrase b{font-size:15px;color:var(--ink);}
+  .qa-phrase span{font-size:12.5px;color:var(--ink-soft);}
+  .qa-doc,.qa-contact,.qa-note{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;margin-bottom:8px;border-radius:12px;background:var(--papyrus);border:1px solid var(--line);}
+  .qa-note{flex-direction:column;align-items:stretch;}
+  .qa-note-meta{display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-soft);}
+  .qa-note p{margin:6px 0 0;font-size:14px;color:var(--ink);white-space:pre-wrap;}
+  .qa-info b{display:block;font-size:14px;color:var(--ink);}
+  .qa-info span{font-size:12px;color:var(--ink-soft);}
+  .qa-info a{color:var(--nile);font-weight:600;}
+  .qa-btn-sm{background:var(--nile);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;min-height:44px;text-decoration:none;display:inline-flex;align-items:center;}
+  .qa-x{background:none;border:none;color:var(--ink-soft);font-size:16px;cursor:pointer;padding:8px;min-width:40px;min-height:40px;}
+  #qaNoteText,.qa-input{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px;font-family:'Lora',serif;font-size:16px;background:var(--papyrus);color:var(--ink);}
+  #qaNoteText{min-height:96px;resize:vertical;}
+  .qa-save{width:100%;min-height:52px;margin:10px 0 16px;border:none;border-radius:14px;background:var(--nile);color:#fff;font-family:'Cinzel',serif;font-size:15px;cursor:pointer;}
+  .qa-form{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
+  .qa-hint{font-size:12px;color:var(--ink-soft);margin:6px 0 12px;line-height:1.5;}
+
+  @media (max-width: 640px){
+    nav.tabs{justify-content:space-around;overflow-x:visible;gap:4px;padding:6px 6px calc(6px + env(safe-area-inset-bottom));-webkit-mask-image:none;mask-image:none;}
+    nav.tabs button{flex:1 1 0;min-width:0;padding:8px 4px;font-size:11.5px;text-align:center;line-height:1.2;}
+    nav.tabs button[data-icon]::before{content:attr(data-icon);display:block;font-size:20px;line-height:1.1;margin-bottom:2px;}
+    nav.tabs button.sec{display:none;}
+    nav.tabs button.more-btn{display:block;}
+    .fab{bottom:calc(86px + env(safe-area-inset-bottom));right:16px;}
+  }
+
+  /* ===== modo oscuro (negro puro: ahorra bateria en OLED) ===== */
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --papyrus:#000000; --papyrus-card:#0e1618; --ink:#ECE6D6; --ink-soft:#A9B4AF;
+    --nile:#23808C; --nile-dark:#CFE9EB; --nile-light:#10343A;
+    --gold:#D2A441; --gold-light:#F1E1B8; --clay:#E08A5E; --line:#25373B;
+  }
+  :root[data-theme="dark"] body{background-image:none;}
+  :root[data-theme="dark"] .hero-card{background:linear-gradient(155deg,#0f3a40 0%,#06181b 100%);}
+  :root[data-theme="dark"] .flight-card,
+  :root[data-theme="dark"] .metric,
+  :root[data-theme="dark"] .fx-box{background:#0d2b30;}
+  :root[data-theme="dark"] input,
+  :root[data-theme="dark"] textarea,
+  :root[data-theme="dark"] select{background:#070d0f;color:var(--ink);border-color:var(--line);}
+  :root[data-theme="dark"] .opt,
+  :root[data-theme="dark"] .doc-card,
+  :root[data-theme="dark"] .wday{background:#0a1214;}
+  :root[data-theme="dark"] .opt.picked{background:var(--nile-light);}
+  :root[data-theme="dark"] .poll,
+  :root[data-theme="dark"] .wcard,
+  :root[data-theme="dark"] .next-card,
+  :root[data-theme="dark"] .doc-card{border-color:var(--line);}
+  :root[data-theme="dark"] .ficha-warn{background:#2e2410;color:var(--ink);}
+  :root[data-theme="dark"] table.budget tbody tr:hover{background:rgba(255,255,255,.05);}
+  :root[data-theme="dark"] table.budget td{border-bottom-color:var(--line);}
+  :root[data-theme="dark"] .chip.active .dot{color:#0b1d20;}
+  :root[data-theme="dark"] .img-modal-close{color:#12363b;}
+  :root[data-theme="dark"] .sync-btn,
+  :root[data-theme="dark"] .ficha summary,
+  :root[data-theme="dark"] .sheet-back,
+  :root[data-theme="dark"] .sheet-x,
+  :root[data-theme="dark"] .qa-info a,
+  :root[data-theme="dark"] header .eyebrow{color:#6CC3CE;border-color:#2c6a73;}
+  :root[data-theme="dark"] .qa-call,
+  :root[data-theme="dark"] .qa-btn-sm,
+  :root[data-theme="dark"] .qa-save{background:#12525b;}
+  @media (max-width: 640px){
+    :root[data-theme="dark"] nav.tabs button.active{background:rgba(108,195,206,.18);}
+  }
 </style>
 </head>
 <body>
 <div class="wrap" id="app"><div class="loading">Cargando el mapa del Nilo…</div></div>
 <div class="img-modal" id="imgModal"><button class="img-modal-close" id="imgModalClose">✕</button><img id="imgModalImg" src="" alt=""></div>
+<button class="fab" id="fab" aria-label="Acceso rápido">⚡</button>
+<div class="sheet-backdrop" id="sheetBackdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
 
 <script>
 /* ====== GUARDADO COMPARTIDO ======
@@ -542,11 +649,7 @@ function fichaHtml(it){
 }
 function openPlaceFicha(id){
   openFichas[id] = true;
-  document.querySelectorAll('nav.tabs button').forEach(function(b){ b.classList.remove('active'); });
-  document.querySelectorAll('section').forEach(function(s){ s.classList.remove('active'); });
-  const btn = document.querySelector('nav.tabs button[data-tab="votaciones"]');
-  if(btn) btn.classList.add('active');
-  document.getElementById('tab-votaciones').classList.add('active');
+  switchTab('votaciones');
   renderVotaciones();
   const card = document.querySelector('[data-place-card="' + id + '"]');
   if(card && card.scrollIntoView) card.scrollIntoView({behavior:'smooth', block:'start'});
@@ -621,7 +724,7 @@ const MAP_POINTS = [
   {name:"Hurghada", lat:27.2579, lon:33.8116, segment:"Hurghada"}
 ];
 
-let state = { me:null, interest:{}, calendar:{}, budget:{}, photos:{}, checklist:[], docs:[] };
+let state = { me:null, interest:{}, calendar:{}, budget:{}, photos:{}, checklist:[], docs:[], notes:[], contacts:null };
 let itinView = "lista";
 let wikiCache = {};
 let weatherCache = {};
@@ -639,7 +742,7 @@ function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace
 const STATE_CACHE_KEY = 'nile-state-cache-v1';
 const AUX_CACHE_KEY = 'nile-aux-cache-v1';
 const DIRTY_KEY = 'nile-dirty-v1';
-function stateSnapshot(){ return {interest:state.interest, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist, docs:state.docs}; }
+function stateSnapshot(){ return {interest:state.interest, calendar:state.calendar, budget:state.budget, photos:state.photos, checklist:state.checklist, docs:state.docs, notes:state.notes, contacts:state.contacts}; }
 function readStateCache(){ try{ return JSON.parse(localStorage.getItem(STATE_CACHE_KEY) || 'null'); }catch(e){ return null; } }
 function writeStateCache(){ try{ localStorage.setItem(STATE_CACHE_KEY, JSON.stringify(stateSnapshot())); }catch(e){} }
 function isDirty(){ try{ return localStorage.getItem(DIRTY_KEY) === '1'; }catch(e){ return false; } }
@@ -650,6 +753,8 @@ function applyRecord(rec){
   state.photos = rec.photos || {};
   state.checklist = (rec.checklist && rec.checklist.length) ? rec.checklist : DEFAULT_CHECKLIST.map(function(x){ return Object.assign({}, x); });
   state.docs = rec.docs || [];
+  state.notes = Array.isArray(rec.notes) ? rec.notes : [];
+  state.contacts = Array.isArray(rec.contacts) ? rec.contacts : null;
 }
 function readAuxCache(){
   try{
@@ -804,6 +909,8 @@ async function prefetchAllWeather(){
 function ensureDefaults(){
   BUDGET_CATEGORIES.forEach(function(cat){ if(state.budget[cat.id] === undefined) state.budget[cat.id] = cat.def; });
   if(!state.checklist || !state.checklist.length) state.checklist = DEFAULT_CHECKLIST.map(function(x){ return Object.assign({}, x); });
+  if(!Array.isArray(state.notes)) state.notes = [];
+  if(!Array.isArray(state.contacts)) state.contacts = DEFAULT_CONTACTS.map(function(x){ return Object.assign({}, x); });
 }
 
 async function init(){
@@ -828,11 +935,276 @@ async function init(){
   prefetchAllThumbs().then(function(){ writeAuxCache(); renderVotaciones(); });
 }
 
+// ================= MODO VIAJE =================
+const KEY_EVENTS = [
+  {date:"2026-10-09", time:"desde las 14:00 hasta las 00:00", label:"Check-in hotel en Giza (Pyramids Holiday Escape)", note:"si llegan después de las 00:00, avisar: +20 100 344 4483"},
+  {date:"2026-10-09", time:"19:45", label:"Vuelo Stuttgart → El Cairo", note:"1 escala"},
+  {date:"2026-10-11", time:"09:00 (ideal)", label:"Llegar al Gran Museo Egipcio", note:"turno online obligatorio en visit-gem.com"},
+  {date:"2026-10-12", time:"10:00 a 12:00", label:"Check-out del hotel de Giza", note:"coordinar con el chofer que las valijas viajen con ustedes"},
+  {date:"2026-10-12", time:"17:00", label:"Vuelo interno El Cairo → Asuán", note:"llegar al aeropuerto con buen margen"},
+  {date:"2026-10-13", time:"madrugada (3-4 am)", label:"Salida a Abu Simbel", note:"unas 3 h de viaje por trayecto"},
+  {date:"2026-10-15", time:"~5:00", label:"Globo aerostático: recogida", note:"si se cancela por clima, reembolsan 25 USD por persona"},
+  {date:"2026-10-15", time:"a definir", label:"Fin del crucero y traslado a Hurghada (~4 h)", note:"confirmar que el traslado esté reservado"},
+  {date:"2026-10-19", time:"17:20", label:"Vuelo Hurghada → Stuttgart", note:"1 escala"}
+];
+const EMERGENCY_NUMBERS = [
+  {ico:"🚓", name:"Policía", num:"122"},
+  {ico:"🛂", name:"Policía turística", num:"126"},
+  {ico:"🚑", name:"Ambulancia", num:"123"},
+  {ico:"🚒", name:"Bomberos", num:"180"},
+  {ico:"🆘", name:"Emergencias (unificado)", num:"112", note:"puede no funcionar en todas las zonas: probá primero los de arriba"}
+];
+const DEFAULT_CONTACTS = [
+  {id:"k1", name:"Hotel Pyramids Holiday Escape (Giza)", phone:"+20 100 344 4483"},
+  {id:"k2", name:"Agencia / guía del crucero", phone:""},
+  {id:"k3", name:"Hotel en Hurghada", phone:""},
+  {id:"k4", name:"Asistencia del seguro médico", phone:""},
+  {id:"k5", name:"Embajada / consulado", phone:""}
+];
+const FRASES = [
+  {title:"Lo básico", items:[
+    ["Ahlan", "Hola / bienvenido"],
+    ["Sabah el-kheir", "Buen día"],
+    ["Masa' el-kheir", "Buenas tardes / noches"],
+    ["Shukran", "Gracias"],
+    ["Afwan", "De nada"],
+    ["Aywa / La", "Sí / No"],
+    ["Min fadlak (a un hombre) · min fadlik (a una mujer)", "Por favor"],
+    ["Law samaht", "Disculpe / permiso"],
+    ["Ma'a es-salama", "Chau"]
+  ]},
+  {title:"Comprar y regatear", items:[
+    ["Bikam da?", "¿Cuánto cuesta esto?"],
+    ["Ghali awi", "Muy caro"],
+    ["La, shukran", "No, gracias"],
+    ["Mish ayez (hombre) · mish ayza (mujer)", "No quiero"],
+    ["Shwaya shwaya", "Poco a poco / más despacio"],
+    ["Khalas", "Listo / basta"],
+    ["El-hesab, min fadlak", "La cuenta, por favor"]
+  ]},
+  {title:"Moverse y comer", items:[
+    ["Fein el-hammam?", "¿Dónde está el baño?"],
+    ["Mayya", "Agua"],
+    ["Yalla", "Vamos / dale"],
+    ["Mashi", "Está bien / ok"],
+    ["Ana mish fahem (hombre) · mish fahma (mujer)", "No entiendo"],
+    ["Betetkallem ingleezi?", "¿Habla inglés?"],
+    ["Lazeez", "Delicioso"]
+  ]},
+  {title:"Números", items:[
+    ["1 wahed · 2 etneen · 3 talata · 4 arba'a · 5 khamsa", "del uno al cinco"],
+    ["6 setta · 7 sab'a · 8 tamanya · 9 tes'a · 10 'ashara", "del seis al diez"]
+  ]}
+];
+
+function attr(s){ return esc(s).replace(/"/g, '&quot;'); }
+function localDateStr(d){ return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'); }
+function fmtNoteTime(iso){
+  const d = new Date(iso);
+  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0') + ' ' + String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+}
+function telHref(p){ return 'tel:' + String(p || '').replace(/[^\d+]/g, ''); }
+function linkify(t){
+  return esc(t || '').replace(/(\+\d[\d ]{6,}\d)/g, function(m){ return '<a href="tel:' + m.replace(/ /g, '') + '">' + m + '</a>'; });
+}
+
+function keyEventsHtml(ts){
+  const t = todayStr();
+  let list = [];
+  if(ts.mode === 'durante'){
+    const tomorrow = DAY_STRINGS[ts.idx + 1];
+    list = KEY_EVENTS.filter(function(e){ return e.date === t || e.date === tomorrow; });
+  } else if(ts.mode === 'antes'){
+    list = KEY_EVENTS.filter(function(e){ return e.date >= t; }).slice(0, 3);
+  }
+  if(!list.length) return '';
+  const rows = list.map(function(e){
+    let badge;
+    if(ts.mode === 'durante'){ badge = (e.date === t) ? 'HOY' : 'MAÑ.'; }
+    else { const dm = fmtDay(e.date); badge = dm.num + '<br>' + dm.mo; }
+    return '<div class="next-row"><div class="next-date">' + badge + '</div><div><strong>' + esc(e.label) + '</strong><span>' + esc(e.time) + (e.note ? ' · ' + esc(e.note) : '') + '</span></div></div>';
+  }).join('');
+  return '<div class="next-card"><h4>Horarios clave</h4>' + rows + '</div>';
+}
+
+// ---------- tema claro / oscuro / automatico ----------
+function themePref(){ try{ return localStorage.getItem('nile-theme') || 'auto'; }catch(e){ return 'auto'; } }
+function themeLabel(){ const p = themePref(); return p === 'dark' ? 'Oscuro' : (p === 'light' ? 'Claro' : 'Automático'); }
+function applyTheme(){
+  const pref = themePref();
+  const sysDark = !!(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const dark = pref === 'dark' || (pref === 'auto' && sysDark);
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  const m = document.querySelector('meta[name="theme-color"]');
+  if(m) m.setAttribute('content', dark ? '#000000' : '#123B40');
+  const tb = document.getElementById('themeBtn');
+  if(tb) tb.textContent = pref === 'dark' ? '🌙' : (pref === 'light' ? '☀️' : '🌓');
+}
+function cycleTheme(){
+  const order = ['auto', 'light', 'dark'];
+  const next = order[(order.indexOf(themePref()) + 1) % order.length];
+  try{ localStorage.setItem('nile-theme', next); }catch(e){}
+  applyTheme();
+}
+
+// ---------- pestanas (recuerda la actual aunque se redibuje todo) ----------
+let currentTab = 'hoy';
+function applyTab(tab){
+  if(!document.getElementById('tab-' + tab)) tab = 'hoy';
+  currentTab = tab;
+  document.querySelectorAll('nav.tabs button[data-tab]').forEach(function(b){ b.classList.toggle('active', b.dataset.tab === tab); });
+  document.querySelectorAll('section').forEach(function(s){ s.classList.toggle('active', s.id === 'tab-' + tab); });
+  const mb = document.getElementById('moreBtn');
+  const tb = document.querySelector('nav.tabs button[data-tab="' + tab + '"]');
+  if(mb) mb.classList.toggle('active', !!(tb && tb.classList.contains('sec')));
+}
+function switchTab(tab){ applyTab(tab); closeSheet(); }
+
+// ---------- panel de acceso rapido ----------
+let sheetView = null;
+function openSheet(view){
+  sheetView = view;
+  renderSheet();
+  document.getElementById('sheetBackdrop').classList.add('open');
+  document.getElementById('sheet').classList.add('open');
+  document.body.classList.add('sheet-open');
+}
+function closeSheet(){
+  sheetView = null;
+  const b = document.getElementById('sheetBackdrop');
+  const s = document.getElementById('sheet');
+  if(b) b.classList.remove('open');
+  if(s) s.classList.remove('open');
+  document.body.classList.remove('sheet-open');
+}
+function sheetHead(title, back){
+  return '<div class="sheet-head">' + (back ? '<button class="sheet-back" data-sheet-back>‹ Atrás</button>' : '<span style="min-width:44px"></span>')
+    + '<div class="sheet-title">' + esc(title) + '</div><button class="sheet-x" data-sheet-close>✕</button></div>';
+}
+function qaBtn(view, ico, label){ return '<button class="qa-btn" data-qa="' + view + '"><span class="qa-ico">' + ico + '</span><span>' + label + '</span></button>'; }
+function tabBtn(tab, ico, label){ return '<button class="qa-btn" data-go-tab="' + tab + '"><span class="qa-ico">' + ico + '</span><span>' + label + '</span></button>'; }
+
+function renderSheet(){
+  const sh = document.getElementById('sheet');
+  if(!sh || !sheetView) return;
+  const keep = {};
+  ['qaNoteText', 'ctName', 'ctPhone'].forEach(function(id){ const e = document.getElementById(id); if(e) keep[id] = e.value; });
+  let h = '';
+
+  if(sheetView === 'menu'){
+    h = sheetHead('Acceso rápido', false)
+      + '<div class="qa-grid">' + qaBtn('docs', '📄', 'Documentos') + qaBtn('emerg', '🚑', 'Emergencias') + qaBtn('frases', '🗣️', 'Frases') + qaBtn('notas', '📝', 'Nota rápida') + '</div>';
+  } else if(sheetView === 'mas'){
+    h = sheetHead('Más secciones', false)
+      + '<div class="qa-grid">' + tabBtn('documentos', '📄', 'Documentos') + tabBtn('tips', '💡', 'Tips') + tabBtn('mapa', '🗺️', 'Mapa') + tabBtn('clima', '⛅', 'Clima') + tabBtn('checklist', '✅', 'Para reservar') + tabBtn('presupuesto', '💶', 'Presupuesto') + '</div>'
+      + '<div class="qa-row2"><button class="qa-wide" data-theme-cycle>Tema: ' + themeLabel() + '</button><button class="qa-wide" data-sync>🔄 Sincronizar</button></div>';
+  } else if(sheetView === 'docs'){
+    h = sheetHead('Documentos', true);
+    if(!state.docs.length){ h += '<p class="qa-hint">Todavía no hay documentos cargados.</p>'; }
+    h += state.docs.map(function(doc){
+      const isImg = isImageLink(doc.link);
+      const act = isImg
+        ? '<button class="qa-btn-sm" data-open-img="' + attr(doc.link) + '">Ver</button>'
+        : (doc.link ? '<a class="qa-btn-sm" href="' + attr(doc.link) + '" target="_blank" rel="noopener">Abrir</a>' : '');
+      return '<div class="qa-doc"><div class="qa-info"><b>' + esc(doc.name || 'Documento') + '</b><span>' + esc(doc.note || '') + '</span></div>' + act + '</div>';
+    }).join('');
+    h += '<p class="qa-hint">Las imágenes del propio sitio (como /crucero.png) abren sin señal si ya las abriste una vez con internet; los links a Drive necesitan internet. Para lo crítico (pasaporte, visa, tickets) tené también una captura en Fotos o Archivos del teléfono.</p>'
+      + '<button class="qa-wide" style="width:100%" data-go-tab="documentos">Agregar o administrar documentos</button>';
+  } else if(sheetView === 'emerg'){
+    h = sheetHead('Emergencias', true)
+      + EMERGENCY_NUMBERS.map(function(n){
+          return '<a class="qa-call" href="tel:' + n.num + '"><span class="qa-ico2">' + n.ico + '</span><span class="qa-call-main"><b>' + esc(n.name) + '</b>' + (n.note ? '<small>' + esc(n.note) + '</small>' : '') + '</span><span class="qa-num">' + n.num + '</span></a>';
+        }).join('')
+      + '<div class="qa-group">Contactos del viaje</div>'
+      + (state.contacts || []).map(function(k){
+          const ph = k.phone ? '<a href="' + telHref(k.phone) + '">' + esc(k.phone) + '</a>' : 'sin teléfono: tocá ✎ para completarlo';
+          return '<div class="qa-contact"><div class="qa-info"><b>' + esc(k.name) + '</b><span>' + ph + '</span></div><div><button class="qa-x" data-edit-contact="' + attr(k.id) + '">✎</button><button class="qa-x" data-del-contact="' + attr(k.id) + '">✕</button></div></div>';
+        }).join('')
+      + '<div class="qa-form"><input class="qa-input" id="ctName" placeholder="Nombre (ej: Guía del crucero)"><input class="qa-input" id="ctPhone" type="tel" placeholder="Teléfono (+20 …)"><button class="qa-save" id="ctAdd" style="margin:0">Agregar contacto</button></div>'
+      + '<p class="qa-hint">Cargá acá lo que falte (hotel de Hurghada, guía, seguro, embajada). Lo ven los 6. No guardes números de pasaporte ni de tarjetas.</p>';
+  } else if(sheetView === 'frases'){
+    h = sheetHead('Frases en árabe', true)
+      + FRASES.map(function(g){
+          return '<div class="qa-group">' + esc(g.title) + '</div>' + g.items.map(function(p){ return '<div class="qa-phrase"><b>' + esc(p[0]) + '</b><span>' + esc(p[1]) + '</span></div>'; }).join('');
+        }).join('')
+      + '<p class="qa-hint">Pronunciación aproximada (árabe egipcio). Si no te entienden, mostrales la pantalla.</p>';
+  } else if(sheetView === 'notas'){
+    h = sheetHead('Nota rápida', true)
+      + '<textarea id="qaNoteText" placeholder="Ej: taxi al aeropuerto 300 EGP · el guía se llama…"></textarea>'
+      + '<button class="qa-save" id="qaNoteSave">Guardar nota</button>'
+      + (state.notes.length ? '' : '<p class="qa-hint">Todavía no hay notas. Las ven los 6 y quedan guardadas aunque no haya señal.</p>')
+      + state.notes.slice(0, 30).map(function(n){
+          return '<div class="qa-note"><div class="qa-note-meta"><span>' + esc(fmtNoteTime(n.t)) + (n.by ? ' · ' + esc(n.by) : '') + '</span><button class="qa-x" data-del-note="' + attr(n.id) + '">✕</button></div><p>' + esc(n.text) + '</p></div>';
+        }).join('');
+  }
+
+  sh.innerHTML = h;
+  Object.keys(keep).forEach(function(id){ const e = document.getElementById(id); if(e) e.value = keep[id]; });
+
+  sh.querySelectorAll('[data-sheet-close]').forEach(function(b){ b.addEventListener('click', closeSheet); });
+  sh.querySelectorAll('[data-sheet-back]').forEach(function(b){ b.addEventListener('click', function(){ openSheet('menu'); }); });
+  sh.querySelectorAll('[data-qa]').forEach(function(b){ b.addEventListener('click', function(){ openSheet(b.dataset.qa); }); });
+  sh.querySelectorAll('[data-go-tab]').forEach(function(b){ b.addEventListener('click', function(){ switchTab(b.dataset.goTab); }); });
+  sh.querySelectorAll('[data-open-img]').forEach(function(b){ b.addEventListener('click', function(){ openImageModal(b.dataset.openImg); }); });
+  sh.querySelectorAll('[data-theme-cycle]').forEach(function(b){ b.addEventListener('click', function(){ cycleTheme(); renderSheet(); }); });
+  sh.querySelectorAll('[data-sync]').forEach(function(b){ b.addEventListener('click', function(){ closeSheet(); document.getElementById('syncBtn').click(); }); });
+
+  const saveNote = document.getElementById('qaNoteSave');
+  if(saveNote){
+    saveNote.addEventListener('click', function(){
+      const ta = document.getElementById('qaNoteText');
+      const text = ta.value.trim();
+      if(!text) return;
+      state.notes.unshift({id:'n' + Date.now(), t:new Date().toISOString(), by:state.me || '', text:text});
+      ta.value = '';
+      saveShared(); renderSheet(); renderHoy();
+    });
+  }
+  sh.querySelectorAll('[data-del-note]').forEach(function(b){
+    b.addEventListener('click', function(){
+      state.notes = state.notes.filter(function(n){ return n.id !== b.dataset.delNote; });
+      saveShared(); renderSheet(); renderHoy();
+    });
+  });
+
+  const addContact = document.getElementById('ctAdd');
+  if(addContact){
+    addContact.addEventListener('click', function(){
+      const name = document.getElementById('ctName').value.trim();
+      const phone = document.getElementById('ctPhone').value.trim();
+      if(!name){ alert('Poné al menos un nombre.'); return; }
+      state.contacts.push({id:'k' + Date.now(), name:name, phone:phone});
+      document.getElementById('ctName').value = '';
+      document.getElementById('ctPhone').value = '';
+      saveShared(); renderSheet();
+    });
+  }
+  sh.querySelectorAll('[data-edit-contact]').forEach(function(b){
+    b.addEventListener('click', function(){
+      const k = state.contacts.find(function(x){ return x.id === b.dataset.editContact; });
+      if(!k) return;
+      const name = prompt('Nombre:', k.name);
+      if(name === null) return;
+      const phone = prompt('Teléfono (con +código de país):', k.phone);
+      if(phone === null) return;
+      k.name = name.trim() || k.name;
+      k.phone = phone.trim();
+      saveShared(); renderSheet();
+    });
+  });
+  sh.querySelectorAll('[data-del-contact]').forEach(function(b){
+    b.addEventListener('click', function(){
+      state.contacts = state.contacts.filter(function(x){ return x.id !== b.dataset.delContact; });
+      saveShared(); renderSheet();
+    });
+  });
+}
+
 function render(){
   const app = document.getElementById('app');
   app.innerHTML = `
     <header>
-      <div class="eyebrow"><span>Grupo · 6 viajeros</span><span style="display:flex;gap:8px;align-items:center;"><span id="syncStatus">${syncStatus}</span><button class="sync-btn" id="syncBtn">Sincronizar</button></span></div>
+      <div class="eyebrow"><span>Grupo · 6 viajeros</span><span style="display:flex;gap:8px;align-items:center;"><span id="syncStatus">${syncStatus}</span><button class="sync-btn" id="themeBtn" title="Tema">🌓</button><button class="sync-btn" id="syncBtn">Sincronizar</button></span></div>
       <h1>Egipto, octubre 2026</h1>
       <p class="sub">Stuttgart → El Cairo → Asuán → crucero → Luxor → Hurghada → Stuttgart</p>
       <div id="countdownBox">${countdownHtml()}</div>
@@ -841,17 +1213,17 @@ function render(){
       <div class="whoami-note">${state.me ? 'Estás votando como <b>'+state.me+'</b>.' : 'Elegí quién sos para poder votar y anotar cosas.'}</div>
     </header>
     <nav class="tabs" id="tabs">
-      <button data-tab="hoy" class="active">Hoy</button>
-      <button data-tab="itinerario">Itinerario</button>
-      <button data-tab="clima">Clima</button>
-      <button data-tab="mapa">Mapa</button>
-      <button data-tab="votaciones">Lugares</button>
-      <button data-tab="checklist">Para reservar</button>
-      <button data-tab="documentos">Documentos</button>
-      <button data-tab="tips">Tips</button>
-      <button data-tab="presupuesto">Presupuesto</button>
+      <button data-tab="hoy" class="active" data-icon="🏠">Hoy</button>
+      <button data-tab="itinerario" data-icon="🗓️">Itinerario</button>
+      <button data-tab="clima" class="sec">Clima</button>
+      <button data-tab="mapa" class="sec">Mapa</button>
+      <button data-tab="votaciones" data-icon="📍">Lugares</button>
+      <button data-tab="checklist" class="sec">Para reservar</button>
+      <button data-tab="documentos" class="sec">Documentos</button>
+      <button data-tab="tips" class="sec">Tips</button>
+      <button data-tab="presupuesto" class="sec">Presupuesto</button>
+      <button class="more-btn" id="moreBtn" data-icon="☰">Más</button>
     </nav>
-    <div class="nav-hint ${navHintSeen() ? 'hidden' : ''}" id="navHint">›</div>
     <section id="tab-hoy" class="active"></section>
     <section id="tab-itinerario"></section>
     <section id="tab-clima"></section>
@@ -872,22 +1244,16 @@ function render(){
     el.addEventListener('click', ()=>{ state.me = el.dataset.person; saveMe(); render(); });
   });
 
-  document.getElementById('tabs').querySelectorAll('button').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
-      document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-    });
+  document.querySelectorAll('#tabs button[data-tab]').forEach(function(btn){
+    btn.addEventListener('click', function(){ switchTab(btn.dataset.tab); });
   });
-
-  document.getElementById('tabs').addEventListener('scroll', function(){
-    const hint = document.getElementById('navHint');
-    if(hint) hint.classList.add('hidden');
-    try{ localStorage.setItem('nile-nav-hint-seen','1'); }catch(e){}
-  }, {once:true});
+  document.getElementById('moreBtn').addEventListener('click', function(){ openSheet('mas'); });
+  document.getElementById('themeBtn').addEventListener('click', cycleTheme);
 
   renderItinerario(); renderClima(); renderMapa(); renderVotaciones(); renderChecklist(); renderPresupuesto(); renderHoy(); renderDocumentos(); renderTips();
+  applyTab(currentTab);
+  applyTheme();
+  if(sheetView) renderSheet();
 }
 
 const DATE_CITY = {
@@ -961,7 +1327,7 @@ function renderHoy(){
     + '</div>';
 
   const ts = tripState();
-  let heroHtml, planHtml = '';
+  let heroHtml, planHtml = '', planTomorrowHtml = '';
   if(ts.mode === 'durante'){
     const sg = segmentForDate(ts.date);
     const dm = fmtDay(ts.date);
@@ -971,8 +1337,8 @@ function renderHoy(){
       + '<p class="hero-sub">' + dm.wd + ' ' + dm.num + ' de ' + dm.mo + '</p>'
       + '</div>';
     const tomorrow = DAY_STRINGS[ts.idx+1];
-    planHtml = '<div class="next-card"><h4>Plan de hoy</h4><p class="plan-text">' + esc(dayText(ts.date)) + '</p>' + placeChipsHtml(ts.date) + '</div>'
-      + (tomorrow ? '<div class="next-card"><h4>Mañana</h4><p class="plan-text">' + esc(dayText(tomorrow)) + '</p>' + placeChipsHtml(tomorrow) + '</div>' : '');
+    planHtml = '<div class="next-card"><h4>Plan de hoy</h4><p class="plan-text">' + esc(dayText(ts.date)) + '</p>' + placeChipsHtml(ts.date) + '</div>';
+    planTomorrowHtml = tomorrow ? '<div class="next-card"><h4>Mañana</h4><p class="plan-text">' + esc(dayText(tomorrow)) + '</p>' + placeChipsHtml(tomorrow) + '</div>' : '';
   } else if(ts.mode === 'despues'){
     heroHtml = '<div class="hero-card"><div class="hero-eyebrow">Egipto · Octubre 2026</div><div class="hero-title">¡Qué viaje!</div><p class="hero-sub">Gracias por organizarlo entre todos. El itinerario y los documentos quedan acá de recuerdo.</p></div>';
   } else {
@@ -990,14 +1356,39 @@ function renderHoy(){
     ? '<div class="next-card"><h4>Todavía sin decidir</h4><p class="plan-text">' + esc(openNames.join(' · ')) + '</p><p class="badge-pp" style="margin:8px 0 0;">En la pestaña Lugares podés marcar "Me interesa".</p></div>'
     : '';
 
+  const todayKey = todayStr();
+  const keyHtml = keyEventsHtml(ts);
+  let reservasHtml = '', notasHtml = '';
+  if(ts.mode === 'durante'){
+    const resv = state.checklist.filter(function(i){ return i.day === todayKey; });
+    if(resv.length){
+      reservasHtml = '<div class="next-card"><h4>Reservas de hoy</h4>' + resv.map(function(i){
+        return '<div class="next-row"><div class="next-date">' + (i.done ? '✓' : '⏳') + '</div><div><strong>' + esc(i.name) + '</strong><span>' + linkify(i.link || '') + '</span></div></div>';
+      }).join('') + '</div>';
+    }
+    const todayNotes = (state.notes || []).filter(function(n){ return localDateStr(new Date(n.t)) === todayKey; });
+    notasHtml = '<div class="next-card"><h4>Notas de hoy</h4>'
+      + (todayNotes.length ? todayNotes.map(function(n){
+          return '<p class="plan-text" style="margin-bottom:8px;"><span class="badge-pp">' + esc(fmtNoteTime(n.t)) + (n.by ? ' · ' + esc(n.by) : '') + '</span><br>' + esc(n.text) + '</p>';
+        }).join('') : '<p class="empty-note">Sin notas todavía.</p>')
+      + '<button class="sync-btn" data-open-sheet="notas" style="margin-top:6px;">＋ Nota rápida</button></div>';
+  }
+
   el.innerHTML = heroHtml
     + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">' + weatherMini + fxMini + '</div>'
+    + keyHtml
     + planHtml
+    + reservasHtml
+    + notasHtml
+    + planTomorrowHtml
     + nextHtml
     + openHtml;
 
   el.querySelectorAll('[data-goto-place]').forEach(function(b){
     b.addEventListener('click', function(){ openPlaceFicha(b.dataset.gotoPlace); });
+  });
+  el.querySelectorAll('[data-open-sheet]').forEach(function(b){
+    b.addEventListener('click', function(){ openSheet(b.dataset.openSheet); });
   });
 
   if(fxRate){
@@ -1342,6 +1733,15 @@ document.getElementById('imgModalClose').addEventListener('click', closeImageMod
 document.getElementById('imgModal').addEventListener('click', function(e){
   if(e.target.id === 'imgModal') closeImageModal();
 });
+document.getElementById('fab').addEventListener('click', function(){ openSheet('menu'); });
+document.getElementById('sheetBackdrop').addEventListener('click', closeSheet);
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closeSheet(); closeImageModal(); } });
+applyTheme();
+if(window.matchMedia){
+  const mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+  const onSys = function(){ if(themePref() === 'auto') applyTheme(); };
+  if(mqDark.addEventListener){ mqDark.addEventListener('change', onSys); } else if(mqDark.addListener){ mqDark.addListener(onSys); }
+}
 
 const TIPS = [
   {title:"Antes de salir (últimos días)", items:[
