@@ -386,17 +386,17 @@ const PEOPLE = ["Pipa","Fer","Maticha","Edu","Agus","Javi"];
 const DAY_STRINGS = ["2026-10-09","2026-10-10","2026-10-11","2026-10-12","2026-10-13","2026-10-14","2026-10-15","2026-10-16","2026-10-17","2026-10-18","2026-10-19"];
 
 const DEFAULT_CALENDAR = {
-  "2026-10-09": "Llegada a El Cairo (vuelo desde Stuttgart, sale 19:45). Hotel confirmado: Pyramids Holiday Escape, en Giza (11 Gamal Abdel Nasser St) - check-in desde las 14:00. A dormir.",
-  "2026-10-10": "Día 1 Cairo - Pirámides. Como el hotel ya está en Giza, arranque corto hasta la meseta (antes salían desde Zamalek). Desayuno/almuerzo en Khufu's (reservar antes, pedir mesa afuera - es el lugar con vista a las pirámides). Tarde: Esfinge, Khafre, Micerinos. Cena: ojo que Crimson Bar & Grill queda en Zamalek - es un viaje más largo de vuelta desde Giza, capaz conviene algo más cerca del hotel esa noche.",
-  "2026-10-11": "Día 2 Cairo - Gran Museo Egipcio (GEM), que además está a solo ~2km del hotel en Giza. 09:00 directo a las salas de Tutankamón (se llena después). Calcular ~6h, vale la pena un guía. Almuerzo tarde: Andrea El Mariouteya (New Giza, reservar el fateer). Cena: Pier 88 queda en Zamalek, considerar la distancia desde Giza.",
-  "2026-10-12": "Día 3 - Check-out del hotel de Giza (10:00-12:00). Medio día en Cairo: Saqqara (pirámide escalonada de Zoser). Vuelo interno Cairo → Asuán, sale 17:00. Noche en Asuán (hotel). Ojo: al embarcar recién el martes nos perdemos el Día 1 del crucero (Templo de Philae + Presa Alta, incluidos en el tour) - ver si lo sumamos aparte.",
-  "2026-10-13": "Día 4 - Crucero día 2: ~4am salida a Abu Simbel (incluido, ~7h ida y vuelta). Al volver, navegación a Kom Ombo y visita al templo (incluida). Noche a bordo.",
-  "2026-10-14": "Día 5 - Crucero día 3: Templo de Edfu (incluido) y llegada a Luxor, visita al Templo de Luxor de noche (incluida). Noche a bordo.",
-  "2026-10-15": "Día 6 - Crucero día 4 (último): paseo en globo aerostático al amanecer (incluido), Colosos de Memnón, Valle de los Reyes, Templo de Hatshepsut, Karnak (entradas no incluidas, ~80-100 USD aparte). Fin del crucero - transfer a Hurghada (~4h en auto).",
-  "2026-10-16": "Hurghada: playa.",
-  "2026-10-17": "Hurghada: playa.",
-  "2026-10-18": "Hurghada: playa.",
-  "2026-10-19": "Hurghada + vuelo de vuelta (según el ticket sale 17:20)."
+  "2026-10-09": "Vuelo Stuttgart → El Cairo (Austrian, sale 19:45, 1 escala). Aterrizan de madrugada (~3 am del sábado). Hotel confirmado en Giza: Pyramids Holiday Escape (11 Gamal Abdel Nasser St, +20 100 344 4483), con desayuno y, según la reserva, traslado gratis desde el aeropuerto: confirmar con el hotel la llegada tardía.",
+  "2026-10-10": "Día 1 en Cairo, con guía privado (Snefro Travel Egypt, ya pagado): Museo Nacional de la Civilización Egipcia con la Sala de las Momias Reales, Ciudadela de Saladino y mezquita de Muhammad Ali, Cairo Viejo (barrio copto) y bazar Khan el-Khalili. La hora de salida se confirma con el guía, porque llegan de madrugada. Incluye las entradas estándar; comidas, bebidas y propinas no.",
+  "2026-10-11": "Día 2 en Cairo, con el guía: Pirámides de Guiza y Esfinge, Saqqara (con entrada a una de sus pirámides, según el horario del sitio) y la antigua Menfis. La cámara de la Gran Pirámide (Keops) no está incluida: se paga aparte si la quieren. Incluye las entradas estándar; comidas, bebidas y propinas no.",
+  "2026-10-12": "Check-out del hotel de Giza (10:00 a 12:00) con las valijas. Visita guiada al Gran Museo Egipcio y traslado privado al aeropuerto de El Cairo para el vuelo MS284 (EgyptAir) a Asuán, que sale 17:35. En Asuán los espera el traslado al barco (incluido en el crucero): llegan hacia las 22:00 y duermen a bordo del MS Nile Jewel. El día 1 del tour (Philae y Presa Alta) se pierde porque llegan a la noche.",
+  "2026-10-13": "Día 2 del crucero (MS Nile Jewel): de madrugada (3-4 am) salida a Abu Simbel, unas 3 h por trayecto (entrada no incluida en el tour). De vuelta, navegación a Kom Ombo y visita al templo. Noche a bordo.",
+  "2026-10-14": "Día 3 del crucero: templo de Edfu (paseo en calesa) y llegada a Luxor; visita al templo de Luxor al final de la tarde. Noche a bordo.",
+  "2026-10-15": "Día 4 del crucero (último): Colosos de Memnón (entrada incluida), Valle de los Reyes, templo de Hatshepsut y Karnak (entradas no incluidas, ~80 USD aparte). El globo al amanecer NO está incluido: es opcional y se le pide a Mohamed. Terminan hacia las 16:00 y siguen en auto a Hurghada (~4 h): ese traslado todavía no está reservado. Hotel: Sunrise Aqua Joy Resort (todo incluido).",
+  "2026-10-16": "Hurghada: Sunrise Aqua Joy Resort (zona Mamsha, todo incluido). Playa y descanso; excursión opcional (snorkel, islas) si se animan.",
+  "2026-10-17": "Hurghada: playa y descanso.",
+  "2026-10-18": "Hurghada: playa y descanso.",
+  "2026-10-19": "Hurghada: vuelo de vuelta HRG → Stuttgart (sale 17:20). Resolver con el hotel cómo llegar al aeropuerto."
 };
 
 const ICONS = {
@@ -413,37 +413,105 @@ const ICONS = {
 function iconSvg(name){ return '<svg width="30" height="30" viewBox="0 0 24 24">'+(ICONS[name]||ICONS.temple)+'</svg>'; }
 
 const PLACES = [
-  {segment:"El Cairo", items:[
-    {id:"guiza", name:"Pirámides de Guiza", desc:"Día 1 de Cairo. La única de las 7 maravillas del mundo antiguo que sigue en pie.", wiki:"Pirámides de Guiza", imgUrl:null, status:"decidido"},
-    {id:"khufus", name:"Khufu's Restaurant", desc:"Desayuno/almuerzo con vista a las pirámides desde afuera. Hay que reservar y entrar al predio (Uber no llega).", wiki:null, imgUrl:"https://www.listonegiordano.com/one/wp-content/uploads/2025/01/Khufus-Restaurant-ristorante-vista-piramidi-egitto-giza1-1536x1024.jpg", status:"decidido"},
-    {id:"gem", name:"Gran Museo Egipcio (GEM)", desc:"Día 2 de Cairo. El museo más grande del mundo dedicado a una sola civilización, con la colección completa de Tutankamón.", wiki:null, imgUrl:"https://elojodelarte.com/media/k2/items/cache/fdcdab7b883db46c6461d37dc1d99b74_S.webp?t=20250121_035239", status:"decidido"},
-    {id:"saqqara", name:"Saqqara", desc:"Medio día del lunes. La primera pirámide de Egipto, la escalonada de Zoser (~2650 a.C.).", wiki:"Saqqara", imgUrl:null, status:"decidido"}
+  {segment:"El Cairo y Giza (guía privado de Snefro)", items:[
+    {id:"nmec", name:"Museo de la Civilización Egipcia y Momias Reales", desc:"Sábado, con guía. El museo de Fustat, con la Sala de las Momias Reales: 22 faraones y reinas, entre ellos Ramsés II.", wiki:"Museo Nacional de la Civilización Egipcia", imgUrl:null, status:"decidido"},
+    {id:"citadel", name:"Ciudadela de Saladino y mezquita de Muhammad Ali", desc:"Sábado. La fortaleza medieval sobre la ciudad, con la mezquita de alabastro adentro y buenas vistas.", wiki:"Ciudadela de El Cairo", imgUrl:null, status:"decidido"},
+    {id:"oldcairo", name:"Cairo Viejo (barrio copto)", desc:"Sábado. El barrio cristiano más antiguo de la ciudad, con la Iglesia Colgante y callecitas muy antiguas.", wiki:"Iglesia Colgante", imgUrl:null, status:"decidido"},
+    {id:"khan", name:"Khan el-Khalili", desc:"Sábado, para cerrar el día. El bazar histórico: especias, lámparas, joyas y cafés.", wiki:"Jan el-Jalili", imgUrl:null, icon:"village", status:"decidido"},
+    {id:"guiza", name:"Pirámides de Guiza", desc:"Domingo, con guía privado. La única de las 7 maravillas del mundo antiguo que sigue en pie.", wiki:"Pirámides de Guiza", imgUrl:null, status:"decidido"},
+    {id:"saqqara", name:"Saqqara", desc:"Domingo. La primera pirámide de Egipto, la escalonada de Zoser (~2650 a.C.). El tour incluye entrar a una de sus pirámides.", wiki:"Saqqara", imgUrl:null, status:"decidido"},
+    {id:"memphis", name:"Menfis", desc:"Domingo. La antigua capital del Imperio Antiguo; hoy un museo al aire libre con un coloso caído de Ramsés II.", wiki:"Menfis (Egipto)", imgUrl:null, status:"decidido"},
+    {id:"gem", name:"Gran Museo Egipcio (GEM)", desc:"Lunes por la mañana, antes del vuelo a Asuán. El museo más grande del mundo dedicado a una sola civilización, con la colección completa de Tutankamón.", wiki:null, imgUrl:"https://elojodelarte.com/media/k2/items/cache/fdcdab7b883db46c6461d37dc1d99b74_S.webp?t=20250121_035239", status:"decidido"},
+    {id:"khufus", name:"Khufu's Restaurant", desc:"Idea del plan del amigo de Fer, no está en el plan confirmado: almuerzo con mesas con vista a las pirámides. Hay que reservar y entrar al predio (Uber no llega).", wiki:null, imgUrl:"https://www.listonegiordano.com/one/wp-content/uploads/2025/01/Khufus-Restaurant-ristorante-vista-piramidi-egitto-giza1-1536x1024.jpg", status:"abierto"}
   ]},
-  {segment:"Crucero por el Nilo (4 días, Aswan → Luxor)", items:[
-    {id:"abusimbel", name:"Abu Simbel", desc:"Día 2 del crucero, salida ~4am. Los templos tallados en la montaña por Ramsés II.", wiki:"Abu Simbel", imgUrl:null, status:"decidido"},
-    {id:"komombo", name:"Templo de Kom Ombo", desc:"Día 2 del crucero. Único templo doble de Egipto, mitad Sobek (cocodrilo) mitad Horus.", wiki:"Templo de Kom Ombo", imgUrl:null, status:"decidido"},
-    {id:"edfu", name:"Templo de Edfu", desc:"Día 3 del crucero. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", imgUrl:null, status:"decidido"},
-    {id:"luxortemplo", name:"Templo de Luxor", desc:"Día 3 del crucero, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", imgUrl:null, status:"decidido"},
-    {id:"globo", name:"Paseo en globo aerostático", desc:"Día 4 del crucero, al amanecer sobre el Valle de los Reyes. Incluido en el tour.", wiki:null, imgUrl:"https://media.tacdn.com/media/attractions-splice-spp-674x446/09/a8/4a/dc.jpg", status:"decidido"},
+  {segment:"Crucero por el Nilo (MS Nile Jewel, 4 días, Asuán → Luxor)", items:[
+    {id:"barco", name:"El barco: MS Nile Jewel", desc:"Lunes 12 a la noche suben (llegan ~22:00) y duermen a bordo. Traslado aeropuerto → barco incluido. Bebidas no incluidas.", wiki:null, icon:"boat", imgUrl:null, status:"decidido"},
+    {id:"abusimbel", name:"Abu Simbel", desc:"Martes, salida de madrugada (3-4 am). Los templos tallados en la montaña por Ramsés II.", wiki:"Abu Simbel", imgUrl:null, status:"decidido"},
+    {id:"komombo", name:"Templo de Kom Ombo", desc:"Martes, de vuelta de Abu Simbel. Único templo doble de Egipto, mitad Sobek (cocodrilo) mitad Horus.", wiki:"Templo de Kom Ombo", imgUrl:null, status:"decidido"},
+    {id:"edfu", name:"Templo de Edfu", desc:"Miércoles. El templo egipcio mejor conservado, dedicado a Horus.", wiki:"Templo de Edfu", imgUrl:null, status:"decidido"},
+    {id:"luxortemplo", name:"Templo de Luxor", desc:"Miércoles, de noche. Iluminado, en pleno centro de Luxor.", wiki:"Templo de Luxor", imgUrl:null, status:"decidido"},
+    {id:"globo", name:"Paseo en globo aerostático", desc:"Jueves al amanecer sobre Luxor. NO está incluido en el tour: es opcional y hay que pedírselo a Mohamed, con costo extra. ¿Quién se anima?", wiki:null, imgUrl:"https://media.tacdn.com/media/attractions-splice-spp-674x446/09/a8/4a/dc.jpg", status:"abierto"},
     {id:"colossi", name:"Colosos de Memnón", desc:"Día 4 del crucero. Dos estatuas gigantes de Amenhotep III que custodiaban la entrada de su templo funerario. Entrada incluida en el tour.", wiki:"Colosos de Memnón", imgUrl:null, status:"decidido"},
     {id:"valle", name:"Valle de los Reyes", desc:"Día 4 del crucero. Necrópolis de los faraones del Imperio Nuevo, incluido Tutankamón.", wiki:"Valle de los Reyes", imgUrl:null, status:"decidido"},
     {id:"hatshepsut", name:"Templo de Hatshepsut", desc:"Día 4 del crucero. El templo en terrazas de la faraona Hatshepsut, pegado al acantilado de Deir el-Bahari.", wiki:"Templo de Hatshepsut", imgUrl:null, status:"decidido"},
     {id:"karnak", name:"Templo de Karnak", desc:"Día 4 del crucero. El complejo religioso más grande jamás construido.", wiki:"Templo de Karnak", imgUrl:null, status:"decidido"}
   ]},
-  {segment:"¿Sumamos aparte? (nos las perdemos por embarcar el martes)", items:[
+  {segment:"Ideas que quedaron afuera (el día 1 del crucero no se hace)", items:[
     {id:"philae", name:"Templo de Philae", desc:"Día 1 del crucero que nos perdemos. Templo de Isis reconstruido en una isla del Nilo.", wiki:"Templo de Filé", imgUrl:null, status:"abierto"},
     {id:"highDam", name:"Presa Alta de Asuán", desc:"Día 1 del crucero que nos perdemos. Formó el lago Nasser, parada corta e icónica.", wiki:"Presa de Asuán", imgUrl:null, status:"abierto"},
     {id:"obelisk", name:"Obelisco Inacabado", desc:"No está en el tour. Obelisco gigante abandonado en la cantera, se ve cómo lo tallaban.", wiki:null, imgUrl:"https://www.luxorandaswan.com/images/16587742560The-Unfinshed-Obelisk.jpg", status:"abierto"},
     {id:"nubian", name:"Pueblo Nubio", desc:"No está en el tour. Casas de colores a orillas del Nilo, a veces con paseo en felucca.", wiki:null, imgUrl:"https://www.egiptoexclusivo.com/wp-content/uploads/2023/06/destino-nubia.jpg", icon:"village", status:"abierto"}
   ]},
   {segment:"Hurghada (4 días de playa)", items:[
-    {id:"hurghadaplaya", name:"Playa / resort", desc:"Del jueves a la noche hasta el lunes del vuelo. Como está el plan, es descanso puro.", wiki:"Hurghada", imgUrl:null, status:"decidido"},
+    {id:"hurghadaplaya", name:"Sunrise Aqua Joy Resort (Mamsha)", desc:"Del jueves a la noche hasta el lunes del vuelo. Hotel todo incluido en la zona de Mamsha. Descanso puro.", wiki:"Hurghada", imgUrl:null, status:"decidido"},
     {id:"snorkel", name:"Día de snorkel / buceo", desc:"Opciones para un día en vez de playa de hotel: yate 3 islas+delfines+snorkel (55 USD), lancha 2 islas+delfines+snorkel (35 USD), snorkel Isla Giftun (35 USD), Orange Bay (20 USD), o noche de estrellas en el desierto con camello y cena (35 USD).", wiki:null, imgUrl:"https://egyptra.com/wp-content/uploads/2025/06/image-2025-06-29T174349.874-1024x681.jpg", status:"abierto"}
   ]}
 ];
 
 const PLACE_INFO = {
-  guiza:{ date:"2026-10-10", time:"medio día o más",
+  nmec:{ date:"2026-10-10", time:"2-3 h",
+    facts:[
+      "Está en Fustat, dentro del Cairo Viejo, y recorre la historia de Egipto en orden cronológico, desde la prehistoria hasta el siglo XX.",
+      "Su joya es la Sala de las Momias Reales: 22 faraones y reinas, entre ellos Ramsés II, Seti I y Hatshepsut, trasladados en abril de 2021 en el desfile llamado Desfile Dorado de los Faraones.",
+      "Cada momia tiene su propia sala, con luz tenue y clima controlado, a lo largo de un camino en forma de serpentina."
+    ],
+    tips:[
+      "En la Sala de las Momias Reales está prohibido sacar fotos (lo hacen cumplir); en el resto del museo se puede con el celular, sin flash.",
+      "La entrada a la sala de momias va incluida en la entrada del museo y en el tour de Snefro.",
+      "Es el primer día y llegan de madrugada: confirmar con el guía a qué hora arrancan."
+    ]},
+  citadel:{ date:"2026-10-10", time:"~2 h",
+    facts:[
+      "Saladino la mandó construir en el siglo XII como fortaleza contra los cruzados, y fue sede del gobierno de Egipto durante unos 700 años.",
+      "Adentro está la mezquita de Muhammad Ali, llamada la mezquita de alabastro: de estilo otomano, con dos minaretes finos, se terminó a mediados del siglo XIX.",
+      "Desde la terraza hay una de las mejores vistas de El Cairo."
+    ],
+    tips:[
+      "Mezquita: hombros y rodillas cubiertos y se entra sin zapatos (medias limpias); un pañuelo liviano ayuda.",
+      "Se visita con el guía y las entradas estándar están incluidas."
+    ]},
+  oldcairo:{ date:"2026-10-10", time:"1-2 h",
+    facts:[
+      "Es el barrio cristiano (copto) más antiguo de la ciudad, con más de 1.500 años, construido sobre el antiguo fuerte romano de Babilonia.",
+      "La Iglesia Colgante está levantada sobre uno de los bastiones de ese fuerte romano, y de ahí viene el nombre.",
+      "En pocas cuadras conviven iglesias coptas, una sinagoga y callecitas muy antiguas; según la tradición, la Sagrada Familia se refugió por acá."
+    ],
+    tips:[
+      "En las iglesias: ropa que cubra hombros y rodillas.",
+      "Se camina por calles angostas: calzado cómodo."
+    ]},
+  khan:{ date:"2026-10-10", time:"1-2 h",
+    facts:[
+      "Es un bazar del siglo XIV (se fundó en 1382, época mameluca) y sigue siendo uno de los mercados más famosos del mundo árabe.",
+      "Se vende de todo: especias, lámparas, perfumes, joyas y souvenirs, y todavía funcionan talleres de metal y cuero.",
+      "El Café El Fishawy, abierto desde el siglo XVIII, es una parada clásica para el té."
+    ],
+    tips:[
+      "Regatear es parte del juego: preguntar el precio (Bikam da?), ofrecer menos y sonreír; si no quieren, La, shukran y seguir caminando.",
+      "Llevar efectivo en billetes chicos y cuidar el celular y la billetera.",
+      "Los vendedores insisten: no hay que comprar nada que no se quiera."
+    ]},
+  memphis:{ date:"2026-10-11", time:"~1 h",
+    facts:[
+      "Fue la capital del Egipto del Imperio Antiguo y hoy es Patrimonio de la Humanidad, junto con sus necrópolis (de Guiza a Dahshur).",
+      "Hoy queda un museo al aire libre; la estrella es un coloso caído de Ramsés II, de más de 10 m, que se ve acostado.",
+      "También hay una esfinge de alabastro de gran tamaño."
+    ],
+    tips:[
+      "Es una parada corta de la misma jornada que Guiza y Saqqara.",
+      "Casi no hay sombra: gorro y agua."
+    ]},
+  barco:{ date:"2026-10-12", time:"3 noches a bordo",
+    facts:[
+      "Es el MS Nile Jewel: según lo que averiguó el grupo, un barco chico de gama media, con trato amable, pileta chica y comida tipo buffet; no es un crucero de lujo.",
+      "El traslado del aeropuerto de Asuán al barco está incluido, y llegan hacia las 22:00 del lunes. Las comidas también están incluidas."
+    ],
+    tips:[
+      "Las bebidas NO están incluidas y no se sabe si aceptan tarjeta: llevar efectivo.",
+      "La propina recomendada para la tripulación es de unos 10 USD por persona por noche.",
+      "El contacto del crucero es Mohamed (Go Tours): Pipa compartió su contacto en el grupo; cárguenlo en Acceso rápido, Emergencias, Contactos."
+    ]},
+  guiza:{ date:"2026-10-11", time:"parte del día (con guía)",
     facts:[
       "La Gran Pirámide (Keops, ~2560 a.C.) fue el edificio más alto del mundo durante unos 3.800 años, y es la única de las siete maravillas antiguas que sigue en pie.",
       "Las tres pirámides grandes son de una misma familia: Keops, su hijo Kefrén y su nieto Micerinos.",
@@ -451,21 +519,21 @@ const PLACE_INFO = {
       "La Esfinge mide unos 73 m de largo y 20 m de alto, tallada en la roca natural del lugar; se la asocia con el faraón Kefrén."
     ],
     tips:[
-      "Entrar temprano: el calor y la gente suben fuerte después de las 10.",
+      "El hotel está en Giza: están cerca de todo y no hay que cruzar la ciudad.",
       "Dentro del predio hay shuttles gratis entre los monumentos.",
       "Camello o caballo: acordar el precio por escrito antes de subir (es donde más se aprovechan de los turistas).",
-      "Entrar a la cámara de la Gran Pirámide suele ser con ticket aparte, y es angosto, caluroso y sin aire: solo si no hay claustrofobia.",
-      "Comprar los tickets online con anticipación."
+      "Entrar a la cámara de la Gran Pirámide NO está incluido en el tour: es ticket aparte, y es angosto, caluroso y sin aire (solo si no hay claustrofobia).",
+      "Las entradas estándar están incluidas en el tour de Snefro; comidas, bebidas y propinas, no."
     ]},
-  khufus:{ date:"2026-10-10", time:"1-2 h",
+  khufus:{ time:"1-2 h",
     facts:[],
     tips:[
-      "Abre de 09:00 a 16:00. Reservar con anticipación (+20 10 80058888) y pedir MESA AFUERA: es la que tiene vista a las pirámides.",
-      "Está dentro del sitio arqueológico, así que Uber y taxis no llegan: se entra al predio y se toma el shuttle del propio restaurante.",
-      "Es caro: conviene fijar expectativas con el grupo antes."
+      "No está en el plan confirmado: viene del plan del amigo de Fer. Si lo quieren sumar, hay que reservar (+20 10 80058888) y pedir MESA AFUERA, la que tiene vista a las pirámides.",
+      "Está dentro del sitio arqueológico: Uber y taxis no llegan; se entra al predio y se toma el shuttle del propio restaurante.",
+      "Abre de 09:00 a 16:00 y es caro."
     ]},
-  gem:{ date:"2026-10-11", time:"3-6 h",
-    warn:"Las entradas se reservan online con turno horario (visit-gem.com): ya no se venden en la puerta. Si todavía no sacaron el turno, conviene hacerlo hoy mismo.",
+  gem:{ date:"2026-10-12", time:"~3 h (con guía)",
+    warn:"Según el programa, la entrada está incluida en el tour de Snefro. Igual conviene preguntarle al guía si ya tiene el turno online reservado: el museo trabaja con turnos horarios.",
     facts:[
       "Es el museo arqueológico más grande del mundo dedicado a una sola civilización, a unos 2 km de las pirámides. Se inauguró oficialmente el 1 de noviembre de 2025.",
       "Por primera vez desde el hallazgo de Howard Carter (1922), toda la colección de Tutankamón -5.398 piezas- se exhibe junta.",
@@ -473,12 +541,12 @@ const PLACE_INFO = {
       "La Gran Escalera exhibe estatuas colosales y tiene vistas a las pirámides. El pabellón del bote solar de Keops (de unos 4.500 años) está incluido en la entrada."
     ],
     tips:[
+      "Es el lunes por la mañana: el vuelo a Asuán sale a las 17:35 y el guía los lleva al aeropuerto después del museo.",
+      "Hacen el check-out del hotel de Giza antes (10:00 a 12:00): las valijas viajan con ustedes.",
       "Ir directo a las salas de Tutankamón apenas abre (09:00): después se llenan y hay cola para la máscara.",
-      "Calcular entre 3 y 6 horas. Un guía vale la pena (se contrata aparte, dura ~90 min).",
-      "Las salas funcionan de 09:00 a 18:00 en un día normal como el domingo.",
-      "La entrada ronda 1.200-1.600 EGP (~25-30 USD) según la fuente: confirmar el precio al reservar."
+      "Las salas funcionan de 09:00 a 18:00."
     ]},
-  saqqara:{ date:"2026-10-12", time:"2-3 h",
+  saqqara:{ date:"2026-10-11", time:"2-3 h",
     facts:[
       "La pirámide escalonada de Zoser (~2650 a.C.) es considerada la primera gran construcción de piedra de la historia. La diseñó Imhotep, que siglos después fue venerado como dios de la medicina.",
       "Tiene seis escalones: es el paso intermedio entre las tumbas tipo banco (mastabas) y las pirámides lisas de Guiza.",
@@ -486,9 +554,9 @@ const PLACE_INFO = {
       "Cerca hay tumbas de nobles con relieves muy coloridos y la pirámide de Unas, con los Textos de las Pirámides: de los textos religiosos más antiguos que se conocen."
     ],
     tips:[
-      "El hotel de Giza tiene check-out de 10:00 a 12:00: coordinar con el chofer que las valijas viajen con ustedes.",
-      "El vuelo a Asuán sale a las 17:00: calcular la vuelta al aeropuerto con buen margen (el tráfico de Cairo es impredecible).",
-      "Llevar agua y gorro: casi no hay sombra."
+      "El tour incluye entrar a una de las pirámides de Saqqara, si el sitio lo permite ese día (según el programa del guía).",
+      "Es el mismo día que Guiza y Menfis: jornada larga, llevar agua y gorro.",
+      "Casi no hay sombra."
     ]},
   abusimbel:{ date:"2026-10-13", time:"~7 h con el viaje",
     facts:[
@@ -535,14 +603,15 @@ const PLACE_INFO = {
       "La entrada no está incluida en el tour."
     ]},
   globo:{ date:"2026-10-15", time:"30-45 min de vuelo",
+    warn:"NO está incluido en su reserva (el nombre del tour lo menciona, pero el voucher dice que no): es opcional y hay que pedírselo a Mohamed, con costo extra. Si lo quieren, hay que avisar con tiempo.",
     facts:[
       "Se vuela al amanecer sobre la orilla oeste: se ven el Valle de los Reyes, el templo de Hatshepsut, los Colosos de Memnón y el contraste entre el verde de los cultivos y el desierto.",
-      "Al terminar entregan un certificado de vuelo."
+      "Al terminar suelen entregar un certificado de vuelo."
     ],
     tips:[
-      "Recogida hacia las 5:00 am.",
+      "La recogida es hacia las 5:00 am.",
       "No se permiten cámaras en la canasta: solo celular.",
-      "Si el vuelo se cancela (viento u otro motivo), según el tour reembolsan 25 USD por persona."
+      "El vuelo depende del viento: puede cancelarse el día mismo."
     ]},
   colossi:{ date:"2026-10-15", time:"parada corta",
     facts:[
@@ -614,6 +683,9 @@ const PLACE_INFO = {
       "En octubre el agua ronda los 27 °C."
     ],
     tips:[
+      "Hotel: Sunrise Aqua Joy Resort, en la zona de Mamsha, todo incluido (reservó Mati; el cobro fue en dólares).",
+      "Llegan el jueves a la noche, después del traslado desde Luxor (~4 h): ese traslado todavía hay que reservarlo.",
+      "El lunes 19 el vuelo sale 17:20: resolver con el hotel cómo llegar al aeropuerto.",
       "Llevar escarpines o calzado de agua: protegen de los corales y los erizos.",
       "No tocar ni pisar el coral: es frágil y protegido.",
       "Protector solar resistente al agua, y una remera de licra si van a hacer snorkel."
@@ -671,15 +743,15 @@ function openPlaceFicha(id){
 }
 
 const BUDGET_CATEGORIES = [
-  {id:"cruise", name:"Crucero por el Nilo (4 días/3 noches)", note:"desde 279 USD pp + ~80-100 USD entradas no incluidas + propina crew ~10 USD/persona/noche", def:420},
-  {id:"vueloInterno", name:"Vuelo interno Cairo → Asuán", note:"sale 17:00 del lunes", def:90},
-  {id:"hotelCairo", name:"Hotel en Giza (Pyramids Holiday Escape)", note:"confirmado: 3 noches, 3 habitaciones, 6 adultos - US$327,89 total (~301€, ~50€ pp)", def:50},
-  {id:"hotelAswan", name:"Hotel en Asuán (noche del lunes)", note:"antes de subir al barco el martes", def:60},
-  {id:"hotelHurghada", name:"Hotel/resort en Hurghada", note:"4 noches de playa", def:280},
-  {id:"entradas", name:"Entradas a templos y sitios", note:"Giza, Saqqara, GEM, Karnak/Valle de los Reyes del último día del crucero, etc.", def:180},
-  {id:"traslados", name:"Traslados y guía", note:"transfers, chofer/guía compartido en Cairo", def:120},
-  {id:"comidas", name:"Comidas fuera del crucero/hotel", note:"Khufu's, Andrea, Crimson, Pier 88, días en Hurghada", def:160},
-  {id:"extras", name:"Extras e imprevistos", note:"propinas, souvenirs, agua, camello/caballo en Guiza, etc.", def:90}
+  {id:"cruise", name:"Crucero por el Nilo (4 días/3 noches)", note:"Go Tours, MS Nile Jewel: ~480 € p/p, ya reservado. Sin globo ni bebidas", def:480},
+  {id:"vueloInterno", name:"Vuelo interno El Cairo → Asuán", note:"MS284 17:35 · comprado: 141,50 € p/p", def:142},
+  {id:"guiaCairo", name:"Guía privado en Cairo (3 días)", note:"Snefro: 185 USD p/p (1.110 USD el grupo) · entradas estándar y traslados incluidos", def:170},
+  {id:"hotelCairo", name:"Hotel en Giza (Pyramids Holiday Escape)", note:"3 noches, desayuno incluido · ~50 € p/p", def:50},
+  {id:"hotelHurghada", name:"Hotel en Hurghada (Sunrise Aqua Joy)", note:"4 noches, todo incluido · estimado: se cobró en dólares el 5/10 (ver el Splitwise)", def:280},
+  {id:"entradas", name:"Entradas del crucero", note:"No incluidas en el tour: ~80 USD p/p (las de Cairo ya están en el guía)", def:75},
+  {id:"traslados", name:"Traslado Luxor → Hurghada", note:"Sin reservar: se habló de ~40 USD p/p", def:40},
+  {id:"comidas", name:"Comidas y bebidas", note:"Cairo (el guía no incluye comidas) y bebidas del barco; Hurghada es todo incluido", def:110},
+  {id:"extras", name:"Extras e imprevistos", note:"propinas (~10 USD por noche en el barco), souvenirs, excursiones, camello, etc.", def:90}
 ];
 
 const CHECKLIST_CATEGORIES = ["Vuelo interno","Crucero","Alojamiento","Entrada","Traslado","Restaurante","Seguro/Visa","Otro"];
@@ -688,22 +760,24 @@ const CATEGORY_COLORS = {
   "Traslado":"#4A6FA5", "Restaurante":"#C9704B", "Seguro/Visa":"#7B5EA7", "Otro":"#8A8272"
 };
 const DEFAULT_CHECKLIST = [
-  {id:"c1", name:"Crucero Aswan-Luxor 4d/3n (Go Tours, Abu Simbel+globo)", category:"Crucero", day:"2026-10-13", done:true, price:0, payer:"Pipa", link:"Reservado y pagado - viator.com d796-331802P3"},
-  {id:"c2", name:"Vuelo interno Cairo → Asuán (17:00)", category:"Vuelo interno", day:"2026-10-12", done:false, price:0, payer:"", link:"Falta dato de Agustín para completar"},
-  {id:"c3", name:"Entradas Karnak/Valle de los Reyes/Hatshepsut (día 4 crucero)", category:"Entrada", day:"2026-10-15", done:false, price:0, payer:"", link:"no incluidas en el tour, ~80-100 USD"},
-  {id:"c4", name:"Entradas Giza (pirámides + Esfinge)", category:"Entrada", day:"2026-10-10", done:false, price:0, payer:"", link:"comprar online con anticipación"},
-  {id:"c5", name:"Khufu's Restaurant - reserva mesa afuera", category:"Restaurante", day:"2026-10-10", done:false, price:0, payer:"", link:"+20 10 80058888"},
-  {id:"c6", name:"Crimson Bar & Grill - reserva cena", category:"Restaurante", day:"2026-10-10", done:false, price:0, payer:"", link:"+20 12 75055555 - 16 Kamal Al Tawil St"},
-  {id:"c7", name:"GEM - entrada + guía", category:"Entrada", day:"2026-10-11", done:false, price:0, payer:"", link:"reservar online, considerar guía"},
-  {id:"c8", name:"Andrea El Mariouteya - reserva fateer", category:"Restaurante", day:"2026-10-11", done:false, price:0, payer:"", link:"+20 10 03531000"},
-  {id:"c9", name:"Pier 88 - reserva cena", category:"Restaurante", day:"2026-10-11", done:false, price:0, payer:"", link:"+20 10 80888840 - 19 Saray El Gezira St"},
-  {id:"c10", name:"Hotel en Giza - Pyramids Holiday Escape", category:"Alojamiento", day:"2026-10-09", done:true, price:50, payer:"", link:"Reservado - US$327,89 total (3 hab., 3 noches, 6 adultos) - tel +201003444483"},
-  {id:"c11", name:"Hotel en Asuán (noche del lunes)", category:"Alojamiento", day:"2026-10-12", done:false, price:0, payer:"", link:""},
-  {id:"c12", name:"Hotel/resort en Hurghada", category:"Alojamiento", day:"2026-10-16", done:false, price:0, payer:"", link:""},
-  {id:"c13", name:"SIM local (Vodafone/Orange, aeropuerto)", category:"Otro", day:"2026-10-09", done:false, price:0, payer:"", link:""},
-  {id:"c14", name:"Visa / e-visa Egipto", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""},
-  {id:"c15", name:"Seguro de viaje", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""},
-  {id:"c16", name:"Excursión Hurghada (elegir: yate 3 islas 55$ / lancha 2 islas 35$ / snorkel Giftun 35$ / Orange Bay 20$ / desierto+camello+cena 35$)", category:"Otro", day:"2026-10-16", done:false, price:0, payer:"", link:""}
+  {id:"c1", name:"Crucero Asuán-Luxor 4d/3n (Go Tours, MS Nile Jewel)", category:"Crucero", day:"2026-10-12", done:true, price:0, payer:"Pipa", link:"Reservado y pagado por Viator. Contacto: Mohamed"},
+  {id:"c2", name:"Vuelo interno MS284 El Cairo → Asuán (17:35)", category:"Vuelo interno", day:"2026-10-12", done:true, price:142, payer:"Pipa", link:"Comprado el 30/8: 849,10 € en total (141,50 € por persona)"},
+  {id:"c3", name:"Guía privado en Cairo, 3 días (Snefro Travel Egypt)", category:"Traslado", day:"2026-10-10", done:true, price:170, payer:"Fer", link:"185 USD por persona (1.110 USD el grupo), pagado por PayPal"},
+  {id:"c4", name:"Hotel en Giza - Pyramids Holiday Escape", category:"Alojamiento", day:"2026-10-09", done:true, price:50, payer:"", link:"3 noches, desayuno incluido, lo reservó Mati · tel +20 100 344 4483"},
+  {id:"c5", name:"Hotel en Hurghada - Sunrise Aqua Joy Resort", category:"Alojamiento", day:"2026-10-15", done:true, price:0, payer:"Mati", link:"Todo incluido · cobrado el 5/10 (en dólares)"},
+  {id:"c6", name:"E-visa de Egipto", category:"Seguro/Visa", day:"", done:true, price:0, payer:"Pipa", link:"Aprobadas por mail · llevar descargadas (e impresas si quieren)"},
+  {id:"c7", name:"Check-in online del vuelo de ida", category:"Otro", day:"2026-10-09", done:true, price:0, payer:"", link:"Lo hizo Pipa el 8/10 (una fila entera juntos)"},
+  {id:"c8", name:"TRASLADO Luxor → Hurghada (jueves, ~4 h)", category:"Traslado", day:"2026-10-15", done:false, price:40, payer:"", link:"SIN RESERVAR · se habló de ~40 USD · el crucero termina ~16:00"},
+  {id:"c9", name:"Confirmar con el hotel de Giza la llegada de madrugada (~3 am) y el traslado desde el aeropuerto", category:"Otro", day:"2026-10-09", done:false, price:0, payer:"", link:"+20 100 344 4483"},
+  {id:"c10", name:"Confirmar con el guía (Mo) la hora de salida del sábado", category:"Otro", day:"2026-10-10", done:false, price:0, payer:"", link:""},
+  {id:"c11", name:"Entradas del crucero (Abu Simbel, Karnak, Valle de los Reyes, etc.)", category:"Entrada", day:"2026-10-13", done:false, price:75, payer:"", link:"No incluidas en el tour: ~80 USD por persona, en efectivo"},
+  {id:"c12", name:"Globo aerostático en Luxor (opcional)", category:"Otro", day:"2026-10-15", done:false, price:0, payer:"", link:"No incluido · hay que pedírselo a Mohamed si alguien quiere"},
+  {id:"c13", name:"eSIM / datos para el celular", category:"Otro", day:"2026-10-09", done:false, price:0, payer:"", link:"Decidir cuál y comprarla antes de salir"},
+  {id:"c14", name:"Seguro de viaje: que todos lo tengan", category:"Seguro/Visa", day:"", done:false, price:0, payer:"", link:""},
+  {id:"c15", name:"Splitwise: resetear saldos antes de viajar", category:"Otro", day:"2026-10-09", done:false, price:0, payer:"", link:"Idea de Mati: dejar todo en cero el viernes"},
+  {id:"c16", name:"Efectivo: dólares o euros en billetes", category:"Otro", day:"2026-10-09", done:false, price:0, payer:"", link:"Entradas, propinas y bebidas del barco"},
+  {id:"c17", name:"Traslado del hotel de Hurghada al aeropuerto (lunes 19)", category:"Traslado", day:"2026-10-19", done:false, price:0, payer:"", link:"Vuelo 17:20 · ver con el hotel"},
+  {id:"c18", name:"Excursión en Hurghada (elegir: yate 3 islas 55$ / lancha 2 islas 35$ / snorkel Giftun 35$ / Orange Bay 20$ / desierto+camello+cena 35$)", category:"Otro", day:"2026-10-16", done:false, price:0, payer:"", link:""}
 ];
 
 const WEATHER_CITIES = [
@@ -952,15 +1026,17 @@ async function init(){
 
 // ================= MODO VIAJE =================
 const KEY_EVENTS = [
-  {date:"2026-10-09", time:"desde las 14:00 hasta las 00:00", label:"Check-in hotel en Giza (Pyramids Holiday Escape)", note:"si llegan después de las 00:00, avisar: +20 100 344 4483"},
-  {date:"2026-10-09", time:"19:45", label:"Vuelo Stuttgart → El Cairo", note:"1 escala"},
-  {date:"2026-10-11", time:"09:00 (ideal)", label:"Llegar al Gran Museo Egipcio", note:"turno online obligatorio en visit-gem.com"},
-  {date:"2026-10-12", time:"10:00 a 12:00", label:"Check-out del hotel de Giza", note:"coordinar con el chofer que las valijas viajen con ustedes"},
-  {date:"2026-10-12", time:"17:00", label:"Vuelo interno El Cairo → Asuán", note:"llegar al aeropuerto con buen margen"},
-  {date:"2026-10-13", time:"madrugada (3-4 am)", label:"Salida a Abu Simbel", note:"unas 3 h de viaje por trayecto"},
-  {date:"2026-10-15", time:"~5:00", label:"Globo aerostático: recogida", note:"si se cancela por clima, reembolsan 25 USD por persona"},
-  {date:"2026-10-15", time:"a definir", label:"Fin del crucero y traslado a Hurghada (~4 h)", note:"confirmar que el traslado esté reservado"},
-  {date:"2026-10-19", time:"17:20", label:"Vuelo Hurghada → Stuttgart", note:"1 escala"}
+  {date:"2026-10-09", time:"19:45", label:"Vuelo Stuttgart → El Cairo (Austrian)", note:"1 escala · aterrizan de madrugada (~3 am del sábado)"},
+  {date:"2026-10-10", time:"~3 am", label:"Llegada a El Cairo y traslado al hotel de Giza", note:"el hotel ofrecería traslado gratis (confirmar) · avisar la llegada tardía: +20 100 344 4483"},
+  {date:"2026-10-10", time:"a confirmar con el guía", label:"Tour 1: Cairo histórico y momias reales", note:"Snefro Travel Egypt (guía privado)"},
+  {date:"2026-10-11", time:"a confirmar con el guía", label:"Tour 2: Guiza, Saqqara y Menfis", note:"la cámara de la Gran Pirámide no está incluida"},
+  {date:"2026-10-12", time:"10:00 a 12:00", label:"Check-out del hotel de Giza", note:"las valijas viajan con ustedes al museo y al aeropuerto"},
+  {date:"2026-10-12", time:"mañana", label:"Visita guiada al Gran Museo Egipcio", note:"entrada incluida en el tour de Snefro"},
+  {date:"2026-10-12", time:"17:35", label:"Vuelo interno MS284 El Cairo → Asuán (EgyptAir)", note:"el guía los lleva al aeropuerto"},
+  {date:"2026-10-12", time:"~22:00", label:"Llegada al barco (MS Nile Jewel)", note:"traslado aeropuerto → barco incluido · duermen a bordo"},
+  {date:"2026-10-13", time:"madrugada (3-4 am)", label:"Salida a Abu Simbel", note:"unas 3 h por trayecto"},
+  {date:"2026-10-15", time:"~16:00", label:"Fin del crucero y traslado a Hurghada (~4 h)", note:"SIN RESERVAR todavía: se habló de ~40 USD"},
+  {date:"2026-10-19", time:"17:20", label:"Vuelo Hurghada → Stuttgart", note:"1 escala · resolver cómo llegar al aeropuerto"}
 ];
 const EMERGENCY_NUMBERS = [
   {ico:"🚓", name:"Policía", num:"122"},
@@ -971,10 +1047,11 @@ const EMERGENCY_NUMBERS = [
 ];
 const DEFAULT_CONTACTS = [
   {id:"k1", name:"Hotel Pyramids Holiday Escape (Giza)", phone:"+20 100 344 4483"},
-  {id:"k2", name:"Agencia / guía del crucero", phone:""},
-  {id:"k3", name:"Hotel en Hurghada", phone:""},
-  {id:"k4", name:"Asistencia del seguro médico", phone:""},
-  {id:"k5", name:"Embajada / consulado", phone:""}
+  {id:"k2", name:"Mohamed · Go Tours (crucero MS Nile Jewel)", phone:""},
+  {id:"k3", name:"Mo · Snefro Travel Egypt (guía de Cairo)", phone:""},
+  {id:"k4", name:"Hotel Sunrise Aqua Joy (Hurghada)", phone:""},
+  {id:"k5", name:"Asistencia del seguro médico", phone:""},
+  {id:"k6", name:"Embajada / consulado", phone:""}
 ];
 const FRASES = [
   {title:"Lo básico", items:[
@@ -1099,6 +1176,18 @@ function sheetHead(title, back){
 function qaBtn(view, ico, label){ return '<button class="qa-btn" data-qa="' + view + '"><span class="qa-ico">' + ico + '</span><span>' + label + '</span></button>'; }
 function tabBtn(tab, ico, label){ return '<button class="qa-btn" data-go-tab="' + tab + '"><span class="qa-ico">' + ico + '</span><span>' + label + '</span></button>'; }
 
+function mergeDefaultContacts(){
+  const cur = Array.isArray(state.contacts) ? state.contacts : [];
+  const defIds = {};
+  DEFAULT_CONTACTS.forEach(function(d){ defIds[d.id] = true; });
+  const merged = DEFAULT_CONTACTS.map(function(d){
+    const ex = cur.find(function(k){ return k.id === d.id; });
+    return {id:d.id, name:d.name, phone:(ex && ex.phone) ? ex.phone : d.phone};
+  });
+  cur.forEach(function(k){ if(!defIds[k.id]) merged.push(k); });
+  state.contacts = merged;
+}
+
 function renderSheet(){
   const sh = document.getElementById('sheet');
   if(!sh || !sheetView) return;
@@ -1136,7 +1225,8 @@ function renderSheet(){
           return '<div class="qa-contact"><div class="qa-info"><b>' + esc(k.name) + '</b><span>' + ph + '</span></div><div><button class="qa-x" data-edit-contact="' + attr(k.id) + '">✎</button><button class="qa-x" data-del-contact="' + attr(k.id) + '">✕</button></div></div>';
         }).join('')
       + '<div class="qa-form"><input class="qa-input" id="ctName" placeholder="Nombre (ej: Guía del crucero)"><input class="qa-input" id="ctPhone" type="tel" placeholder="Teléfono (+20 …)"><button class="qa-save" id="ctAdd" style="margin:0">Agregar contacto</button></div>'
-      + '<p class="qa-hint">Cargá acá lo que falte (hotel de Hurghada, guía, seguro, embajada). Lo ven los 6. No guardes números de pasaporte ni de tarjetas.</p>';
+      + '<button class="qa-wide" id="ctReset" style="width:100%;margin-top:10px">↻ Cargar contactos sugeridos</button>'
+      + '<p class="qa-hint">Cargá acá lo que falte: el teléfono de Mohamed (crucero), del guía Mo, del hotel de Hurghada, el seguro y la embajada. Lo ven los 6. No guardes números de pasaporte ni de tarjetas.</p>';
   } else if(sheetView === 'frases'){
     h = sheetHead('Frases en árabe', true)
       + FRASES.map(function(g){
@@ -1192,6 +1282,13 @@ function renderSheet(){
       document.getElementById('ctName').value = '';
       document.getElementById('ctPhone').value = '';
       saveShared(); renderSheet();
+    });
+  }
+  const resetContacts = document.getElementById('ctReset');
+  if(resetContacts){
+    resetContacts.addEventListener('click', function(){
+      if(!confirm('Esto actualiza los contactos sugeridos (los teléfonos que ya cargaste se conservan). ¿Seguro?')) return;
+      mergeDefaultContacts(); saveShared(); renderSheet();
     });
   }
   sh.querySelectorAll('[data-edit-contact]').forEach(function(b){
@@ -1287,6 +1384,8 @@ function renderHoy(){
   const now = new Date();
   const diffMs = target - now;
   const daysLeft = diffMs > 0 ? Math.max(0, Math.floor(diffMs / (1000*60*60*24))) : 0;
+  const hoursLeft = Math.max(1, Math.ceil(diffMs / (1000*60*60)));
+  const faltaTxt = daysLeft > 0 ? ('Faltan ' + daysLeft + (daysLeft === 1 ? ' día' : ' días')) : ('Faltan ' + hoursLeft + ' h');
 
   const pending = state.checklist.filter(function(i){ return !i.done; });
   const withDay = pending.filter(function(i){ return !!i.day; }).sort(function(a,b){ return a.day < b.day ? -1 : 1; });
@@ -1359,7 +1458,7 @@ function renderHoy(){
   } else {
     heroHtml = '<div class="hero-card">'
       + '<div class="hero-eyebrow">Egipto · Octubre 2026</div>'
-      + '<div class="hero-title">Faltan ' + daysLeft + ' días</div>'
+      + '<div class="hero-title">' + faltaTxt + '</div>'
       + '<p class="hero-sub">' + heroSub + '</p>'
       + statsHtml
       + '</div>';
@@ -1697,6 +1796,7 @@ function renderChecklist(){
   el.innerHTML = '<table class="budget"><thead><tr><th></th><th>Ítem</th><th>Categoría</th><th>Día</th><th>Precio</th><th>Pagó</th><th>Hotel / link</th><th></th></tr></thead>'
     + '<tbody id="checklistBody">' + rows + '</tbody></table>'
     + '<button class="sync-btn" id="addChecklistRow" style="margin-top:12px;">+ agregar ítem</button>'
+    + ' <button class="sync-btn" id="resetChecklist" style="margin-top:12px;">↻ Cargar lista actualizada</button>'
     + '<div class="budget-summary">'
     + '<div class="metric"><div class="label">Reservado</div><div class="value">'+doneCount+' / '+state.checklist.length+'</div></div>'
     + '<div class="metric"><div class="label">Ya pagado</div><div class="value">€'+totalPaid.toLocaleString('es-AR')+'</div></div>'
@@ -1727,6 +1827,11 @@ function renderChecklist(){
   });
   document.getElementById('addChecklistRow').addEventListener('click', ()=>{
     state.checklist.push({id:'c'+Date.now(), name:'', category:CHECKLIST_CATEGORIES[0], day:'', done:false, price:0, payer:'', link:''});
+    saveShared(); renderChecklist(); updatePrepProgress();
+  });
+  document.getElementById('resetChecklist').addEventListener('click', function(){
+    if(!confirm('Esto reemplaza el checklist actual (para los 6) por la lista actualizada, con lo que ya está reservado y lo que falta. ¿Seguro?')) return;
+    state.checklist = DEFAULT_CHECKLIST.map(function(x){ return Object.assign({}, x); });
     saveShared(); renderChecklist(); updatePrepProgress();
   });
 }
@@ -1760,32 +1865,38 @@ if(window.matchMedia){
 
 const TIPS = [
   {title:"Antes de salir (últimos días)", items:[
-    {name:"Visa", text:"Depende del pasaporte de cada uno. Opciones: e-visa online en visa2egypt.gov.eg (~30 USD, tarda unos días en aprobarse; tenela descargada o impresa) o visa al llegar al aeropuerto (~30 USD en efectivo; subió en marzo 2026). El pasaporte tiene que tener al menos 6 meses de validez. Confirmá tu caso en el portal oficial."},
-    {name:"Llegada de madrugada al hotel", text:"El check-in del hotel de Giza va de las 14:00 a las 00:00 del viernes. Si el vuelo aterriza más tarde, avisale al hotel (+20 100 344 4483) para que los esperen, y resolvé el traslado desde el aeropuerto (Uber/Careem o un traslado reservado)."},
-    {name:"Efectivo", text:"Llevá USD o EUR en billetes chicos y en buen estado: sirven para la visa, las propinas y las entradas del último día del crucero (~80-100 USD no incluidas). Cambiá a libras egipcias (EGP) allá y tené siempre billetes sueltos de 10/20/50 EGP."},
-    {name:"Internet y mapas", text:"Bajá los mapas offline de Cairo, Luxor, Asuán y Hurghada en Google Maps. Esta app queda disponible sin señal si la abrís una vez con internet (agregala a la pantalla de inicio). Una eSIM prepaga se instala antes de viajar y evita buscar SIM en el aeropuerto a esa hora."},
+    {name:"Visa", text:"Ya está resuelta: Pipa tramitó las e-visas de todo el grupo y llegaron aprobadas por mail. Llevalas descargadas en el teléfono (y, si quieren, impresas: Pipa preguntó si imprimir). El pasaporte tiene que tener al menos 6 meses de validez."},
+    {name:"Llegada de madrugada al hotel", text:"Aterrizan hacia las 3 am del sábado. En la reserva del hotel de Giza el check-in va de las 14:00 a las 00:00 del viernes, así que hay que avisar de la llegada tardía y confirmar el traslado gratis desde el aeropuerto que aparecía en la reserva: +20 100 344 4483."},
+    {name:"Efectivo", text:"Llevá USD o EUR en billetes chicos y en buen estado: sirven para las entradas del crucero (~80 USD por persona), las propinas (~10 USD por persona por noche en el barco) y las bebidas del barco, que no están incluidas. A varios les fallaron los cajeros en otros viajes, así que conviene no depender de la tarjeta. En Egipto se cambia a libras (EGP): tené siempre billetes sueltos de 10, 20 y 50 para propinas."},
+    {name:"Internet y mapas", text:"Quedó pendiente decidir la eSIM: se instala antes de viajar (la de N26 es rápida pero más cara; Fer vio otra opción). Bajá también los mapas offline de Cairo, Luxor, Asuán y Hurghada en Google Maps. Esta app queda disponible sin señal si la abrís una vez con internet (agregala a la pantalla de inicio)."},
     {name:"Enchufes", text:"Egipto usa enchufes tipo C/F de 220 V, los mismos que en Alemania: no hace falta adaptador."},
-    {name:"Papeles a mano", text:"Pasaporte, e-visa (si la sacan), reserva del hotel, ticket del crucero (pestaña Documentos) y seguro de viaje. Una foto de cada uno en el celular, por las dudas."}
+    {name:"Papeles a mano", text:"Pasaporte, e-visa, reserva del hotel, ticket del crucero (pestaña Documentos), el voucher del guía y el seguro de viaje. Una foto de cada uno en el celular, por las dudas."},
+    {name:"Seguro de viaje", text:"Algunos todavía estaban chequeando si su seguro médico los cubre en el viaje: conviene que cada uno lo confirme antes de salir."},
+    {name:"Splitwise", text:"Mati propuso hacer un reseteo de saldos el viernes antes de viajar, para arrancar en cero y seguir anotando allá."},
+    {name:"Dron", text:"No llevarlo: en Egipto está prohibido para turistas y en los aeropuertos lo confiscan (a veces con demoras de horas)."},
+    {name:"Equipaje de mano", text:"Las aerolíneas europeas suelen ser estrictas con el tamaño del equipaje de mano: llevar el reglamentario."}
   ]},
   {title:"Moverse y costumbres", items:[
     {name:"Uber y Careem", text:"En Cairo y Giza funcionan muy bien y son baratos. Para los 6, pedí dos autos o una van (opción XL). En Luxor y Asuán no hay Uber: taxi acordando el precio antes de subir, o el chofer del tour. En Hurghada andan bien para moverse por la ciudad, pero para el aeropuerto reservá un traslado fijo."},
+    {name:"La panza", text:"Lo que averiguó el grupo: tomar solo agua embotellada y sellada, pedir las bebidas sin hielo y siempre cerradas, y hasta lavarse los dientes con agua embotellada. Mejor evitar la comida de dudosa procedencia. Conviene llevar carbón activado y lo que cada uno use para el estómago."},
     {name:"Baksheesh (propinas)", text:"Es parte de la costumbre, no un extra: guardianes de templos, botones, baños. Llevá billetes chicos sueltos (10, 20 y 50 EGP) para no sacar la billetera. En el crucero la propina sugerida para la tripulación es ~10 USD por persona por noche."},
     {name:"Templos y mezquitas", text:"Hombros y rodillas cubiertos (un pañuelo liviano alcanza). En las mezquitas se entra sin zapatos: medias limpias."},
     {name:"Khan el-Khalili", text:"Si no querés comprar y los vendedores insisten: 'La, shukran' (no, gracias) y seguir caminando con paso firme. Para un café histórico menos masivo dentro del mercado: Café El Fishawy, abierto desde el siglo XVIII."},
-    {name:"Sol y agua", text:"Protector, gorro y lentes. Tomá solo agua embotellada sellada. La salida a Abu Simbel es de madrugada: llevá una capa fina."},
-    {name:"Frases útiles", text:"Shukran = gracias · La, shukran = no, gracias · Yalla = vamos · Mashi = dale / ok."}
+    {name:"Sol y agua", text:"Protector, gorro y lentes. La salida a Abu Simbel es de madrugada: llevá una capa fina."},
+    {name:"Frases útiles", text:"Shukran = gracias · La, shukran = no, gracias · Yalla = vamos · Mashi = dale / ok. Más en Acceso rápido, Frases."}
   ]},
   {title:"Cairo: lugares poco comunes (si sobra una tarde)", items:[
+    {name:"Ojo con el tiempo", text:"El plan con el guía ocupa los tres días de Cairo, así que una tarde libre es difícil: lo dejo como inspiración por si algo se cae o para otro viaje."},
     {name:"Nilómetro de la isla de Rhoda", text:"Pozo de piedra del siglo IX con una columna octogonal sumergida que se usaba para medir las crecidas del Nilo. Se baja por una escalera de caracol hasta la base; muy tranquilo."},
     {name:"Casa-Museo Gayer-Anderson", text:"Al lado de la mezquita de Ibn Tulun: dos casas tradicionales unidas por un puente, con patios, celosías de madera (mashrabiya) y una azotea muy tranquila en medio de la ciudad."},
     {name:"Palacio Manial", text:"En la isla de Manial: arquitectura otomana, persa, andaluza y rococó rodeada de jardines. Casi sin turistas."},
-    {name:"Música Zar en el centro cultural Makan", text:"Alternativa auténtica a la cena con danza del vientre: espectáculos de música Zar y folclore egipcio tradicional."},
-    {name:"Ojo con las distancias", text:"Estos cuatro están del otro lado de la ciudad respecto del hotel de Giza (calculá unos 40 minutos de auto cada trayecto): sirven para una tarde libre, no para encajar entre otras visitas."}
+    {name:"Música Zar en el centro cultural Makan", text:"Alternativa auténtica a la cena con danza del vientre: espectáculos de música Zar y folclore egipcio tradicional."}
   ]},
-  {title:"Comida callejera imperdible", items:[
-    {name:"Ta'ameya (falafel egipcio)", text:"Se hace con habas y hierbas frescas, no con garbanzos: crujiente por fuera y verde por dentro. Probalo en pan pita caliente con tahina."},
+  {title:"Comida típica (con criterio)", items:[
+    {name:"Antes de probar", text:"El grupo leyó que conviene evitar los puestos callejeros. Si prueban algo, que sea caliente y recién hecho, en lugares concurridos."},
+    {name:"Ta'ameya (falafel egipcio)", text:"Se hace con habas y hierbas frescas, no con garbanzos: crujiente por fuera y verde por dentro. Se come en pan pita caliente con tahina."},
     {name:"Koshary", text:"El plato nacional: arroz, fideos, lentejas y garbanzos con salsa de tomate picante y cebolla frita. Koshary Abou Tarek, en el centro de Cairo, es una institución."},
-    {name:"Feteer meshaltet", text:"Hojaldre egipcio, salado (queso, carne, verduras) o dulce (miel, crema, frutos secos). El almuerzo del día 2 en Andrea El Mariouteya es justamente de fateer."}
+    {name:"Feteer meshaltet", text:"Hojaldre egipcio, salado (queso, carne, verduras) o dulce (miel, crema, frutos secos)."}
   ]}
 ];
 
@@ -1867,7 +1978,8 @@ function renderPresupuesto(){
 
   el.innerHTML = fxHtml + `
     <table class="budget"><thead><tr><th>Rubro</th><th></th><th>Estimado</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="sunk-note">Los vuelos STR↔CAI/HRG ya están reservados, no están incluidos en este cálculo.</div>
+    <div class="sunk-note">Los vuelos STR↔CAI/HRG ya están reservados y no están incluidos acá; el vuelo interno a Asuán sí.</div>
+    <button class="sync-btn" id="resetBudget" style="margin-top:10px;">↻ Cargar estimaciones actualizadas</button>
     <div class="budget-summary">
       <div class="metric"><div class="label">Por persona</div><div class="value">€${totalPP.toLocaleString('es-AR')}</div></div>
       <div class="metric"><div class="label">Grupo (6 personas)</div><div class="value">€${totalGroup.toLocaleString('es-AR')}</div></div>
@@ -1878,6 +1990,10 @@ function renderPresupuesto(){
       state.budget[inp.dataset.cat] = Math.max(0, Number(inp.value)||0);
       saveShared(); renderPresupuesto();
     });
+  });
+  document.getElementById('resetBudget').addEventListener('click', function(){
+    if(!confirm('Esto vuelve las estimaciones del presupuesto a los valores actualizados (para los 6). ¿Seguro?')) return;
+    state.budget = {}; ensureDefaults(); saveShared(); renderPresupuesto(); renderHoy();
   });
   if(fxRate){
     const eurInp = document.getElementById('fxEur');
@@ -1896,4 +2012,3 @@ setInterval(()=>{ const box = document.getElementById('countdownBox'); if(box) b
 </script>
 </body>
 </html>
-
